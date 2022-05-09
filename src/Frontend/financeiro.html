@@ -25,6 +25,84 @@
                             <h3>Detalhamento da receita</h3>
                             <h3>Gráfico de Antecipações</h3>
                         </div>
+                        <div class="grafico">
+                            <section class="pie">
+                                <canvas class="pie-chart"></canvas>                                      
+                            </section>    
+                            <section class="bar">
+                                 <canvas class="bar-chart"></canvas> 
+                            </section>
+                        </div>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                            <script>
+                                var ctx = document.getElementsByClassName('pie-chart');
+                                var chartGraph = new Chart(ctx, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: ['Dinheiro Antecipável', 'Dinheiro Não Antecipável', 'Dinheiro Antecipado'],
+                                    datasets: [{
+                                        label: 'Detalhamento receita',
+                                        data: [300,50,100],
+                                        backgroundColor: [
+                                            'rgb(255, 99, 132)',
+                                            'rgb(54, 162, 235)',
+                                            'rgb(255, 205, 86)'
+                                        ],
+                                        hoverOffset: 4,
+                                        radius: '100%',
+                                        borderWidth: 1,
+                                        cutout: '60%',
+                                    options: {
+                                        responsive: false,
+                                        maintainAspectRatio: false,
+                                        plugins: {
+                                            legend: {
+                                                labels: {
+                                                    font: {
+                                                        weight: 900
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                    }
+                                    }]                                        
+                                    }
+                                }); 
+                            </script>
+                            <script>                                
+                                var boy = document.getElementsByClassName('bar-chart');
+                                var barGraph = new Chart(boy, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ['Jan', 'Fev'],
+                                        datasets: [{
+                                            label: 'Gráfico de Antecipações em R$',
+                                            data: [3000, 2700],
+                                            backgroundColor: [
+                                                'rgb(255, 99, 132)',
+                                                'rgb(255, 159, 64)',
+                                        ],
+                                        barThickness: 125,
+                                        borderRadius: 12
+                                    }]
+                                    },
+                                    options: {
+                                        scales: {
+                                        x: {
+                                            grid: {
+                                            display: false
+                                            }
+                                        },
+                                        y: {
+                                            grid: {
+                                            display: false
+                                            }
+                                        }
+                                        }
+                                    }
+                                });
+                            </script> 
                     </div>
                     
                 </div>
