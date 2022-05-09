@@ -10,10 +10,13 @@
     <body>
         <div class="main">
             <div class="top">
-                <img src="https://logowik.com/content/uploads/images/hurb4358.jpg">
-                <div class="config">
-                    <img src="">
+                <div id="logo">
+                    <img src="assets/logo.PNG">
                 </div>
+                <div id="menu">
+                    <img src="./assets/menu.png">
+                </div>
+            </div>
             </div>
             <div class="body">
                 <div class="background">
@@ -23,7 +26,18 @@
                     <div class="whitebg">
                         <div class="titulo">
                             <h3>Detalhamento da receita</h3>
-                            <h3>Gráfico de Antecipações</h3>
+                            <div class="button">
+                                <h3>Gráfico de Antecipações</h3>
+                                <button id="myBtn">2 meses</button>
+                            </div>
+                        </div>
+                        <div id="myModal" class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <button align="center" id="popup">3 meses</button>
+                                <button align="center" id="popup">6 meses</button>
+                                <button align="center" id="popup">1 ano</button>
+                              </div>
                         </div>
                         <div class="grafico">
                             <section class="pie">
@@ -34,7 +48,10 @@
                             </section>
                         </div>
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-                            <script>
+                           
+                           <script>
+                               Chart.defaults.font.weight = 'bolder';
+                               Chart.defaults.font.family = 'Montserrat';
                                 var ctx = document.getElementsByClassName('pie-chart');
                                 var chartGraph = new Chart(ctx, {
                                     type: 'doughnut',
@@ -54,17 +71,7 @@
                                         cutout: '60%',
                                     options: {
                                         responsive: false,
-                                        maintainAspectRatio: false,
-                                        plugins: {
-                                            legend: {
-                                                labels: {
-                                                    font: {
-                                                        weight: 900
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        
+                                        maintainAspectRatio: false,                                                                               
                                     }
                                     }]                                        
                                     }
@@ -88,6 +95,7 @@
                                     }]
                                     },
                                     options: {
+                                        maintainAspectRatio: false,
                                         scales: {
                                         x: {
                                             grid: {
@@ -108,6 +116,22 @@
                 </div>
             </div>
         </div>
+        <script>
+            var modal = document.getElementById("myModal");
+            var btn = document.getElementById("myBtn");
+            var span = document.getElementsByClassName("close")[0];
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
     </body>
         
 </html>
