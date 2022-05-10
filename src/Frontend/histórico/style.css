@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+*{
+    margin: 0px;
+    font-weight: bold;
+    text-decoration: none;
+}
+body{
+    height: 100vh;
+    overflow:hidden;
+}
+
+/* HEADER */
+
+#header{
+    text-align: center;
+    position: relative
+}
+
+#logo {
+    width: 140px;
+    margin: 10px;
+}
+
+#menu{
+    height: 40px;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+/* MAIN */
+
+#container{ 
+    background-color: #DDE6FF;
+    border-radius: 30px 30px 0px 0px;
+    padding-bottom: 40px
+}
+
+#wtContainer{
+    background-color: white;
+    margin: 0px 70px ;
+    border-radius: 20px 15px 20px 15px ;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    height: 400px;
+    overflow: hidden;
+}
+
+#title{
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    padding: 20px;
+}
+
+
+#previousAnticipatios{
+    text-align: center;
+    
+}
+
+/* #anticipatiosColumns{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    overflow-y:scroll;
+
+} */
+
+.scrollContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    overflow-y: scroll;
+    height: 250px;
+
+}
+
+.columTitles{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+.columTitle{
+    background-color: rgb(52, 104, 252, 0.8);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    color: white;
+    padding: 8px;
+    margin: 0px 26px 10px 20px;
+    border-radius: 15px;
+    border:2px rgba(255, 255, 255) solid ;
+    transition: 200ms;
+}
+
+.columTitle:hover{
+    background-color: white; border:rgb(52, 104, 252);
+    color: rgb(52, 104, 252);
+    cursor: pointer;
+    border: 2px rgb(52, 104, 252) solid;
+}
+
+.subtitle{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    background-color: #DDE6FF;
+    display: inline-block;
+    margin: 20px;
+    padding: 17px 50px 17px 50px;
+    border-radius: 15px;
+}
+.columElements{
+    font-family: 'Montserrat', sans-serif;
+    background-color: #DDE6FF;
+    margin: 20px;
+    border-radius: 15px;
+    padding: 12px;
+}
+
+#pastProjections{
+    text-align: center ;    
+}
+
+
+
+.graphContainer{
+    width: 300px;
+    margin: auto;
+    padding: 30px 0px 0px 0px;
+}
+
+.graphContainer img{
+    width: 100%
+}
+
+
+
