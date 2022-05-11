@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
     <title>Histórico</title>
   </head>
   <body>
@@ -32,6 +33,8 @@
                 <p class="columElements">XX/XX/XXXX</p>
                 <p class="columElements">XX/XX/XXXX</p>
                 <p class="columElements">XX/XX/XXXX</p>
+                <p class="columElements">XX/XX/XXXX</p>
+                <p class="columElements">XX/XX/XXXX</p>
               </div>
               <div class="anticipatiosColumn">
                 <p class="columElements">XXXX</p>
@@ -39,8 +42,12 @@
                 <p class="columElements">XXXX</p>
                 <p class="columElements">XXXX</p>
                 <p class="columElements">XXXX</p>
+                <p class="columElements">XXXX</p>
+                <p class="columElements">XXXX</p>
               </div>
               <div class="anticipatiosColumn">
+                <p class="columElements">R$XXXX,XX</p>
+                <p class="columElements">R$XXXX,XX</p>
                 <p class="columElements">R$XXXX,XX</p>
                 <p class="columElements">R$XXXX,XX</p>
                 <p class="columElements">R$XXXX,XX</p>
@@ -53,10 +60,72 @@
         <div id="pastProjections">
           <p class="subtitle">Projeções Passadas</p>
           <div class="graphContainer">
-            <img src="./assets/grafico.jpeg" alt="" />
+            <div class="grafico">    
+              <section class="bar">
+                   <canvas style="height: 300px; width: 450px;" class="bar-chart"></canvas> 
+              </section>
+          </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                           
+             <script>                                
+                 var boy = document.getElementsByClassName('bar-chart');
+                 var barGraph = new Chart(boy, {
+                     type: 'bar',
+                     data: {
+                         labels: ['Jan', 'Fev'],
+                         datasets: [{
+                             label: 'Gráfico de Antecipações em R$',
+                             data: [9000, 2700],
+                             backgroundColor: [
+                                 'rgb(52, 104, 252)',
+                                 'rgb(52, 104, 252)',
+                         ],
+                         barThickness: 125,
+                         borderRadius: 12
+                     }]
+                     },
+                     options: {
+                         maintainAspectRatio: false,
+                         scales: {
+                         x: {
+                             grid: {
+                             display: false
+                             }
+                         },
+                         y: {
+                             grid: {
+                             display: false
+                             }
+                         }
+                         }
+                     }
+                 });
+             </script> 
+     </div>
+     
+ </div>
+</div>
+</div>
+          <script>
+          var modal = document.getElementById("myModal");
+          var btn = document.getElementById("myBtn");
+          var span = document.getElementsByClassName("close")[0];
+          btn.onclick = function() {
+          modal.style.display = "block";
+          }
+          span.onclick = function() {
+          modal.style.display = "none";
+          }
+          window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+          }
+          </script>
+
           </div>
         </div>
       </div>
     </main>
   </body>
-</html>
+</html> 
