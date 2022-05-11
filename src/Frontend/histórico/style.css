@@ -50,7 +50,7 @@ body{
     border-radius: 20px 15px 20px 15px ;
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    height: 420px;
+    height: 70vh;
     padding-bottom: 30px;
     
 }
@@ -82,7 +82,7 @@ body{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     overflow-y: scroll;
-    height: 240px;
+    height: 50vh;
 
 }
 
@@ -136,7 +136,7 @@ body{
 
 .graphContainer{
     height:100vh;
-    margin:10px 10px 0px 30px;
+    margin:10px 5px 0px 30px;
 }
 
 .graphContainer img{
