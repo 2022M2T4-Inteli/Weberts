@@ -1,0 +1,91 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    background-color:   rgb(52, 104, 252, 0.95);
+    overflow: hidden;
+}
+
+#header{
+    position: relative;
+}
+
+#logo {
+    width: 40px;
+    margin: 5px 10px 0px 22px;
+}
+
+#menu {
+    height: 35px;
+    position: absolute;
+    right: 30px;
+    top: 55%;
+    transform: translateY(-50%);
+}
+
+.body-dashboard {
+    margin-top: 8px;
+    box-shadow: rgb(81 75 75) 0 0 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DDE6FF;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    height: 510px;
+    width: 100%;
+}
+
+.dashboard-center {
+    display: grid;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    width: 90%;
+    height: 85%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.dashboard-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 2.5rem;
+    width: 100%;
+}
+
+.select-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 10.625rem;
+    background-color: #DDE6FF;
+    height: 360px;
+    border-width: 0.15rem;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #FFFFFF;
+}
+
+#solicitar-montante {
+    width: 70px;
+}
+
+#solicitar-reservas {
+    width: 70px;
+}
+
+.select-button:hover {
+    border-color: #3468FC;
+    cursor: pointer;
+}
