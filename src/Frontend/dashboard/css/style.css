@@ -1,0 +1,122 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #FFFFFF;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
+    width: 100%;
+}
+
+.header-mask {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.menu-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    gap: 0.35rem;
+}
+
+.menu-line {
+    background-color: #3468FC;
+    width: 54px;
+    height: 4.6px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    margin-right: 32px;
+}
+
+.body-dashboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DDE6FF;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    height: 30.5rem;
+}
+
+.dashboard-center {
+    display: grid;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    width: 90%;
+    height: 85%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.dashboard-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 2.5rem;
+    width: 100%;
+}
+
+.select-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 10.625rem;
+    background-color: #DDE6FF;
+    height: 10rem;
+    border-width: 0.15rem;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #FFFFFF;
+}
+
+#logo-hurb {
+    width: 160px;
+}
+
+#solicitar-antecipação {
+    width: 55px;
+}
+
+#finanças {
+    width: 60px;
+}
+
+#histórico {
+    width: 49px;
+}
+
+#acompanhar-solicitações {
+    width: 50px;
+}
+
+.select-button:hover {
+    border-color: #3468FC;
+    cursor: pointer;
+}
