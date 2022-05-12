@@ -32,7 +32,7 @@ body{
     transform: translateY(-50%)
 }
 
-/* BACKGROUNDS */
+/* MAIN */
 
 #container{ 
     background-color: #DDE6FF;
@@ -55,9 +55,6 @@ body{
     
 }
 
-
-/* WHITE TITLE */
-
 #title{
     position: absolute;
     left: 66px;
@@ -68,13 +65,17 @@ body{
     font-weight: bold;
 }
 
-/* LEFT PART */
 
 #previousAnticipatios{
     text-align: center;
+    
 }
 
-/* LEFT TITLE */
+#anticipatiosColumns{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 
 .subtitle{
     font-family: 'Montserrat', sans-serif;
@@ -85,17 +86,6 @@ body{
     padding: 13px 50px 13px 50px;
     border-radius: 15px;
 }
-
-/* LEFT BODY */
-
-#anticipatiosColumns{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-/* INPUT BACKGROUND */
-
 #anteciparbox{
     width: 40vw;
     height: 40vh;
@@ -104,9 +94,6 @@ body{
     margin-top: 8vh;
     border-radius: 20px;   
 }
-
-/* INPUT */
-
 #anticipatiosColumns div input{
     padding: 2%;
     margin-top: 13vh;
@@ -119,9 +106,6 @@ body{
     justify-self: center;
     align-self: center;
 }
-
-/* LEFT BOTTOM SUBTITLE */
-
 #totalreservas{
     margin-top:10vh;
 }
@@ -141,7 +125,7 @@ body{
     height: 30vh;
     background-color: #DDE6FF;
     align-self: center;
-    margin-top: 8vh;
+    margin-top: 13vh;
     border-radius: 20px;   
 }
 #direita{
@@ -149,7 +133,7 @@ body{
     font-size: 3vh;
     font-weight: 500;
     align-self: center;
-    margin-top: 15vh;
+    margin-top: 14vh;
 }
 .valor{
     font-family: 'Montserrat', sans-serif;
