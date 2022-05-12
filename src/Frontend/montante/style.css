@@ -86,19 +86,28 @@ body{
     padding: 13px 50px 13px 50px;
     border-radius: 15px;
 }
-#anticipatiosColumns form input{
+#anteciparbox{
+    width: 40vw;
+    height: 40vh;
+    background-color: #DDE6FF;
+    align-self: center;
+    margin-top: 8vh;
+    border-radius: 20px;   
+}
+#anticipatiosColumns div input{
     padding: 2%;
-    margin-top: 20vh;
+    margin-top: 13vh;
     border-radius: 30px;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
-    font-size: 4vh;
+    font-size: 6vh;
     font-weight: 500;
-    border-color: blue;
+    border-width: 0px;
     justify-self: center;
+    align-self: center;
 }
 #totalreservas{
-    margin-top: 26vh;
+    margin-top:10vh;
 }
 #totalreservas h2{
     font-family: 'Montserrat', sans-serif;
