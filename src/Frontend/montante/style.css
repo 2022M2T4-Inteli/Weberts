@@ -50,7 +50,7 @@ body{
     border-radius: 20px 15px 20px 15px ;
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    height: 75vh;
+    height: 79vh;
     padding-bottom: 30px;
     
 }
@@ -79,7 +79,7 @@ body{
 
 .subtitle{
     font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
+    font-size: 4vh;
     background-color: #DDE6FF;
     display: inline-block;
     margin: 20px;
@@ -88,29 +88,61 @@ body{
 }
 #anticipatiosColumns form input{
     padding: 2%;
-    margin-top: 20%;
+    margin-top: 20vh;
     border-radius: 30px;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
-    font-size: 25px;
+    font-size: 4vh;
     font-weight: 500;
     border-color: blue;
     justify-self: center;
 }
 #totalreservas{
-    margin-top: 25%;
-    margin-right: 16%;
+    margin-top: 26vh;
 }
 #totalreservas h2{
     font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
+    font-size: 3vh;
     font-weight: 500;
 }
 
 #pastProjections{
     text-align: center ;    
+    display: flex;
+    flex-direction: column;
 }
-
+.disponivel{
+    width: 50vh;
+    height: 30vh;
+    background-color: #DDE6FF;
+    align-self: center;
+    margin-top: 13vh;
+    border-radius: 20px;   
+}
+#direita{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3vh;
+    font-weight: 500;
+    align-self: center;
+    margin-top: 14vh;
+}
+.valor{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    background-color: #DDE6FF;
+    display: inline-block;
+    margin: 20px;
+    padding: 13px 50px 13px 50px;
+    border-radius: 15px;
+    width: 32%;
+    align-self: center;
+}
+#insidebox{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 7vh;
+    font-weight: 500;
+    margin-top: 20%;
+}
 
 
 
