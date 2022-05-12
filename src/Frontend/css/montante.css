@@ -32,7 +32,7 @@ body{
     transform: translateY(-50%)
 }
 
-/* MAIN */
+/* BACKGROUNDS */
 
 #container{ 
     background-color: #DDE6FF;
@@ -55,6 +55,9 @@ body{
     
 }
 
+
+/* WHITE TITLE */
+
 #title{
     position: absolute;
     left: 66px;
@@ -65,17 +68,13 @@ body{
     font-weight: bold;
 }
 
+/* LEFT PART */
 
 #previousAnticipatios{
     text-align: center;
-    
 }
 
-#anticipatiosColumns{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
+/* LEFT TITLE */
 
 .subtitle{
     font-family: 'Montserrat', sans-serif;
@@ -86,6 +85,17 @@ body{
     padding: 13px 50px 13px 50px;
     border-radius: 15px;
 }
+
+/* LEFT BODY */
+
+#anticipatiosColumns{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/* INPUT BACKGROUND */
+
 #anteciparbox{
     width: 40vw;
     height: 40vh;
@@ -94,6 +104,9 @@ body{
     margin-top: 8vh;
     border-radius: 20px;   
 }
+
+/* INPUT */
+
 #anticipatiosColumns div input{
     padding: 2%;
     margin-top: 13vh;
@@ -106,6 +119,9 @@ body{
     justify-self: center;
     align-self: center;
 }
+
+/* LEFT BOTTOM SUBTITLE */
+
 #totalreservas{
     margin-top:10vh;
 }
@@ -115,26 +131,16 @@ body{
     font-weight: 500;
 }
 
+/* RIGHT BODY */
+
 #pastProjections{
     text-align: center ;    
     display: flex;
     flex-direction: column;
 }
-.disponivel{
-    width: 50vh;
-    height: 30vh;
-    background-color: #DDE6FF;
-    align-self: center;
-    margin-top: 13vh;
-    border-radius: 20px;   
-}
-#direita{
-    font-family: 'Montserrat', sans-serif;
-    font-size: 3vh;
-    font-weight: 500;
-    align-self: center;
-    margin-top: 14vh;
-}
+
+/* RIGHT TITLE */
+
 .valor{
     font-family: 'Montserrat', sans-serif;
     font-size: 4vh;
@@ -146,6 +152,20 @@ body{
     width: 32%;
     align-self: center;
 }
+
+/* RIGHT BLUE BOX */
+
+.disponivel{
+    width: 50vh;
+    height: 30vh;
+    background-color: #DDE6FF;
+    align-self: center;
+    margin-top: 8vh;
+    border-radius: 20px;   
+}
+
+/* TEXT INSIDE BOX */
+
 #insidebox{
     font-family: 'Montserrat', sans-serif;
     font-size: 7vh;
@@ -153,6 +173,12 @@ body{
     margin-top: 20%;
 }
 
+/* RIGHT SUBTITLE */
 
-
-
+#direita{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3vh;
+    font-weight: 500;
+    align-self: center;
+    margin-top: 15vh;
+}

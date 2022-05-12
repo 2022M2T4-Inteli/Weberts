@@ -4,35 +4,40 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/financeiro.css" />
-    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
-    <title>HU | Financeiro</title>
+    <link rel="stylesheet" href="../css/financeiro.css" /> <!--LINK CSS-->
+    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon"> <!--TAB ICON-->
+    <title>HU | Financeiro</title> <!--TAB TITLE-->
   </head>
   <body>
     <div id="header">
-      <img id="logo" src="../assets/logo.PNG" alt="logo" />
-      <img id="menu" src="../assets/menu.png" alt="menu" />
-      <h1 id="title">Financeiro</h1>
+      <img id="logo" src="../assets/logo.PNG" alt="logo" /> <!--LEFT LOGO-->
+      <img id="menu" src="../assets/menu.png" alt="menu" /> <!--MENU ICON-->
+      <h1 id="title">Financeiro</h1> <!--WHITE TITLE-->
     </div>
-    <main id="container">
-      <div id="wtContainer">
-        <div id="revenueDetails">
-          <p class="subtitle">Detalhamento da receita</p>
-          <div id="pieChartContainer">
+    <main id="container"> <!--BLUE BACKGROUND-->
+      <div id="wtContainer"> <!--WHITE BACKGROUND-->
+        <div id="revenueDetails"> <!--LEFT PART-->
+          <p class="subtitle">Detalhamento da receita</p> <!--LEFT TITLE-->
+          <div id="pieChartContainer"> <!--PIE CHART SECTION-->
               <canvas class="pie-chart"></canvas> 
           </div>
         </div>
-        <div id="antecipationGraph">
-          <p class="subtitle">Gráfico de Antecipações</p>
-          <div class="graphContainer">
-            <div class="grafico">    
+        <div id="antecipationGraph"> <!--LEFT PART-->
+          <p class="subtitle">Gráfico de Antecipações</p> <!--LEFT TITLE-->
+          <div class="graphContainer"> 
+            <div class="grafico">    <!--PIE CHART SECTION-->
               <section class="bar">
                    <canvas style="height: 350px; width: 450px;" class="bar-chart"></canvas> 
               </section>
           </div>
+
+          <!--CHART JS LINK-->
+
           <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-                           
-          <script>
+
+          <!--PIE CHART-->     
+
+          <script> 
               Chart.defaults.font.weight = 'bolder';
               Chart.defaults.font.family = 'Montserrat';
                var ctx = document.getElementsByClassName('pie-chart');
@@ -60,6 +65,8 @@
                    }
                }); 
            </script>
+
+           <!--BAR CHART-->  
 
            <script>                                
                var boy = document.getElementsByClassName('bar-chart');
@@ -100,6 +107,9 @@
 </div>
 </div>
 </div>
+
+<!--BAR CHART BUTTON-->  
+
 <script>
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");
