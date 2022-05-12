@@ -82,9 +82,9 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: right;
-    height: 96%;
     gap: 3rem;
     width: 70%;
+    height:auto;
     border-right: 40px;
     border-bottom: 90px;
 

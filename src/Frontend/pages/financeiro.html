@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/financeiro.css" />
+    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
+    <title>HU | Financeiro</title>
+  </head>
+  <body>
+    <div id="header">
+      <img id="logo" src="../assets/logo.PNG" alt="logo" />
+      <img id="menu" src="../assets/menu.png" alt="menu" />
+      <h1 id="title">Financeiro</h1>
+    </div>
+    <main id="container">
+      <div id="wtContainer">
+        <div id="revenueDetails">
+          <p class="subtitle">Detalhamento da receita</p>
+          <div id="pieChartContainer">
+              <canvas class="pie-chart"></canvas> 
+          </div>
+        </div>
+        <div id="antecipationGraph">
+          <p class="subtitle">Gráfico de Antecipações</p>
+          <div class="graphContainer">
+            <div class="grafico">    
+              <section class="bar">
+                   <canvas style="height: 350px; width: 450px;" class="bar-chart"></canvas> 
+              </section>
+          </div>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+                           
+          <script>
+              Chart.defaults.font.weight = 'bolder';
+              Chart.defaults.font.family = 'Montserrat';
+               var ctx = document.getElementsByClassName('pie-chart');
+               var chartGraph = new Chart(ctx, {
+                   type: 'doughnut',
+                   data: {
+                       labels: ['Dinheiro Antecipável', 'Dinheiro Não Antecipável', 'Dinheiro Antecipado'],
+                   datasets: [{
+                       label: 'Detalhamento receita',
+                       data: [300,50,100],
+                       backgroundColor: [
+                           'rgb(255, 99, 132)',
+                           'rgb(54, 162, 235)',
+                           'rgb(255, 205, 86)'
+                       ],
+                       hoverOffset: 4,
+                       radius: '100%',
+                       borderWidth: 1,
+                       cutout: '60%',
+                   options: {
+                       responsive: false,
+                       maintainAspectRatio: false,                                                                               
+                   }
+                   }]                                        
+                   }
+               }); 
+           </script>
+
+           <script>                                
+               var boy = document.getElementsByClassName('bar-chart');
+               var barGraph = new Chart(boy, {
+                   type: 'bar',
+                   data: {
+                       labels: ['Jan', 'Fev'],
+                       datasets: [{
+                           label: 'Gráfico de Antecipações em R$',
+                           data: [3000, 2700],
+                           backgroundColor: [
+                               'rgb(255, 99, 132)',
+                               'rgb(255, 159, 64)',
+                       ],
+                       barThickness: 125,
+                       borderRadius: 12
+                   }]
+                   },
+                   options: {
+                       maintainAspectRatio: false,
+                       scales: {
+                       x: {
+                           grid: {
+                           display: false
+                           }
+                       },
+                       y: {
+                           grid: {
+                           display: false
+                           }
+                       }
+                       }
+                   }
+               });
+           </script> 
+   </div>
+   
+</div>
+</div>
+</div>
+<script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+modal.style.display = "block";
+}
+span.onclick = function() {
+modal.style.display = "none";
+}
+window.onclick = function(event) {
+if (event.target == modal) {
+   modal.style.display = "none";
+}
+}
+</script>
+
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html> 
