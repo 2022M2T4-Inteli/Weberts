@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt">
   <head>
+    <!-- Detalhes de configuração inicial -->
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Estilo do site-->
     <link rel="stylesheet" href="../css/historico.css" />
     <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
-    <title>Histórico</title>
+    <title>Histórico</title>  <!-- Título da página -->
   </head>
-  <body>
-    <div id="header">
-      <img id="logo" src="../assets/logo.png" alt="logo" />
-      <img id="menu" src="../assets/menu.png" alt="menu" />
+  <body> 
+    <!-- Cabeçalho com logo e menu -->
+    <div id="header"> 
+      <img id="logo" src="../assets/logo.png" alt="logo" /> <!-- imagem da logo -->
+      <img id="menu" src="../assets/menu.png" alt="menu" /><!-- imagem do menu -->
+
       <h1 id="title">Histórico</h1>
-    </div>
+    </div> 
+    <!-- Background azul -->
     <main id="container">
+      <!-- Background branco -->
       <div id="wtContainer">
+        <!-- Coluna de Antecipações passadas -->
         <div id="previousAnticipatios">
           <p class="subtitle">Antecipações Anteriores</p>
           <div id="anticipatiosColumns">
@@ -27,6 +34,7 @@
               <a href="../pages/financeiro.html" 200ms class="columTitle">Valor</a>
             </div>
             <div class="scrollContainer">
+              <!-- Elementos de texto -->
               <div class="anticipatiosColumn">
                 <p class="columElements">XX/XX/XXXX</p>
                 <p class="columElements">XX/XX/XXXX</p>
@@ -58,7 +66,9 @@
           </div>
         </div>
         <div id="pastProjections">
+          <!-- Coluna de projeções passadas -->
           <p class="subtitle">Projeções Passadas</p>
+            <!-- Gráfico -->
           <div class="graphContainer">
             <div class="grafico">    
               <section class="bar">
@@ -66,7 +76,6 @@
               </section>
           </div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-                           
              <script>                                
                  var boy = document.getElementsByClassName('bar-chart');
                  var barGraph = new Chart(boy, {
@@ -106,6 +115,7 @@
  </div>
 </div>
 </div>
+          <!-- Configuração do gráfico -->
           <script>
           var modal = document.getElementById("myModal");
           var btn = document.getElementById("myBtn");
