@@ -59,14 +59,15 @@ main{
 
 #passwordForgoten {
     color: #3468FC;
-    font-size: 12px;
-    margin: 5px;
+    font-size: 14px;
     text-align: center;
-    margin: 10px 0px 15px;
+    margin: auto;
 }
 
 .btnBx{
     text-align: center;
+    width: 100%;
+    transform: translateY(20px);
 }
 
 .loginBtn{
