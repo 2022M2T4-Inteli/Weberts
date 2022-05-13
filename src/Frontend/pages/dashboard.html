@@ -12,11 +12,19 @@
     </head>
     <body>
         <!--Cabeçalho do site-->
-        <div class="header">
+        <header class="header">
             <a href="./dashboard.html"><img id="logo" src="../assets/logo.png" alt="logo" /></a>
-            <img id="menu" src="../assets/menu.png" alt="menu" />
+            <div class="toggle" onclick="toggleMenu();"></div>
+            <ul class="menu">
+                <li><a href="./dashboard.html" onclick="toggleMenu();" >Dashboard <br><br></a></li>
+                <li><a href="#location" onclick="toggleMenu();" >Meus Hotéis <br><br></a></li>
+                <li><a href="./antecipacoesInfo.html" onclick="toggleMenu();" >Informações sobre antecipações <br><br></a></li>
+                <li><a href="#services" onclick="toggleMenu();" >Configurações <br><br></a></li>
+                <li><a href="./loginPage.html" onclick="toggleMenu();" >Sair <br><br></a></li>
+            </ul>
+            <!-- <img id="menu" src="../assets/menu.png" alt="menu" /> -->
             <h2 style="margin-left: 10px;">Dashboard</h2>
-        </div>
+        </header>
         <!--Corpo principal da página dashboard-->
         <div class="body-dashboard">
         <!--Centro do dashboard que está dentro do corpo principal-->
@@ -61,6 +69,14 @@
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            function toggleMenu() {
+              var menuToggle = document.querySelector(".toggle");
+              var menu = document.querySelector(".menu");
+              menuToggle.classList.toggle("active");
+              menu.classList.toggle("active");
+            }
+          </script>
     </body>
 </html>
 
