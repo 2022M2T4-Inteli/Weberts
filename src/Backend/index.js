@@ -52,7 +52,7 @@ app.post("/login", (req, res) => {
             )
           );
         } else {
-          res.send("Senha incorreta");
+          res.send("Email ou senha incorreta, tente novamente!");
           res.end();
         }
       }
