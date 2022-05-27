@@ -30,8 +30,12 @@ app.get("/financeiro", (req,res) =>{
     path.resolve(__dirname + "/../frontend/Parceiro/pages/financeiro.html")
   )});
 
+app.get("/historico", (req,res) =>{
+  res.sendFile(
+    path.resolve(__dirname + "/../frontend/Parceiro/pages/historico.html")
+  )});
 
-
+  
 app.post("/login", (req, res) => {
   const infos = req.body;
 //   console.log(infos.email);
