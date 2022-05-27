@@ -15,9 +15,10 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   height: 50px;
   width: 100%;
+  margin-top: 10px;
 }
 
 .header-mask {
@@ -57,7 +58,7 @@ body {
   background-color: #dde6ff;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  height: 575px;
+  height: 100vh;
   margin-top: 10px;
   box-shadow: rgb(43, 43, 44, 0.8) 0 0 10px;
 }
@@ -73,6 +74,7 @@ body {
   border-top-right-radius: 30px;
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
+  padding: 40px 0px;
 }
 
 .dashboard-row {
@@ -111,12 +113,9 @@ body {
   top: 5px;
 }
 
-/* #menu{
-    
-} */
-
+/* 
 .menu {
-  text-align: center;
+    text-align: center;
   background: #fff;
   transition: 500ms;
   position: fixed;
@@ -166,7 +165,7 @@ header ul li a:hover {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 25px;
-}
+} */
 
 #solicitar-antecipação {
   width: 51px;
@@ -202,4 +201,46 @@ h2 {
   position: absolute;
   left: 66px;
   top: 13px;
+}
+
+.antecipationBtn{
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: #3468fc;
+  color: #fff;
+  transition: 200ms;
+  border-radius: 15px;
+  align-items: center;
+  font-weight: bold;
+}
+
+.antecipationBtn:hover{
+  box-shadow: #3468fc 0 0 10px;
+
+}
+
+.antecipationBtn img{
+  margin-left: 20px;
+}
+
+/* MENU HEADER */
+
+.menu{
+  display: flex;
+  list-style: none;
+  padding: 10px 20px;
+}
+
+select{
+  margin: 0px 15px;
+  color: white!important;
+  font-weight: bold;
+  background-color: #3E6FFC;
+  outline: none;
+  border: none;
 }

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/loginPage.css">
+    <link rel="stylesheet" href="css/loginPage.css">
     <link
       rel="shortcut icon"
-      href="../assets/favicon.png"
+      href="/assets/favicon.png"
       type="image/x-icon"
     />
     <title>Hurb | Login</title>
@@ -18,27 +18,27 @@
             <h1>
                 Bem-Vindo
             </h1>
-            <div class="formContainer">
-                <p>Login</p>
-                <input type="email" name="email" id="email">
-                <p>Senha</p>
-                <input type="password" name="password" id="password">
+            <form action="/login" method="post" class="formContainer">
+                <label name="email" for="login" class="inputLabel">Login</label>
+                <input required type="email" name="email" id="email">
+                <label for="senha" class="inputLabel">Senha</label>
+                <input required name="password_" type="password_" name="password_" id="password_">
                 <a href="https://www.hurb.com/br/seja-parceiro/" id="passwordForgoten">
                     Não é parceiro?
                 </a>
                 <div class="btnBx">
-                    <a href="./dashboard.html" class="loginBtn">Entrar</a>
+                    <button type="submit" class="loginBtn">Login</button>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="logoContainer">
             <div class="logoBx">
                 <div class="logoFdp">
-                    <img src="../assets/Hurb-logo.png" alt="logo">
+                    <img src="/assets/Hurb-logo.png" alt="logo">
                 </div>
             </div>
             <div class="imgBx">
-                <img class="gif" src="../assets/travellingGif.gif" alt="">
+                <img class="gif" src="/assets/travellingGif.gif" alt="">
             </div>
         </div>
     </main>
