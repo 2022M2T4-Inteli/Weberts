@@ -20,6 +20,8 @@ app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
 
+/*SERVIDOR DE PÁGINAS HTML - FRONTEND */
+
 app.get("/antecipacoesInfo", (req,res) =>{
   res.sendFile(
     path.resolve(__dirname + "/../frontend/Parceiro/pages/antecipacoesInfo.html")
@@ -35,6 +37,7 @@ app.get("/historico", (req,res) =>{
     path.resolve(__dirname + "/../frontend/Parceiro/pages/historico.html")
   )});
 
+  /*SERVIDOR API - ENDPOINTS (ACESSO AO BANCO DE DADOS) */
   
 app.post("/login", (req, res) => {
   const infos = req.body;
