@@ -24,7 +24,7 @@
         </div>
         <div id="antecipationGraph"> <!--LEFT PART-->
           <p class="subtitle">Gráfico de Antecipações</p> <!--LEFT TITLE-->
-          <div class="graphContainer"> 
+          <div class="graphContainer">  
             <div class="grafico">    <!--PIE CHART SECTION-->
               <section class="bar">
                    <canvas style="height: 350px; width: 450px;" class="bar-chart"></canvas> 
@@ -33,25 +33,54 @@
 
           <!--CHART JS LINK-->
 
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-
-          <!--PIE CHART-->     
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>   
 
           <script> 
+            var api ="localhost:3000";
+
+            var retorno1
+            var retorno2
+            var valor1
+            var valor2
+
+
+            //DADOS VALOR NÃO ANTECIPADO PARA O PIE CHART
+            var url = "http://127.0.0.1:3031/valor1";
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("GET", url, false);
+            xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
+
+            retorno1 = JSON.parse(xhttp.responseText);
+
+            valor1 = retorno1['SUM(valor)']
+
+
+            //DADOS MONTANTE ANTECIPADO PARA O PIE CHART
+            url = "http://127.0.0.1:3031/valor2";
+
+            xhttp = new XMLHttpRequest();
+            xhttp.open("GET", url, false);
+            xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
+
+            retorno2 = JSON.parse(xhttp.responseText);
+
+            valor2 = retorno2['SUM(montante)']
+
+            //PIE CHART
               Chart.defaults.font.weight = 'bolder';
               Chart.defaults.font.family = 'Montserrat';
                var ctx = document.getElementsByClassName('pie-chart');
                var chartGraph = new Chart(ctx, {
                    type: 'doughnut',
                    data: {
-                       labels: ['Dinheiro Antecipável', 'Dinheiro Não Antecipável', 'Dinheiro Antecipado'],
+                       labels: ['Dinheiro Antecipável', 'Dinheiro Não Antecipável'],
                    datasets: [{
                        label: 'Detalhamento receita',
-                       data: [300,50,100],
+                       data: [valor1,valor2],
                        backgroundColor: [
                            'rgb(255, 99, 132)',
                            'rgb(54, 162, 235)',
-                           'rgb(255, 205, 86)'
                        ],
                        hoverOffset: 4,
                        radius: '100%',

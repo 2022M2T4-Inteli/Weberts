@@ -39,9 +39,9 @@ app.get("/historico", (req,res) =>{
 
   /*SERVIDOR API - ENDPOINTS (ACESSO AO BANCO DE DADOS) */
   
+//LOGIN
 app.post("/login", (req, res) => {
   const infos = req.body;
-//   console.log(infos.email);
   db.get(
     `SELECT password_, id FROM usuarios WHERE email == '${infos.email}'`,
     (error, response) => {
@@ -63,3 +63,22 @@ app.post("/login", (req, res) => {
   );
 });
 
+//GET VALOR ANTECIPAVEL
+app.get("/valor1", (req, res) => {
+  db.get(
+    `SELECT SUM(valor) FROM reserva`,
+    (error, data) => {
+      res.json(data)
+    }
+  );
+});
+
+//GET VALOR ANTECIPADO
+app.get("/valor2", (req, res) => {
+  db.get(
+    `SELECT SUM(montante) FROM antecipacao`,
+    (error, data) => {
+      res.json(data)
+    }
+  );
+});
