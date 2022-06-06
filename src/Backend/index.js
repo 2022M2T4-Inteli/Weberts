@@ -82,3 +82,23 @@ app.get("/valor2", (req, res) => {
     }
   );
 });
+
+//GET MES1
+app.get("/mes1", (req, res) => {
+  db.get(
+    `SELECT SUM(montante) FROM antecipacao WHERE data_recebimento == '01/2022'`,
+    (error, data) => {
+      res.json(data)
+    }
+  );
+});
+
+//GET MES2
+app.get("/mes2", (req, res) => {
+  db.get(
+    `SELECT SUM(montante) FROM antecipacao WHERE data_recebimento == '02/2022'`,
+    (error, data) => {
+      res.json(data)
+    }
+  );
+});

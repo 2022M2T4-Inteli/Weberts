@@ -38,11 +38,6 @@
           <script> 
             var api ="localhost:3000";
 
-            var retorno1
-            var retorno2
-            var valor1
-            var valor2
-
 
             //DADOS VALOR NÃO ANTECIPADO PARA O PIE CHART
             var url = "http://127.0.0.1:3031/valor1";
@@ -51,9 +46,9 @@
             xhttp.open("GET", url, false);
             xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
 
-            retorno1 = JSON.parse(xhttp.responseText);
+            var retorno1 = JSON.parse(xhttp.responseText);
 
-            valor1 = retorno1['SUM(valor)']
+            var valor1 = retorno1['SUM(valor)']
 
 
             //DADOS MONTANTE ANTECIPADO PARA O PIE CHART
@@ -63,9 +58,9 @@
             xhttp.open("GET", url, false);
             xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
 
-            retorno2 = JSON.parse(xhttp.responseText);
+            var retorno2 = JSON.parse(xhttp.responseText);
 
-            valor2 = retorno2['SUM(montante)']
+            var valor2 = retorno2['SUM(montante)']
 
             //PIE CHART
               Chart.defaults.font.weight = 'bolder';
@@ -97,15 +92,36 @@
 
            <!--BAR CHART-->  
 
-           <script>                                
+           <script>       
+           //Valor mes 1
+                url = "http://127.0.0.1:3031/mes1";
+                xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, false);
+                xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
+
+                var retornomes1 = JSON.parse(xhttp.responseText);
+
+               var mes1 = retornomes1['SUM(montante)']   
+               
+              //Valor mes 2
+              
+              url = "http://127.0.0.1:3031/mes2";
+                xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, false);
+                xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
+
+                var retornomes2 = JSON.parse(xhttp.responseText);
+
+               var mes2 = retornomes2['SUM(montante)']   
+               
                var boy = document.getElementsByClassName('bar-chart');
                var barGraph = new Chart(boy, {
                    type: 'bar',
                    data: {
-                       labels: ['Jan', 'Fev'],
+                       labels: ['Mes1', 'Mes2'],
                        datasets: [{
                            label: 'Gráfico de Antecipações em R$',
-                           data: [3000, 2700],
+                           data: [mes1, mes2],
                            backgroundColor: [
                                'rgb(255, 99, 132)',
                                'rgb(255, 159, 64)',
