@@ -43,11 +43,11 @@ app.get("/historico", (req,res) =>{
 app.post("/login", (req, res) => {
   const infos = req.body;
   db.get(
-    `SELECT password_, id FROM usuarios WHERE email == '${infos.email}'`,
+    `SELECT senha, id FROM login WHERE email == '${infos.email}'`,
     (error, response) => {
       if (response) {
-        console.log(response.password_, infos.password_);
-        if (response.password_ == infos.password_) {
+        console.log(response.senha, infos.senha);
+        if (response.senha == infos.senha) {
           res.cookie("id", response.id);
           res.sendFile(
             path.resolve(
