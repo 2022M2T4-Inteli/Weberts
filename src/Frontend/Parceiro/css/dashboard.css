@@ -199,12 +199,12 @@ header ul li a:hover {
 }
 
 #histórico {
-  width: 45px;
+  width: 49px;
   top: 15px;
 }
 
-#acompanhar-solicitações {
-  width: 59px;
+#info-ant {
+  width: 49px;
 }
 
 .select-button:hover {
@@ -229,30 +229,6 @@ h2 {
   top: 13px;
 }
 
-.antecipationBtn{
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  background-color: #3468fc;
-  color: #fff;
-  transition: 200ms;
-  border-radius: 15px;
-  align-items: center;
-  font-weight: bold;
-}
-
-.antecipationBtn:hover{
-  box-shadow: #3468fc 0 0 10px;
-
-}
-
-.antecipationBtn img{
-  margin-left: 20px;
-}
 
 /* MENU HEADER */
 
