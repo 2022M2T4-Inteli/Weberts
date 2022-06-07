@@ -104,7 +104,29 @@ body {
   border-radius: 20px;
   border-style: solid;
   border-color: #ffffff;
+  text-align:center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    -moz-animation: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
 }
+/* .select-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 12rem;
+  background-color: #dde6ff;
+  height: 12rem;
+  border-width: 0.15rem;
+  border-radius: 20px;
+  border-style: solid;
+  border-color: #ffffff;
+} */
 
 #logo {
   width: 40px;
@@ -186,8 +208,12 @@ header ul li a:hover {
 }
 
 .select-button:hover {
-  border-color: #3468fc;
+  background-position: 100% 0;
   cursor: pointer;
+  -moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
 }
 
 span {
@@ -205,7 +231,7 @@ h2 {
 
 .antecipationBtn{
   position: absolute;
-  left: 10px;
+  right: 10px;
   bottom: 10px;
   padding: 10px;
   display: flex;
