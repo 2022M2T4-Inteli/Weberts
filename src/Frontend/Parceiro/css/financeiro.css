@@ -50,7 +50,7 @@ body{
     border-radius: 20px 15px 20px 15px ;
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    height: 420px;
+    height: 74vh;
     padding-bottom: 30px;
     
 }
@@ -73,7 +73,7 @@ body{
 
 
 #pieChartContainer{
-    width: 350px;
+    width: 30vw;
     margin: auto;
 }
 
@@ -99,8 +99,8 @@ body{
 }
 
 .graphContainer{
-    height:100vh;
-    margin:10px 10px 0px 30px;
+    width:40vw;
+    margin:10vh 10px 0px 30px;
 }
 
 .graphContainer img{
