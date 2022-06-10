@@ -102,3 +102,14 @@ app.get("/mes2", (req, res) => {
     }
   );
 });
+
+//Dados para página de solicitação
+
+app.get("/hotelReserva", (req, res) => {
+  db.all(
+    'SELECT hotel.nome, reserva.code, reserva.data_checkout, reserva.valor FROM reserva, hotel WHERE reserva.hotel_id = hotel.id ORDER BY hotel.id',
+    (error, data) => {
+      res.json(data)
+    }
+  );
+});

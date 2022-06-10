@@ -5,22 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/antecipacoes.css" />
+    <script src="../css/script.js"></script>
     <!--LINK CSS-->
-    <link
+    <!-- <link
       rel="shortcut icon"
       href="../assets/favicon.png"
       type="image/x-icon"
-    />
+    /> -->
     <!--TAB ICON-->
     <title>Hurb | Antecipações</title>
     <!--TAB TITLE-->
   </head>
-  <body>
+  <body onload="load()">
     <div id="header">
-      <a href="./dashboard.html"
-        ><img id="logo" src="../assets/logo.png" alt="logo"
-      /></a>
-      <img id="menu" src="../assets/menu.png" alt="menu" />
+      <a href="./dashboard.html">
+        <!-- <img id="logo" src="../assets/logo.png" alt="logo"/> -->
+      </a>
+      <!-- <img id="menu" src="../assets/menu.png" alt="menu" /> -->
       <!--MENU ICON-->
       <h1 id="title">Antecipações</h1>
       <!--WHITE TITLE-->
@@ -32,163 +33,7 @@
         <div class="subtileCointainer">
           <h1 class="subtitle">Reservas Selecionadas</h1>
         </div>
-        <div class="scrollContainer">
-          <form action="">
-            <div class="reserveContainer">
-              <input type="checkbox" name="D+15" id="agree" />
-              <div class="reserveInfos">
-                <div class="textInfos">
-                  <h1 class="hotelName">Hotel São Paulo</h1>
-                  <div class="codeAndCheckOutDate">
-                    <div class="ccBoxLeft">
-                      <p class="ccText">Código</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                    <div class="ccBoxRight">
-                      <p class="ccText">Check-Out</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="valueInfos">
-                  <p class="valueText">Valor</p>
-                  <p class="valueNumber">R$ 9.982,09</p>
-                </div>
-              </div>
-            </div>
-            <div class="reserveContainer">
-              <input type="checkbox" name="agree" id="agree" />
-              <div class="reserveInfos">
-                <div class="textInfos">
-                  <h1 class="hotelName">Hotel São Paulo</h1>
-                  <div class="codeAndCheckOutDate">
-                    <div class="ccBoxLeft">
-                      <p class="ccText">Código</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                    <div class="ccBoxRight">
-                      <p class="ccText">Check-Out</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="valueInfos">
-                  <p class="valueText">Valor</p>
-                  <p class="valueNumber">R$ 9.982,09</p>
-                </div>
-              </div>
-            </div>
-            <div class="reserveContainer">
-              <input type="checkbox" name="agree" id="agree" />
-              <div class="reserveInfos">
-                <div class="textInfos">
-                  <h1 class="hotelName">Hotel São Paulo</h1>
-                  <div class="codeAndCheckOutDate">
-                    <div class="ccBoxLeft">
-                      <p class="ccText">Código</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                    <div class="ccBoxRight">
-                      <p class="ccText">Check-Out</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="valueInfos">
-                  <p class="valueText">Valor</p>
-                  <p class="valueNumber">R$ 9.982,09</p>
-                </div>
-              </div>
-            </div>
-            <div class="reserveContainer">
-              <input type="checkbox" name="agree" id="agree" />
-              <div class="reserveInfos">
-                <div class="textInfos">
-                  <h1 class="hotelName">Hotel São Paulo</h1>
-                  <div class="codeAndCheckOutDate">
-                    <div class="ccBoxLeft">
-                      <p class="ccText">Código</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                    <div class="ccBoxRight">
-                      <p class="ccText">Check-Out</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="valueInfos">
-                  <p class="valueText">Valor</p>
-                  <p class="valueNumber">R$ 9.982,09</p>
-                </div>
-              </div>
-            </div>
-            <div class="reserveContainer">
-              <input type="checkbox" name="agree" id="agree" />
-              <div class="reserveInfos">
-                <div class="textInfos">
-                  <h1 class="hotelName">Hotel São Paulo</h1>
-                  <div class="codeAndCheckOutDate">
-                    <div class="ccBoxLeft">
-                      <p class="ccText">Código</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                    <div class="ccBoxRight">
-                      <p class="ccText">Check-Out</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="valueInfos">
-                  <p class="valueText">Valor</p>
-                  <p class="valueNumber">R$ 9.982,09</p>
-                </div>
-              </div>
-            </div>
-            <div class="reserveContainer">
-              <input type="checkbox" name="agree" id="agree" />
-              <div class="reserveInfos">
-                <div class="textInfos">
-                  <h1 class="hotelName">Hotel São Paulo</h1>
-                  <div class="codeAndCheckOutDate">
-                    <div class="ccBoxLeft">
-                      <p class="ccText">Código</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                    <div class="ccBoxRight">
-                      <p class="ccText">Check-Out</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="valueInfos">
-                  <p class="valueText">Valor</p>
-                  <p class="valueNumber">R$ 9.982,09</p>
-                </div>
-              </div>
-            </div>
-            <div class="reserveContainer">
-              <input type="checkbox" name="agree" id="agree" />
-              <div class="reserveInfos">
-                <div class="textInfos">
-                  <h1 class="hotelName">Hotel São Paulo</h1>
-                  <div class="codeAndCheckOutDate">
-                    <div class="ccBoxLeft">
-                      <p class="ccText">Código</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                    <div class="ccBoxRight">
-                      <p class="ccText">Check-Out</p>
-                      <p class="ccNumber">XX/XX/XXXX</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="valueInfos">
-                  <p class="valueText">Valor</p>
-                  <p class="valueNumber">R$ 9.982,09</p>
-                </div>
-              </div>
-            </div>
-          </form>
+        <div class="scrollContainer" id="scrollContainer">
         </div>
         <div class="geralContainer">
           <div class="geralTitle">
@@ -197,7 +42,7 @@
           <div class="geralInfos">
             <div class="valueInfos">
               <p class="valueText">Valor</p>
-              <p class="valueNumber">R$ 9.982,09</p>
+              <p class="valueNumber" id="fullValue">R$ 0</p>
             </div>
             <div class="antecipationType">
               <div class="selectedAntecipationContainer">
@@ -207,41 +52,45 @@
               <form action="" class="antecipationForm">
                 <div>
                   <input
-                    type="checkbox"
-                    name="D+30"
+                    type="radio"
+                    name="D"
                     id="D+30"
                     class="checkBox"
                     value="D+30"
+                    onclick="javaScript:regra()"
                   />
                   <label for="D+30">D+30</label>
                 </div>
                 <div>
                   <input
-                    type="checkbox"
-                    name="D+15"
+                    type="radio"
+                    name="D"
                     id="D+15"
                     class="checkBox"
                     value="D+15"
+                    onclick="javaScript:regra()"
                   />
                   <label for="D+15">D+15</label>
                 </div>
                 <div>
                   <input
-                    type="checkbox"
-                    name="D+7"
+                    type="radio"
+                    name="D"
                     id="D+7"
                     class="checkBox"
                     value="D+7"
+                    onclick="javaScript:regra()"
                   />
                   <label for="D+7">D+7</label>
                 </div>
                 <div>
                   <input
-                    type="checkbox"
-                    name="D+2"
+                    type="radio"
+                    name="D"
                     id="D+2"
                     class="checkBox"
                     value="D+2"
+                    onclick="javaScript:regra()"
                   />
                   <label for="D+2">D+2</label>
                 </div>
@@ -249,7 +98,7 @@
             </div>
             <div class="receiptDateContainer">
               <h1>Data de Recebimento</h1>
-              <p>XX/XX/XXXX</p>
+              <p id="Data">XX/XX/XXXX</p>
             </div>
           </div>
         </div>
