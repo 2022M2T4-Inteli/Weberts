@@ -37,6 +37,11 @@ app.get("/historico", (req,res) =>{
     path.resolve(__dirname + "/../frontend/Parceiro/pages/historico.html")
   )});
 
+  app.get("/antecipacoes", (req,res) =>{
+    res.sendFile(
+      path.resolve(__dirname + "/../frontend/Parceiro/pages/antecipacoes.html")
+    )});
+
   /*SERVIDOR API - ENDPOINTS (ACESSO AO BANCO DE DADOS) */
   
 //LOGIN
