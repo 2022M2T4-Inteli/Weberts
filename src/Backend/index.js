@@ -123,3 +123,31 @@ app.get("/hotelReserva", (req, res) => {
     }
   );
 });
+
+app.get("/stateFilter", (req, res) => {
+  db.all(
+    `SELECT DISTINCT (estado) FROM hotel `,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
+app.get("/antecipations?states=[]", (req, res) => {
+  var stateFiltered = JSON.parse(req.query.state);
+  console.log(stateFiltered)
+  if (!stateFiltered) { 
+    db.get( 
+      `SELECT SUM(estado) FROM hotel`,
+      (error, data) => {
+        res.json(data)
+      }
+    )
+  } else {
+    db.get(
+      `SELECT SUM(estado) FROM hotel WHERE estado in ${stateFiltered}`,
+      (error, data) => {
+        res.json(data)
+      }
+    )
+  }
+})
