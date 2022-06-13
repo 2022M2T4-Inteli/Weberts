@@ -214,6 +214,9 @@ header ul li a:hover {
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
+    transform: scale(1.1);
+    transition: all 0.5s;
+    box-shadow: 10px;
 }
 
 span {

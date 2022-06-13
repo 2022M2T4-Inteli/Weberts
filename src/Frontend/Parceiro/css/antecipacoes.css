@@ -293,3 +293,46 @@ body {
   border-radius: 15px;
   margin: 5px 5px 0px;
 }
+
+.buttonAntecipar{
+  display: flex;
+  align-self: center;
+}
+
+button{
+  background-color: #3468fc;
+  color: #fff;
+  border:none;
+  padding: 10px 30px 10px 30px;
+  border-radius: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
+  text-align: center;
+}
+button{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;  
+  top: 9px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover{
+  padding-right: 30px;
+  padding-left:30px;
+  transform: scale(1.1);
+  transition: all 0.5s;
+}
+
+button:hover:after {
+  opacity: 1;
+  right: 10px;
+}

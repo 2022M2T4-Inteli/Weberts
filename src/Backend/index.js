@@ -27,6 +27,21 @@ app.get("/antecipacoesInfo", (req,res) =>{
     path.resolve(__dirname + "/../frontend/Parceiro/pages/antecipacoesInfo.html")
   )});
 
+app.get("/editarDados", (req,res) =>{
+  res.sendFile(
+    path.resolve(__dirname + "/../frontend/Parceiro/pages/editarDados.html")
+  )});
+
+app.get("/index", (req,res) =>{
+  res.sendFile(
+    path.resolve(__dirname + "/../frontend/Parceiro/index.html")
+  )});
+
+app.get("/editarBanco", (req,res) =>{
+  res.sendFile(
+    path.resolve(__dirname + "/../frontend/Parceiro/pages/editarBanco.html")
+  )});
+
 app.get("/financeiro", (req,res) =>{
   res.sendFile(
     path.resolve(__dirname + "/../frontend/Parceiro/pages/financeiro.html")
