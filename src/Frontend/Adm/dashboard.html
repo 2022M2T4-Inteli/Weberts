@@ -17,9 +17,9 @@
     <div id="menu">
         <div class="row header">
             <div class="col-2 menu-icons">
-                <button id="logout">
+                <button onclick="quitPopup()" id="logout">
                     <i class="bi bi-box-arrow-right"></i>
-                    <span>Logout</span>
+                    <span">Logout</span>
                 </button>
             </div>
             <div class="col-7 menu-icons" id="logo">
@@ -27,12 +27,36 @@
             </div>
             <div class="col-2 menu-icons">
                 <button id="filter">
-                    <i class="bi bi-sort-down"></i>
+                    <i onclick="openFilter()" class="bi bi-sort-down"></i>
                 </button>
             </div>
         </div>
     </div>
     <div id="content" class="container-fluid">
+        <div id="shadow"></div>
+        <div id="filterPopup">
+            <div value="teste">
+                <div onclick="openStates()" class="filter" id="estados-filter">Estados</div>
+                <div id="state-options"></div>
+                <div onclick="openCities()" class="filter" id="cidades-filter">Cidades</div>
+                <div id="city-options"></div>
+                <div onclick="openPartner()" class="filter" id="parceiros-filter">Parceiros</div>
+                <div id="partner-options"></div>
+                <div onclick="openPeriod()" class="filter" id="periodos-filter">Períodos</div>
+                <div id="period-options"></div>
+                <div onclick="openType()" class="filter" id="tipos-filter">Tipos de Atecipações</div>
+                <div id="type-options"></div>
+            </div>
+        </div>
+        <div id="quitPopup">
+            <div>
+                <h3>Você deseja relamente deslogar da sua conta?</h3>
+            </div>
+            <div id="quitoptions">
+                <div onclick="location.href='./index.html'"" class="quitoptions">Sim</div>
+                <div onclick="quitPopup()" class="quitoptions">Não</div>
+            </div>
+        </div>
         <div id="row-content" class="row content">
             <div class="col">
                 <div class="row">
@@ -46,7 +70,7 @@
                                             <h3>Antecipações x Prazo</h3>
                                         </div>
                                         <div class="row">
-                                            <h1 class="blue">4000</h1>
+                                            <h1 id="antecipation-value" class="blue">4000</h1>
                                         </div>
                                     </div>
                                 </div>
@@ -905,536 +929,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div style="overflow-x: scroll;" id="empty-card-2" class="col">
-                        <div id="empty-title-1" class="row">
-                            <h3>Linha do Tempo</h3>
-                        </div>
-                        <div id="timeline-items" class="col">
-                            <div id="timeline-roll">
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="hotelCard row">
-                                    <div id="timeline-box" class="col timeline-solid-card-1">
-                                        <div class="row">
-                                            <div class="col-1 small-line">
-                                            </div>
-                                            <div class="col">
-                                                <div id="timeline-card-title" class="row">
-                                                    <h3>Hotel Santa Cruz</h3>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Montante Solicitado</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h3 class="blue">R$ 28.989.00</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div id="timeline-card" class="row">
-                                                    <div class="col">
-                                                        <div class="row">
-                                                            <h5>Status</h5>
-                                                        </div>
-                                                        <div class="row">
-                                                            <h4>Aguardando Aprovação</h4>
-                                                        </div>
-                                                    </div>
-                                                    <div id="timeline-participation" class="col">
-                                                        <div class="row">
-                                                            <h5>Participação</h5>
-                                                        </div>
-                                                        <div id="timeline-circle-1" class="row">
-                                                            <span>
-                                                                <h5>9,34%</h5>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
+ <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+<script src="../js/dashboard.js"></script>
+
 </body>
 
 </html>
