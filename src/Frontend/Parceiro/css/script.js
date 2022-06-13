@@ -47,7 +47,7 @@ function check(){
         for(i; i < scrollContainer.length; i++){
         if(document.getElementById("agree" + i).checked){
             retorno = document.getElementById('value' + i).innerHTML
-            soma += parseInt(retorno.substring(3, 7))
+            soma += parseInt(retorno.substring(3))
         }
         document.getElementById('fullValue').innerHTML = 'R$ ' + soma
     };
@@ -79,4 +79,4 @@ function regra(){
       month: '2-digit',
       day: '2-digit',
     })
-  }
+  } 
