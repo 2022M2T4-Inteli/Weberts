@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../css/antecipacoes.css" />
     <script src="../css/script.js"></script>
+    <script src="../scripts/popUp.js"></script>
     <!--LINK CSS-->
     <link
-      rel="shortcut icon"
-      href="../assets/favicon.png"
-      type="image/x-icon"
+    rel="shortcut icon"
+    href="../assets/favicon.png"
+    type="image/x-icon"
     />
     <!--TAB ICON-->
     <title>Hurb | Antecipações</title>
@@ -19,7 +20,7 @@
   <body onload="load()">
     <div id="header">
       <a href="./dashboard">
-        <img id="logo" src="../assets/logo.png" alt="logo"/>
+        <img id="logo" src="../assets/logo.png" alt="logo" />
       </a>
       <img id="menu" src="../assets/menu.png" alt="menu" />
       <!--MENU ICON-->
@@ -33,8 +34,7 @@
         <div class="subtileCointainer">
           <h1 class="subtitle">Reservas Selecionadas</h1>
         </div>
-        <div class="scrollContainer" id="scrollContainer">
-        </div>
+        <div class="scrollContainer" id="scrollContainer"></div>
         <div class="geralContainer">
           <div class="geralTitle">
             <h1>Geral</h1>
@@ -101,12 +101,23 @@
               <p id="Data">XX/XX/XXXX</p>
             </div>
             <div class="buttonAntecipar">
-                <button>Antecipar</button>
+              <button onclick="abrir()">Antecipar</button>
             </div>
           </div>
         </div>
       </div>
     </main>
-    </script>
+    <div id="bodyBlur">   
+  </div>
+  <div id="popUp" class="popUp">
+    <div class="imgbx" >
+      <img id="gif" src="../assets/76649-checked.gif" alt="">
+    </div>
+    <p>
+      Sua antecipação foi confirmada! <br />
+      Um link será enviado para seu email com as principais informações da
+      antecipação!
+    </p>
+  </div>
   </body>
 </html>

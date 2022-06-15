@@ -275,6 +275,7 @@ body {
 .receiptDateContainer {
   display: flex;
   flex-direction: column;
+  width: 260px;
 }
 .receiptDateContainer h1 {
   margin: 3px;
@@ -288,7 +289,7 @@ body {
   font-weight: bold;
   color: #3468fc;
   font-size: 24px;
-  padding: 25px;
+  padding: 20px;
   background-color: #dde6ff;
   border-radius: 15px;
   margin: 5px 5px 0px;
@@ -335,4 +336,42 @@ button:hover{
 button:hover:after {
   opacity: 1;
   right: 10px;
+}
+
+.popUp{
+  position:fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 300px;
+  height: 200px;
+  padding: 15px;
+  border-radius: 10px;
+  color: #373737;
+  background-color: #fff;
+  display: none;
+  transition: 500ms;
+  text-align: center;
+  box-shadow: #373737 inset;
+}
+
+#bodyBlur{
+  position:fixed;
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(13px);
+  filter: blur(10px);
+  width: 100vw;
+  height: 100vh;
+}
+
+.imgbx{
+  text-align: center;
+}
+
+#gif{
+  width: 120px;
 }

@@ -72,11 +72,16 @@ main{
 
 .loginBtn{
     padding: 8px 13px;
-    color: #3468FC;
+    color: white;
     font-weight: bold;
-    background-color: white;
+    background-color: #3468FC;
     border-radius: 10px;
     text-align: center;
+    border: none;
+}
+.loginBtn:hover{
+    transform: scale(1.1);
+    transition: all 0.5s;
 }
 
 /* IMG Container */
