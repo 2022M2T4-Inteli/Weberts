@@ -139,9 +139,43 @@ app.get("/hotelReserva", (req, res) => {
   );
 });
 
+//Coisa do luiz
+
 app.get("/stateFilter", (req, res) => {
   db.all(
     `SELECT DISTINCT (estado) FROM hotel `,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
+app.get("/cityFilter", (req, res) => {
+  db.all(
+    `SELECT DISTINCT (cidade) FROM hotel `,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
+app.get("/partnerFilter", (req, res) => {
+  db.all(
+    `SELECT DISTINCT (nome) FROM hotel `,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
+app.get("/periodFilter", (req, res) => {
+  db.all(
+    `SELECT DISTINCT (data_recebimento) FROM antecipacao `,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
+app.get("/typeFilter", (req, res) => {
+  db.all(
+    `SELECT DISTINCT (regra) FROM antecipacao `,
     (error, data) => {
       res.json(data)
     }
@@ -165,4 +199,64 @@ app.get("/antecipations?states=[]", (req, res) => {
       }
     )
   }
+})
+
+app.get("/antecipations", (req, res) => {
+  db.all(
+    `SELECT COUNT (*) FROM antecipacao `,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
+
+app.get("/montante", (req, res) => {
+  db.all(
+    `SELECT SUM (montante) FROM antecipacao`,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+  
+})
+
+app.get("/rentabilidade", (req, res) => {
+  db.all(
+    `SELECT SUM(montante)/SUM(valor) FROM antecipacao INNER JOIN reserva on reserva.code = antecipacao.reserva_code`,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+
+})
+
+app.get("/antecipations?states=[]", (req, res) => {
+  var stateFiltered = JSON.parse(req.query.state);
+  console.log(stateFiltered)
+  if (!stateFiltered) { 
+    db.get( 
+      `SELECT SUM(estado) FROM hotel`,
+      (error, data) => {
+        res.json(data)
+      }
+    )
+  } else {
+    db.get(
+      `SELECT SUM(estado) FROM hotel WHERE estado in ${stateFiltered}`,
+      (error, data) => {
+        res.json(data)
+      }
+    )
+  }
+})
+
+//Ranking
+
+app.get("/ranking", (req, res) => {
+  db.all(
+    `SELECT montante,hotel.nome, antecipacao.regra, hotel.estado FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code`,
+    (error, data) => {
+      res.json(data)
+    }
+  )
 })
