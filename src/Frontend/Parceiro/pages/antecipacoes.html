@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/antecipacoes.css" />
     <script src="../css/script.js"></script>
     <script src="../scripts/popUp.js"></script>
+    
     <!--LINK CSS-->
     <link
     rel="shortcut icon"
@@ -18,8 +19,8 @@
     <!--TAB TITLE-->
   </head>
   <body onload="load()">
-    <div id="header">
-      <a href="./dashboard">
+    <div id="header" class="blur">
+      <a href="./dashboard" >
         <img id="logo" src="../assets/logo.png" alt="logo" />
       </a>
       <img id="menu" src="../assets/menu.png" alt="menu" />
@@ -27,7 +28,7 @@
       <h1 id="title">Antecipações</h1>
       <!--WHITE TITLE-->
     </div>
-    <main id="container">
+    <main id="container" class="blur">
       <!--BLUE BACKGROUND-->
       <div id="wtContainer">
         <!--WHITE BACKGROUND-->
@@ -112,10 +113,13 @@
   <div id="popUp" class="popUp">
     <div class="imgbx" >
       <img id="gif" src="../assets/76649-checked.gif" alt="">
+    <a href="\dashboard">
+      <img id="closeIcon" src="../assets/x.svg" alt="" >
+    </a>
     </div>
-    <p>
-      Sua antecipação foi confirmada! <br />
-      Um link será enviado para seu email com as principais informações da
+    <p id="antecipation"> Sua antecipação foi confirmada!</p> 
+    <p style="font-size: 16px;">
+    Você receberá um email com as principais informações da
       antecipação!
     </p>
   </div>

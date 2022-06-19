@@ -23,15 +23,18 @@
       <a href="/dashboard"
         ><img id="logo" src="../assets/logo.png" alt="logo"
       /></a>
-      <h2 style="margin-left: 10px">Dashboard</h2>
       <div class="toggle"></div>
       <ul class="menu">
         <li>
-          <select name="myAccount" id="myAccount" onchange="location.href=this.value">
+          <select
+            name="myAccount"
+            id="myAccount"
+            onchange="location.href=this.value"
+          >
             <option style="display: none">Minha Conta</option>
-            <option value="/editarDados" >Dados Pessoais</option>
+            <option value="/editarDados">Dados Pessoais</option>
             <option value="/editarBanco">Dados Bancários</option>
-            <option value="/index" >Sair</option>
+            <option value="/index">Sair</option>
           </select>
         </li>
         <li>
@@ -93,12 +96,13 @@
                 margin-bottom: 10px;
               "
             >
-              <span>Informações<br />sobre antecipações</span>
+              <span>Saiba mais<br />sobre antecipações</span>
             </div>
           </a>
         </div>
       </div>
     </div>
+    <!-- Código do menu lateral  -->
     <script type="text/javascript">
       function toggleMenu() {
         var menuToggle = document.querySelector(".toggle");
@@ -106,6 +110,17 @@
         menuToggle.classList.toggle("active");
         menu.classList.toggle("active");
       }
+    </script>
+<!-- Widget para libras -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+      new window.VLibras.Widget("https://vlibras.gov.br/app");
     </script>
   </body>
 </html>

@@ -95,7 +95,9 @@ body {
 .scrollContainer {
   margin: 0px 40px;
   overflow-y: scroll;
-  height: 60%;
+  height: 80%;
+  width: 80%;
+  align-self:center;
 }
 
 .reserveContainer {
@@ -122,7 +124,7 @@ body {
 .reserveInfos {
   display: flex;
   flex-direction: row;
-  border: 2px #3468fc solid;
+  border: 2px #96b0f8 solid;
   border-radius: 10px;
   padding: 10px;
   margin: 5px 10px;
@@ -170,6 +172,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 
 .valueText {
@@ -186,6 +189,7 @@ body {
   font-size: 32px;
   color: #3468fc;
   margin: 10px 10px 0px;
+  width: 150px;
 }
 
 .geralContainer {
@@ -275,7 +279,7 @@ body {
 .receiptDateContainer {
   display: flex;
   flex-direction: column;
-  width: 260px;
+  width: 255px;
 }
 .receiptDateContainer h1 {
   margin: 3px;
@@ -346,26 +350,24 @@ button:hover:after {
   right: 0;
   margin: auto;
   width: 300px;
-  height: 200px;
+  height: fit-content;
   padding: 15px;
   border-radius: 10px;
   color: #373737;
   background-color: #fff;
-  display: none;
-  transition: 500ms;
   text-align: center;
-  box-shadow: #373737 inset;
+  box-shadow: #373737 inset 10px;
+  backdrop-filter: 20px;
+  display: none;
 }
 
-#bodyBlur{
-  position:fixed;
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(13px);
-  filter: blur(10px);
-  width: 100vw;
-  height: 100vh;
+
+
+
+
+#antecipation{
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .imgbx{
@@ -374,4 +376,15 @@ button:hover:after {
 
 #gif{
   width: 120px;
+}
+
+#closeIcon{
+  position:absolute;
+  right: 10px;
+  top: 5px;
+  width: 20px;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: all 0.5s;
+
 }

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
 * {
   margin: 0px;
   font-weight: 500;
@@ -65,6 +65,7 @@ top: 150px;
   height: 70vh;
   padding-bottom: 30px;
   align-items: flex-start;
+  filter: none;
 }
 
 .smallcontainer{
@@ -76,6 +77,19 @@ top: 150px;
 #inputnumber{
     width: 70px;
 
+}
+
+.form-select {
+  background-color: #dde6ff;
+  border-radius: 10px;
+  padding: 3px;
+  border: none;
+  outline: none;
+  font-weight: 400;
+}
+
+.form-select:hover{
+  outline: none;
 }
 
 .containerinfo{
@@ -93,16 +107,24 @@ top: 150px;
     
 }
 
-.dados_bancarios{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    margin: 35px;
-    text-align: center;
-    flex-wrap: wrap;
+.coluninfonumber{
+  position:static;
+  display: flex;
+  flex-direction: column;
+  margin-right: 40px;
+  margin-left: 22px;
+  margin-top: 15px;
+  
 }
 
+.coluninfostate{
+  position:static;
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+  margin-left: 22px;
+  margin-top: 15px;
+}
 
 b {
   color: #3468fc;
@@ -126,6 +148,7 @@ input:focus{
 
 p{
     margin-bottom: 5px;
+    color: #2d2d2d;
 }
 
 
@@ -148,8 +171,75 @@ button{
     border: none;
     padding: 7px 20px 7px 20px; 
     right: 20px;
+    cursor: pointer;
 }
 button:hover{
   transform: scale(1.1);
   transition: all 0.5s;
 }
+
+#estado{
+  border-radius: 10px;
+  background-color: #dde6ff ;
+  border: none;
+  padding: 2px;
+}
+
+input::placeholder{
+   font-weight: 400;
+  color: #131313;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+input:focus:-moz-placeholder { /* Firefox 18- */
+  color: transparent;  
+}
+input:focus::-moz-placeholder {  /* Firefox 19+ */
+  color: transparent;  
+}
+input:focus:-ms-input-placeholder {  
+  color: transparent;  
+}
+
+.popUp{
+  position:fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 300px;
+  height: fit-content;
+  padding: 15px;
+  border-radius: 10px;
+  color: #373737;
+  background-color: #fff;
+  text-align: center;
+  box-shadow: #373737 inset 10px;
+  backdrop-filter: 20px;
+  display: none;
+}
+.imgbx{
+  text-align: center;
+}
+
+#gif{
+  width: 120px;
+}
+
+#dadosSalvos{
+  font-weight: 500;
+}
+
+#closeIcon{
+  position:absolute;
+  right: 10px;
+  top: 5px;
+  width: 20px;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: all 0.5s;
+}
+

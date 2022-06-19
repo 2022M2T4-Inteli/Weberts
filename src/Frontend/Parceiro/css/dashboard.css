@@ -18,7 +18,7 @@ body {
   justify-content: flex-end;
   height: 50px;
   width: 100%;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
 .header-mask {
@@ -92,6 +92,7 @@ body {
 }
 
 .select-button {
+  all: unset;
   display: flex;
   flex-direction: column;
   justify-content: center;
