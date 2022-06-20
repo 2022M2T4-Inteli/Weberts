@@ -126,6 +126,19 @@ top: 150px;
   margin-top: 15px;
 }
 
+.coluninfoCPF{
+  margin-right: 10px;
+  margin-top: 15px;
+}
+
+#inputConta{
+  width: 90px ;
+}
+.coluninfoBanco{
+  margin-right: 10px;
+  margin-top: 15px;
+}
+
 b {
   color: #3468fc;
   font-weight: bolder;
