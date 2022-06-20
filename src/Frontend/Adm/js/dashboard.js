@@ -1,6 +1,6 @@
 
 function openStates(){
-    if ($("#state-options")[0].style.display == "none"){
+    if ($("#state-options")[0].style.display == "none" || $("#state-options")[0].style.display == ""){
         $("#state-options")[0].style.display = "flex"
         off = false
         $("#estados-filter")[0].style.backgroundColor = "#3468FC"
@@ -10,6 +10,61 @@ function openStates(){
         $("#estados-filter")[0].style.backgroundColor = "#DDE6FF"
         $("#estados-filter")[0].style.color = "#373737"
     }
+    
+}
+
+function openCities(){
+    if ($("#city-options")[0].style.display == "none" || $("#city-options")[0].style.display == ""){
+        $("#city-options")[0].style.display = "flex"
+        off = false
+        $("#cidades-filter")[0].style.backgroundColor = "#3468FC"
+        $("#cidades-filter")[0].style.color = "#FFF"
+    } else{
+        $("#city-options")[0].style.display = "none"
+        $("#cidades-filter")[0].style.backgroundColor = "#DDE6FF"
+        $("#cidades-filter")[0].style.color = "#373737"
+    }
+
+}
+function openPartner(){
+    if ($("#partner-options")[0].style.display == "none" || $("#partner-options")[0].style.display == ""){
+        $("#partner-options")[0].style.display = "flex"
+        off = false
+        $("#parceiros-filter")[0].style.backgroundColor = "#3468FC"
+        $("#parceiros-filter")[0].style.color = "#FFF"
+    } else{
+        $("#partner-options")[0].style.display = "none"
+        $("#parceiros-filter")[0].style.backgroundColor = "#DDE6FF"
+        $("#parceiros-filter")[0].style.color = "#373737"
+    }
+}
+
+function openPeriod(){
+    if ($("#period-options")[0].style.display == "none" || $("#period-options")[0].style.display == ""){
+        $("#period-options")[0].style.display = "flex"
+        off = false
+        $("#periodos-filter")[0].style.backgroundColor = "#3468FC"
+        $("#periodos-filter")[0].style.color = "#FFF"
+    } else{
+        $("#period-options")[0].style.display = "none"
+        $("#periodos-filter")[0].style.backgroundColor = "#DDE6FF"
+        $("#periodos-filter")[0].style.color = "#373737"
+    }
+
+}
+
+function openType(){
+    if ($("#type-options")[0].style.display == "none" || $("#type-options")[0].style.display == ""){
+        $("#type-options")[0].style.display = "flex"
+        off = false
+        $("#tipos-filter")[0].style.backgroundColor = "#3468FC"
+        $("#tipos-filter")[0].style.color = "#FFF"
+    } else{
+        $("#type-options")[0].style.display = "none"
+        $("#tipos-filter")[0].style.backgroundColor = "#DDE6FF"
+        $("#tipos-filter")[0].style.color = "#373737"
+    }
+
 }
 
 // const { Console } = require("console")
@@ -25,6 +80,7 @@ function quitPopup(){
 }
 
 function attData() {
+
     $.get("http://localhost:3031/stateFilter", function(resultado){
         resultado.forEach(row => {
             $("#state-options")[0].innerHTML += `<div class="state-unselected" onclick="changeStatus(this)">${row.estado}</div>`;
@@ -33,25 +89,25 @@ function attData() {
 
     $.get("http://localhost:3031/cityFilter", function(resultado){
         resultado.forEach(row => {
-            $("#state-options")[0].innerHTML += `<div class="city-unselected" onclick="changeStatus(this)">${row.cidade}</div>`;
+            $("#city-options")[0].innerHTML += `<div class="city-unselected" onclick="changeStatus(this)">${row.cidade}</div>`;
         });
     });
 
     $.get("http://localhost:3031/partnerFilter", function(resultado){
         resultado.forEach(row => {
-            $("#state-options")[0].innerHTML += `<div class="partner-unselected" onclick="changeStatus(this)">${row.nome}</div>`;
+            $("#partner-options")[0].innerHTML += `<div class="partner-unselected" onclick="changeStatus(this)">${row.nome}</div>`;
         });
     });
 
     $.get("http://localhost:3031/periodFilter", function(resultado){
         resultado.forEach(row => {
-            $("#state-options")[0].innerHTML += `<div class="period-unselected" onclick="changeStatus(this)">${row.data_recebimento}</div>`;
+            $("#period-options")[0].innerHTML += `<div class="period-unselected" onclick="changeStatus(this)">${row.data_recebimento}</div>`;
         });
     });
 
     $.get("http://localhost:3031/typeFilter", function(resultado){
         resultado.forEach(row => {
-            $("#state-options")[0].innerHTML += `<div class="type-unselected" onclick="changeStatus(this)">${row.regra}</div>`;
+            $("#type-options")[0].innerHTML += `<div class="type-unselected" onclick="changeStatus(this)">${row.regra}</div>`;
         });
     });
 
@@ -65,14 +121,14 @@ function attData() {
     $.get("http://localhost:3031/montante", function(resultado){
         
         $("#montate-value")[0].innerHTML ="R$"+parseFloat(resultado[0]["SUM (montante)"]);
-        console.log(resultado[0])
+      
         
     });
 
     $.get("http://localhost:3031/rentabilidade", function(resultado){
         
         $("#rentabilidade-value")[0].innerHTML =(resultado[0]["SUM(montante)/SUM(valor)"]*100).toFixed(0)+"%";
-        console.log(resultado[0])   
+        
         
     });
 
@@ -91,17 +147,42 @@ function openFilter() {
 
 function changeStatus(event) {
     var value = event.parentElement.id
-    console.log(value)
-    if (event.className == "state-unselected")
+    
+
+    if (event.className == "state-unselected" || event.className == "city-unselected" || event.className == "partner-unselected" || event.className == "period-unselected" || event.className == "type-unselected")
         switch (value) {
             case "state-options":
                 event.className = "state-selected"
+                break
+            case "city-options":
+                event.className = "city-selected"
+                break
+            case "partner-options":
+                event.className = "partner-selected"
+                break
+            case "period-options":
+                event.className = "period-selected"
+                break
+            case "type-options":
+                event.className = "type-selected"
                 break
         }
     else {
         switch (value) {
             case "state-options":
                 event.className = "state-unselected"
+                break
+            case "city-options":
+                event.className = "city-unselected"
+                break
+            case "partner-options":
+                event.className = "partner-unselected"
+                break
+            case "period-options":
+                event.className = "period-unselected"
+                break
+            case "type-options":
+                event.className = "type-unselected"
                 break
         }
     }
@@ -115,6 +196,76 @@ function filter() {
         stateFiltered.push(stateVector[i].innerText)
         
     }
+    var cityVector = document.getElementsByClassName("city-selected");
+    var cityFiltered = [];
+    for(var i = 0; i < cityVector.length; i++){
+        cityFiltered.push(cityVector[i].innerText)
+        
+    }
+    var partnerVector = document.getElementsByClassName("partner-selected");
+    var partnerFiltered = [];
+    for(var i = 0; i < partnerVector.length; i++){
+        partnerFiltered.push(partnerVector[i].innerText)
+        
+    }
+    var periodVector = document.getElementsByClassName("period-selected");
+    var periodFiltered = [];
+    for(var i = 0; i < periodVector.length; i++){
+        periodFiltered.push(periodVector[i].innerText)
+        
+    }
+    var typeVector = document.getElementsByClassName("type-selected");
+    var typeFiltered = [];
+    for(var i = 0; i < typeVector.length; i++){
+        typeFiltered.push(typeVector[i].innerText)
+        
+    }
+
+        estado_hotel = stateFiltered
+        cidade_hotel = cityFiltered
+        nome_hotel = partnerFiltered
+        data_recebimento_antecipacao = periodFiltered
+        regra_antecipacao = typeFiltered
+        
+        await(
+            $.ajax({
+                dataType: "json",
+                contentType: "application/json",
+                url: "http://127.0.0.1:3031/hotel",
+                type: "post",
+                cors: true,
+                headers: {
+                    'Acces-Control-Allow-Origin': '*',
+                },
+                data: JSON.stringify({ estado_hotel: estado_hotel,
+                     cidade_hotel: cidade_hotel, 
+                     nome_hotel: nome_hotel 
+                  }),
+                success: function (resultData) {
+                    console.log("Sucesso")
+                    getSkills();
+                }
+            }))
+            await(
+            $.ajax({
+                dataType: "json",
+                contentType: "application/json",
+                url: "http://127.0.0.1:3031/antecipacao",
+                type: "post",
+                cors: true,
+                headers: {
+                    'Acces-Control-Allow-Origin': '*',
+                },
+                data: JSON.stringify({ data_recebimento_antecipacao: data_recebimento_antecipacao, 
+                    regra_antecipacao: regra_antecipacao
+                  }),
+                success: function (resultData) {
+                    console.log("Sucesso")
+                    getSkills();
+                }
+            }))
+
+            
 }
 
 function ranking(){

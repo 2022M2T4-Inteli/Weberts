@@ -9,12 +9,13 @@ const path = require("path");
 const cors = require("cors");
 const bp = require("body-parser");
 const cookieParser = require("cookie-parser");
+const urlencodedParser = bp.urlencoded({ extended: false })
 app.use(bp.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(express.static("../frontend/Parceiro"));
+app.use(express.static("../frontend/Adm"));
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
@@ -139,7 +140,39 @@ app.get("/hotelReserva", (req, res) => {
   );
 });
 
+app.post("/mandarAntecipacao", (req, res) => {
+  const infos = req.body;
+  db.get(
+    `INSERT INTO antecipacao (regra, data_pedido, data_recebimento, montante, reserva_code) VALUES ('${infos.regra}', '${infos.data_pedido}', '${infos.data_recebimento}', '${infos.montante}', '${infos.reserva_code}')`,
+    (error, response) => {
+        if (error) {
+          console.log(error)
+        } else {
+          res.send('sent')
+        }
+    }
+  );
+});
+
 //Coisa do luiz
+
+app.get("/hotel", (req, res) => {
+  db.all(
+    `SELECT * FROM hotel WHERE (estado) IN (${JSON.parse(req.body.estado_hotel)}) AND (${JSON.parse(req.body.cidade_hotel)}) AND (${JSON.parse(req.body.nome_hotel)}) `,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
+
+app.get("/antecipacao", (req, res) => {
+  db.all(
+    `SELECT * FROM antecipacao WHERE (estado) IN (${JSON.parse(req.body.data_recebimento_antecipacao)}) AND (${JSON.parse(req.body.regra_antecipacao)}) `,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
 
 app.get("/stateFilter", (req, res) => {
   db.all(

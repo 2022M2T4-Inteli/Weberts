@@ -49,6 +49,13 @@ function check(){
             retorno = document.getElementById('value' + i).innerHTML
             soma += parseInt(retorno.substring(3))
         }
+        // if(document.getElementById('D+15').checked){
+        //   soma * (94/100)
+        // }else if(document.getElementById('D+7')){
+        //   soma * (91/100)
+        // }else if(document.getElementById('D+2')){
+        //   soma * (88/100)
+        // }
         document.getElementById('fullValue').innerHTML = 'R$ ' + soma
     };
 }
@@ -80,3 +87,25 @@ function regra(){
       day: '2-digit',
     })
   } 
+
+  function abrir(){
+    var url = "http://127.0.0.1:3031/mandarAntecipacao";
+    var regra = document.getElementById('selectedAntecipationText').innerHTML
+    var data_pedido = new Date().toLocaleDateString([], {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    })
+    var data_recebimento = document.getElementById('Data').innerHTML
+    var montante = (document.getElementById('fullValue').innerHTML).substring(3)
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("popUp").style.display = "block";
+        document.getElementById("bodyBlur").style.display = "block";
+      }
+    };
+    xhttp.open("POST", url, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("regra=" + regra + "&data_pedido=" + data_pedido + "&data_recebimento=" + data_recebimento + "&montante=" + montante + "&reserva_code=1");
+}
