@@ -51,11 +51,11 @@ body {
   margin-top: 8px;
 }
 
-#child-body {
+#whiteContainer {
   background-color: white;
-  margin: 20px 70px 0px;
+  margin: 26px 70px;
   border-radius: 20px 15px 20px 15px;
-  height: 70vh;
+  height: 77vh;
   padding-bottom: 30px;
 }
 
@@ -104,12 +104,11 @@ b {
 #calendario {
   width: 200px;
   height: 140px;
-  margin: 0px 70px 0px 70px;
+  margin: 0px 70px 0px 80px !important;
 }
 
 span {
-  color: #3468fc;
+  color: #3468fc !important;
   font-weight: bold;
   align-items: flex-start;
 }
-

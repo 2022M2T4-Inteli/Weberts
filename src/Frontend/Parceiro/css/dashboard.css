@@ -68,7 +68,7 @@ body {
   flex-direction: right;
   background-color: #ffffff;
   width: 1140px;
-  height: 450px;
+  height: 400px;
   margin-bottom: 30px;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
@@ -88,11 +88,11 @@ body {
   width: 70%;
   height: auto;
   border-right: 40px;
-  border-bottom: 90px;
+  border-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 .select-button {
-  all: unset;
   display: flex;
   flex-direction: column;
   justify-content: center;

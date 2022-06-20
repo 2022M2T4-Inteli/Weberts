@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(express.static("../frontend/Adm"));
+app.use(express.static("../frontend/Parceiro"));
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);

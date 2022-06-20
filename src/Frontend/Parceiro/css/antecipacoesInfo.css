@@ -8,7 +8,7 @@
 }
 body {
   height: 100vh;
-  background-color: rgb(52, 104, 252, 0.95);
+  background-color: rgb(52, 104, 252, 0.95) !important;
   overflow: hidden;
 }
 
@@ -47,26 +47,26 @@ body {
   background-color: #dde6ff;
   box-shadow: rgb(81, 75, 75) 0 0 8px;
   border-radius: 30px 30px 0px 0px;
-  padding: 30px 0px 200px 0px;
+  padding: 30px 0px 250px 0px;
   margin-top: 8px;
 }
 
 #wtContainer {
   background-color: white;
-  margin: 20px 70px 0px;
+  margin: 35px 70px 26px 70px;
   border-radius: 20px 15px 20px 15px;
-  height: 70vh;
+  height: 77vh;
   padding-bottom: 30px;
 }
 
 .infoContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 40px 40px 20px;
+  padding: 40px 40px 0px;
 }
 
 .infoBox {
-  margin: 10px 50px;
+  margin: 20px 50px ;
   text-align: center;
 }
 
@@ -74,7 +74,7 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #3468fc;
-  margin-bottom: 15px;
+  margin-bottom: 0;
 }
 
 .infoBox p {
@@ -85,6 +85,7 @@ body {
   text-align: center;
   color: #373737;
   padding: 20px;
+  padding-bottom: none;
   border-radius: 10px;
   border: 2px #3468fc solid;
 }
@@ -98,14 +99,14 @@ b {
   font-weight: bolder;
 }
 
-span{
-    color: transparent;
+#span1{
+    color: transparent !important;
 }
 
 .blueInfo {
-  background: rgb(52, 104, 252,0.8);
+  background: #3468fc;
   border-radius: 15px;
-  padding: 20px;
+  padding: 10px !important;
   margin: 0px 85px;
   text-align: center;
   color: white;
@@ -113,4 +114,23 @@ span{
 
 .blueInfo p {
     font-weight: bold;
+    margin-bottom: 0;
 }
+
+
+
+.carousel-control-prev-icon {
+  background-image: url("../assets/arrow2.svg") !important;
+  width: 10px;
+ }
+ 
+ .carousel-control-next-icon {
+   background-image: url("../assets/arrow.svg") !important;
+ }
+
+ .carousel-indicators{
+  bottom: -50px;
+}
+
+ .carousel .carousel-indicators li {  background-color: #3468fc; top: 30px; }
+ .carousel .carousel-indicators li.active { background-color: var(--primary); }
