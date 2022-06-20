@@ -40,53 +40,67 @@ function load(){
 //Soma dos itens selecionados
 
 function check(){
-    var soma = 0
-    var i = 0
-    var retorno
-    var scrollContainer = Array.from(document.getElementsByClassName('reserveContainer'))
-        for(i; i < scrollContainer.length; i++){
-        if(document.getElementById("agree" + i).checked){
-            retorno = document.getElementById('value' + i).innerHTML
-            soma += parseInt(retorno.substring(3))
-        }
-        // if(document.getElementById('D+15').checked){
-        //   soma * (94/100)
-        // }else if(document.getElementById('D+7')){
-        //   soma * (91/100)
-        // }else if(document.getElementById('D+2')){
-        //   soma * (88/100)
-        // }
+  var soma = 0
+  var i = 0
+  var retorno
+  var scrollContainer = Array.from(document.getElementsByClassName('reserveContainer'))
+      for(i; i < scrollContainer.length; i++){
+      if(document.getElementById("agree" + i).checked){
+          retorno = document.getElementById('value' + i).innerHTML
+          soma += parseInt(retorno.substring(3))
+      }
+      if(document.getElementById('D+15').checked){
+        document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(soma * (94/100))
+      }else if(document.getElementById('D+7').checked){
+        document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(soma * (91/100))
+      }else if(document.getElementById('D+2').checked){
+        document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(soma * (88/100))
+      }else{
         document.getElementById('fullValue').innerHTML = 'R$ ' + soma
-    };
+      }
+  };
 }
 
 //Data de recebimento
 
 function regra(){
-    var D30 = document.getElementById('D+30')
-    var D15 = document.getElementById('D+15')
-    var D7 = document.getElementById('D+7')
-    var D2 = document.getElementById('D+2')
-    var today = new Date();
-    if(D30.checked){
-      document.getElementById('selectedAntecipationText').innerHTML = 'D+30'
-      today.setDate(today.getDate() + 30)
-    }else if(D15.checked){
-      document.getElementById('selectedAntecipationText').innerHTML = 'D+15'
-      today.setDate( today.getDate() + 15)
-    }else if(D7.checked){
-      document.getElementById('selectedAntecipationText').innerHTML = 'D+7'
-      today.setDate( today.getDate() + 7)
-    }else if(D2.checked){
-      document.getElementById('selectedAntecipationText').innerHTML = 'D+2'
-      today.setDate( today.getDate() + 2)
+  var soma = 0
+  var D30 = document.getElementById('D+30')
+  var D15 = document.getElementById('D+15')
+  var D7 = document.getElementById('D+7')
+  var D2 = document.getElementById('D+2')
+  var i = 0
+  var retorno
+  var scrollContainer = Array.from(document.getElementsByClassName('reserveContainer'))
+      for(i; i < scrollContainer.length; i++){
+      if(document.getElementById("agree" + i).checked){
+          retorno = document.getElementById('value' + i).innerHTML
+          soma += parseInt(retorno.substring(3))
+      }
     }
-    document.getElementById('Data').innerHTML = today.toLocaleDateString([], {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    })
-  } 
+  var today = new Date();
+  if(D30.checked){
+    document.getElementById('selectedAntecipationText').innerHTML = 'D+30'
+    today.setDate(today.getDate() + 30)
+  }else if(D15.checked){
+    document.getElementById('selectedAntecipationText').innerHTML = 'D+15'
+    today.setDate( today.getDate() + 15)
+    document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round((soma * (94/100)))
+  }else if(D7.checked){
+    document.getElementById('selectedAntecipationText').innerHTML = 'D+7'
+    today.setDate( today.getDate() + 7)
+    document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round((soma * (91/100)))
+  }else if(D2.checked){
+    document.getElementById('selectedAntecipationText').innerHTML = 'D+2'
+    today.setDate( today.getDate() + 2)
+    document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round((soma * (88/100)))
+  }
+  document.getElementById('Data').innerHTML = today.toLocaleDateString([], {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  })
+}
 
   function abrir(){
     var url = "http://127.0.0.1:3031/mandarAntecipacao";
@@ -102,7 +116,8 @@ function regra(){
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         document.getElementById("popUp").style.display = "block";
-        document.getElementById("bodyBlur").style.display = "block";
+        document.getElementById("container").style.filter = "blur(10px) brightness(90%)";
+        document.getElementById("header").style.filter = "blur(10px) brightness(90%)";
       }
     };
     xhttp.open("POST", url, true);
@@ -110,14 +125,14 @@ function regra(){
     xhttp.send("regra=" + regra + "&data_pedido=" + data_pedido + "&data_recebimento=" + data_recebimento + "&montante=" + montante + "&reserva_code=1");
 }
 
-// PopUp das antecipações
-function abrirAntecipacoes(){
+// // PopUp das antecipações
+// function abrirAntecipacoes(){
 
-  document.getElementById("popUp").style.display = "block";
-  document.getElementById("container").style.filter = "blur(10px) brightness(90%)";
-  document.getElementById("header").style.filter = "blur(10px) brightness(90%)";
+//   document.getElementById("popUp").style.display = "block";
+//   document.getElementById("container").style.filter = "blur(10px) brightness(90%)";
+//   document.getElementById("header").style.filter = "blur(10px) brightness(90%)";
  
-}
+// }
 
 //PopUp da edição de dados
 function abrir(){
