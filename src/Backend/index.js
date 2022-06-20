@@ -293,3 +293,11 @@ app.get("/ranking", (req, res) => {
     }
   )
 })
+app.get("/historicodata", (req, res) => {
+  db.all(
+    'SELECT regra, data_recebimento, montante FROM antecipacao',
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
