@@ -69,18 +69,27 @@ app.get("/historico", (req,res) =>{
 app.post("/login", (req, res) => {
   const infos = req.body;
   db.get(
-    `SELECT senha, id FROM login WHERE email == '${infos.email}'`,
+    `SELECT senha, id, admin FROM login WHERE email == '${infos.email}'`,
     (error, response) => {
       if (response) {
         console.log(response.senha, infos.senha);
         if (response.senha == infos.senha) {
+          if(response.admin == 0){
           res.cookie("id", response.id);
           res.sendFile(
             path.resolve(
               __dirname + "/../frontend/Parceiro/pages/dashboard.html"
             )
           );
-        } else {
+        }else{
+          res.cookie("id", response.id);
+          res.sendFile(
+            path.resolve(
+              __dirname + "/../frontend/Parceiro/pages/admin.html"
+            )
+          )
+        }
+       } else {
           res.send("Email ou senha incorreta, tente novamente!");
           res.end();
         }
@@ -308,14 +317,6 @@ app.get("/antecipations?states=[]", (req, res) => {
 app.get("/ranking", (req, res) => {
   db.all(
     `SELECT montante,hotel.nome, antecipacao.regra, hotel.estado FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code`,
-    (error, data) => {
-      res.json(data)
-    }
-  )
-})
-app.get("/historicodata", (req, res) => {
-  db.all(
-    'SELECT regra, data_recebimento, montante FROM antecipacao',
     (error, data) => {
       res.json(data)
     }

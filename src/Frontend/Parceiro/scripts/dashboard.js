@@ -1,4 +1,3 @@
-
 function openStates(){
     if ($("#state-options")[0].style.display == "none" || $("#state-options")[0].style.display == ""){
         $("#state-options")[0].style.display = "flex"
@@ -221,11 +220,11 @@ function filter() {
         
     }
 
-        estado_hotel = stateFiltered
-        cidade_hotel = cityFiltered
-        nome_hotel = partnerFiltered
-        data_recebimento_antecipacao = periodFiltered
-        regra_antecipacao = typeFiltered
+        var estado_hotel = stateFiltered
+        var cidade_hotel = cityFiltered
+        var nome_hotel = partnerFiltered
+        var data_recebimento_antecipacao = periodFiltered
+        var regra_antecipacao = typeFiltered
         
         await(
             $.ajax({
