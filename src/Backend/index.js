@@ -154,6 +154,26 @@ app.post("/mandarAntecipacao", (req, res) => {
   );
 });
 
+app.post("/editarDados", (req, res) => {
+  const infos = req.body;
+  db.get(
+    `INSERT INTO hoteleiro (nome, cpf) VALUES ('${infos.hoteleiro_nome}', '${infos.cpf}')`,
+    (error, response) => {
+        if (error) {
+          console.log(error)
+        }
+    }
+  );
+  db.get(
+    `INSERT INTO hotel (nome, hoteleiro_cpf, cnpj, cep, rua, numero, estado, cidade, banco, agencia, conta) VALUES ('${infos.hotel_nome}', '${infos.cpf}', '${infos.cnpj}', '${infos.cep}', '${infos.rua}', '${infos.numero}', '${infos.estado}', '${infos.cidade}', '${infos.banco}', '${infos.agencia}', '${infos.conta}') `,
+    (error, response) => {
+        if (error) {
+          console.log(error)
+        }
+    }
+  );
+});
+
 //Coisa do luiz
 
 app.get("/hotel", (req, res) => {

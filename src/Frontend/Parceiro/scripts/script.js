@@ -134,13 +134,31 @@ function abrir() {
 
 // }
 
-//PopUp da edição de dados
-function abrir() {
-
-  document.getElementById("popUpDados").style.display = "block";
-  document.getElementById("main-body").style.filter = "blur(10px) brightness(90%)";
-  document.getElementById("header").style.filter = "blur(10px) brightness(90%)";
-
+function editData(){
+  var hoteleiro_nome = document.getElementById('nome').value
+  var cpf = document.getElementById('cpf').value
+  var hotel_name = document.getElementById('hotel_name').value
+  var cnpj = document.getElementById('cnpj').value
+  var cep = document.getElementById('cep').value
+  var rua = document.getElementById('adress').value
+  var numero = document.getElementById('adress_number').value
+  var estado = document.getElementById('estado1').value
+  var cidade = document.getElementById('cidade1').value
+  var conta = document.getElementById('inputConta').value
+  var agencia = document.getElementById('agencia').value
+  var banco = document.getElementById('banco').value
+  var url = "http://127.0.0.1:3031/editarDados";
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("popUpDados").style.display = "block";
+      document.getElementById("main-body").style.filter = "blur(10px) brightness(90%)";
+      document.getElementById("header").style.filter = "blur(10px) brightness(90%)";
+    }
+  };
+  xhttp.open("POST", url, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("hoteleiro_nome=" + hoteleiro_nome + "&hotel_nome=" + hotel_name + "&cpf=" + cpf + "&cnpj=" + cnpj + "&cep=" + cep + "&rua=" + rua + "&numero=" + numero + "&estado=" + estado + "&cidade=" + cidade + "&banco=" + banco + "&agencia=" + agencia + "&conta=" + conta);
 }
 
 //Script da seleção de cidades e estados
