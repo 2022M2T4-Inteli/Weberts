@@ -102,27 +102,51 @@ function regra(){
   })
 }
 
-  function abrir(){
-    var url = "http://127.0.0.1:3031/mandarAntecipacao";
+  function abrirAntecipacoes(){
+    var reset = 0
+    var taxa = ''
     var regra = document.getElementById('selectedAntecipationText').innerHTML
-    var data_pedido = new Date().toLocaleDateString([], {
+    var montante = (document.getElementById('fullValue').innerHTML).substring(3)
+    if(regra == 'D+15'){
+      taxa = '6%'
+      reset = (100/94)
+    }else if(regra == 'D+7'){
+      taxa = '9%'
+      reset = (100/91)
+    }else{
+      taxa = '12%'
+      reset = (100/88)
+    }
+    document.getElementById("soma").innerHTML = 'Você está antecipando: R$ ' + parseInt(montante * reset)
+    document.getElementById("taxa").innerHTML = 'Taxa: ' + taxa
+    document.getElementById("regra").innerHTML = 'Regra de negócio: ' + regra
+    document.getElementById("montante").innerHTML = 'Total: R$ ' + montante
+    document.getElementById("popUp").style.display = "block";
+    document.getElementById("container").style.filter = "blur(10px) brightness(90%)";
+    document.getElementById("header").style.filter = "blur(10px) brightness(90%)";
+    
+}
+
+function confirmar(){
+  var url = "http://127.0.0.1:3031/mandarAntecipacao";
+  var regra = document.getElementById('selectedAntecipationText').innerHTML
+  var montante = (document.getElementById('fullValue').innerHTML).substring(3)
+  var data_pedido = new Date().toLocaleDateString([], {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
     })
-    var data_recebimento = document.getElementById('Data').innerHTML
-    var montante = (document.getElementById('fullValue').innerHTML).substring(3)
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("popUp").style.display = "block";
-        document.getElementById("container").style.filter = "blur(10px) brightness(90%)";
-        document.getElementById("header").style.filter = "blur(10px) brightness(90%)";
-      }
-    };
-    xhttp.open("POST", url, true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("regra=" + regra + "&data_pedido=" + data_pedido + "&data_recebimento=" + data_recebimento + "&montante=" + montante + "&reserva_code=1");
+  var data_recebimento = document.getElementById('Data').innerHTML
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+  if(this.readyState == 4 && this.status == 200){
+    document.getElementById("confirmPop").style.display = "none";
+    document.getElementById("confirmGif").style.display = "block";
+    }
+  };
+  xhttp.open("POST", url, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send("regra=" + regra + "&data_pedido=" + data_pedido + "&data_recebimento=" + data_recebimento + "&montante=" + montante + "&reserva_code=1");
 }
 
 function editData(){

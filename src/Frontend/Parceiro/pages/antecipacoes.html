@@ -114,39 +114,24 @@
     
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
-        <div class="carousel-item active">
+        <div class="carousel-item active" id="confirmPop">
           <div style="display:flex; flex-direction: column; margin-top: 50px;">
-          <p style="font-size: 16px; align-self: flex-start;">
+          <p id="soma" style="font-size: 16px; align-self: flex-start;">
             Você está antecipando: R$
             </p>
-          <p style="font-size: 16px; align-self: flex-start;">
+          <p id="taxa" style="font-size: 16px; align-self: flex-start;">
             Taxa:
             </p>
-          <p style="font-size: 16px; align-self: flex-start;">
+          <p id="regra" style="font-size: 16px; align-self: flex-start;">
             Regra de negócio:
             </p>
-          <p style="font-size: 16px; align-self: flex-start;">
+          <p id="montante" style="font-size: 16px; align-self: flex-start;">
             Total:
             </p>
+            <button id="confirm" onclick="confirmar()">Confirmar</button>
         </div>
       </div>
-        <div class="carousel-item">
-          <div style="display:flex; flex-direction: column; margin-top: 50px;">
-            <p style="font-size: 16px; align-self: flex-start;">
-              Você está antecipando: R$
-              </p>
-            <p style="font-size: 16px; align-self: flex-start;">
-              Taxa:
-              </p>
-            <p style="font-size: 16px; align-self: flex-start;">
-              Regra de negócio:
-              </p>
-            <p style="font-size: 16px; align-self: flex-start;">
-              Total:
-              </p>
-          </div>
-        </div>
-        <div class="carousel-item">
+        <div class="carousel-item" id="confirmGif">
           <div class="imgbx" >
             <img id="gif" src="../assets/76649-checked.gif" alt="">
           <a href="\dashboard">
@@ -160,13 +145,6 @@
           </p>
         </div>
       </div>
-      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
       </a>
     </div>
   </div>
