@@ -1,14 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap");
 * {
   margin: 0px;
+  line-height: unset!important;
+  margin-bottom: unset!important;
   font-weight: 500;
   font-size: 18px;
   text-decoration: none;
   font-family: "Montserrat" !important;
 }
+
+button:focus{
+  outline: none!important;
+}
+
 body {
   height: 100vh;
-  background-color: rgb(52, 104, 252, 0.95);
+  background-color: rgb(52, 104, 252, 0.95) !important;
   overflow: hidden;
 }
 
@@ -128,6 +135,7 @@ body {
   border-radius: 10px;
   padding: 10px;
   margin: 5px 10px;
+  height: 133px;
 }
 
 .hotelName {
@@ -146,26 +154,40 @@ body {
   display: flex;
   margin: 5px 5px 0px;
   flex-direction: row;
+  height: 57px;
 }
 
 .ccBoxRight {
   border-left: 1px #3468fc solid;
+  line-height: none !important;
+  margin-bottom: none !important;
+
 }
 
 .ccBoxLeft {
   border-right: 1px #3468fc solid;
+  line-height: none !important;
+  margin-bottom: none !important;
+
+
 }
 
 .ccText {
   color: #3468fc;
   font-weight: bold;
   font-size: 15px;
+  line-height: none !important;
+  margin-bottom: none !important;
 }
 
 .ccNumber {
   color: #373737;
   font-weight: bold;
   font-size: 15px;
+  line-height: none !important;
+  margin: none;
+  margin-bottom:0 !important;
+
 }
 
 .valueInfos {
@@ -188,7 +210,6 @@ body {
   font-weight: bold;
   font-size: 32px;
   color: #3468fc;
-  margin: 10px 10px 0px;
   width: 150px;
 }
 
@@ -196,12 +217,14 @@ body {
   margin-top: 15px;
   border-top: 2px #3468fc solid;
   margin: 15px 40px;
+  height: 164px;
 }
 
 .geralTitle h1 {
   font-weight: bold;
-  margin: 15px;
+  margin: 15px !important;
   color: #3468fc;
+  font-size: 16px;
 }
 
 .geralInfos {
@@ -227,6 +250,7 @@ body {
   font-weight: bold;
   font-size: 12px;
   text-align: center;
+  margin-bottom: 5px;
 }
 
 .selectedAntecipationContainer p {
@@ -236,11 +260,10 @@ body {
   padding: 25px;
   background-color: #dde6ff;
   border-radius: 15px;
-  margin: 5px 5px 0px;
 }
 
 .antecipationForm {
-  margin: 5px;
+  margin: 2px;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -309,7 +332,7 @@ button{
   color: #fff;
   border:none;
   padding: 10px 30px 10px 30px;
-  border-radius: 10px;
+  border-radius: 10px!important;
   transition: all 0.5s;
   cursor: pointer;
   text-align: center;
@@ -343,14 +366,13 @@ button:hover:after {
 }
 
 .popUp{
-  position:fixed;
+  position:absolute;
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
   width: 300px;
-  height: fit-content;
+  height:250px ;
   padding: 15px;
   border-radius: 10px;
   color: #373737;
@@ -359,6 +381,7 @@ button:hover:after {
   box-shadow: #373737 inset 10px;
   backdrop-filter: 20px;
   display: none;
+  bottom: 30%;
 }
 
 
