@@ -1,3 +1,5 @@
+
+//Abre a seção dos estados no filtro
 function openStates(){
     if ($("#state-options")[0].style.display == "none" || $("#state-options")[0].style.display == ""){
         $("#state-options")[0].style.display = "flex"
@@ -12,19 +14,7 @@ function openStates(){
     
 }
 
-// function openCities(){
-//     if ($("#city-options")[0].style.display == "none" || $("#city-options")[0].style.display == ""){
-//         $("#city-options")[0].style.display = "flex"
-//         off = false
-//         $("#cidades-filter")[0].style.backgroundColor = "#3468FC"
-//         $("#cidades-filter")[0].style.color = "#FFF"
-//     } else{
-//         $("#city-options")[0].style.display = "none"
-//         $("#cidades-filter")[0].style.backgroundColor = "#DDE6FF"
-//         $("#cidades-filter")[0].style.color = "#373737"
-//     }
-
-// }
+//Abre a seção dos parceiros no filtro
 function openPartner(){
     if ($("#partner-options")[0].style.display == "none" || $("#partner-options")[0].style.display == ""){
         $("#partner-options")[0].style.display = "flex"
@@ -38,20 +28,7 @@ function openPartner(){
     }
 }
 
-function openPeriod(){
-    if ($("#period-options")[0].style.display == "none" || $("#period-options")[0].style.display == ""){
-        $("#period-options")[0].style.display = "flex"
-        off = false
-        $("#periodos-filter")[0].style.backgroundColor = "#3468FC"
-        $("#periodos-filter")[0].style.color = "#FFF"
-    } else{
-        $("#period-options")[0].style.display = "none"
-        $("#periodos-filter")[0].style.backgroundColor = "#DDE6FF"
-        $("#periodos-filter")[0].style.color = "#373737"
-    }
-
-}
-
+//Abre a seção dos tipos de antecipação no filtro
 function openType(){
     if ($("#type-options")[0].style.display == "none" || $("#type-options")[0].style.display == ""){
         $("#type-options")[0].style.display = "flex"
@@ -66,8 +43,7 @@ function openType(){
 
 }
 
-// const { Console } = require("console")
-
+//
 function quitPopup(){
     if ($("#quitPopup")[0].style.display == "none" || $("#quitPopup")[0].style.display == ""){
         $("#quitPopup")[0].style.display = "flex"
@@ -80,6 +56,7 @@ function quitPopup(){
 
 function attData() {
     
+    //Cria as opções de filtro na parte de estados
     $.get("http://localhost:3031/openStates", function(resultado){
         let i = 0
         resultado.forEach(row => {
@@ -88,6 +65,8 @@ function attData() {
         });
     });
 
+
+    //Cria as opções de filtro na parte de parceiros
     $.get("http://localhost:3031/openPartner", function(resultado){
         var nomes_usados_qtd = []
         let i = 0
@@ -102,6 +81,7 @@ function attData() {
             }
     )
 
+    //Cria as opções de filtro na parte de tipos de solicitação
     $.get("http://localhost:3031/openType", function(resultado){
         let i = 0
         resultado.forEach(row => {
@@ -110,13 +90,14 @@ function attData() {
         });
     });
 
-
+    //Valor para a div de AntecipaçãoxPrazo
     $.get("http://localhost:3031/antecipations", function(resultado){
         
         $("#antecipation-value")[0].innerHTML = resultado[0]["COUNT (*)"];
         
     });
 
+    //Valor para a div de PagamentosxPrazo
     $.get("http://localhost:3031/montante", function(resultado){
         
         $("#montate-value")[0].innerHTML ="R$"+parseFloat(resultado[0]["SUM (montante)"]);
@@ -124,6 +105,7 @@ function attData() {
         
     });
 
+    //Valor para a div de Rentabilidade Média
     $.get("http://localhost:3031/rentabilidade", function(resultado){
         
         $("#rentabilidade-value")[0].innerHTML =(resultado[0]["SUM(montante)/SUM(valor)"]*100).toFixed(0)+"%";
@@ -135,6 +117,7 @@ function attData() {
 }
 attData()
 
+//Permite abrir o filtro
 function openFilter() {
     if (document.getElementById("filterPopup").style.display == "flex") {
         document.getElementById("filterPopup").style.display = "none"
@@ -144,18 +127,20 @@ function openFilter() {
     }
 }
 
+//Filtra o ranking a partir do estado
 function changeState(){
     var estado
     var scrollContainer = Array.from(document.getElementsByClassName('state-unselected'))
     for(var a = 0; a < scrollContainer.length; a++){
-        if(document.getElementById("state" + a).checked){
-            estado = document.getElementById("stateText" + a).innerHTML
+        if(document.getElementById("state" + a).checked){ //Busca um por um se há algum estado selecionado
+            estado = document.getElementById("stateText" + a).innerHTML //Define qual o estado selecionado
             var url = "http://127.0.0.1:3031/stateFilter";
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", url, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("estado=" + estado);
+            xhttp.send("estado=" + estado); //Busca no banco as informações relacionadas ao estado selecionado
             var retorno = JSON.parse(xhttp.responseText);
+            //Código HTML que define cada coluna do ranking
             var number = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Nº</h5>' + 
@@ -192,15 +177,16 @@ function changeState(){
             var i = 0
             var semrep = {};
             for (Element of retorno){
-                if(Element.nome in semrep){
-                    semrep[Element.nome]["montante_total"] += Element.montante
-                    semrep[Element.nome]["qtds"] += 1
+                if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
+                    semrep[Element.nome]["montante_total"] += Element.montante //Adiciona ao montante do parceiro que está na lista semrep  
+                    semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
                 }else{
-                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
                 }
             }
-            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
             for(Element of semrep){
+            //Define o código html que será colocado no front junto com os dados recebidos
                 number += '<div class="label-roll">' + 
                 '<div class="label2" id="number' + i + '">' + 
                     '<h5>' + (i + 1) + '</h5>' +
@@ -235,15 +221,14 @@ function changeState(){
             }
         }
         }
-    if(estado == undefined){
-        for(var a = 0; a < scrollContainer.length; a++){
-            if(!document.getElementById("state" + a).checked){
+    if(estado == undefined){    //Caso nenhum filtro esteja selecionado:
                 var url = "http://127.0.0.1:3031/ranking";
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("GET", url, false);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send();
+                xhttp.send();   //Pega as informações necessárias no banco de dados
                 var retorno = JSON.parse(xhttp.responseText);
+                //Código HTML que define cada coluna do ranking
                 var number = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Nº</h5>' + 
@@ -280,15 +265,16 @@ function changeState(){
                 var i = 0
                 var semrep = {}
                 for (Element of retorno){
-                    if(Element.nome in semrep){
-                        semrep[Element.nome]["montante_total"] += Element.montante
-                        semrep[Element.nome]["qtds"] += 1
+                    if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
+                        semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep
+                        semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
                     }else{
-                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
                     }
                 }
-                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
                 for(Element of semrep){
+                    //Define o código html que será colocado no front junto com os dados recebidos
                     number += '<div class="label-roll">' + 
                     '<div class="label2" id="number' + i + '">' + 
                         '<h5>' + (i + 1) + '</h5>' +
@@ -321,10 +307,8 @@ function changeState(){
                 '</div>'
                     i++
                 }
-            }
-                
-          }
     }
+    //Coloca o código HTML com os dados do banco na página
     document.getElementById('col_number').innerHTML = number
     document.getElementById('partner_col').innerHTML = partner
     document.getElementById('rule_col').innerHTML = regra
@@ -334,20 +318,20 @@ function changeState(){
 }
 
 
+//Filtra o ranking a partir do parceiro
 function changePartner(){
     var parceiro
     var scrollContainer = Array.from(document.getElementsByClassName('partner-unselected'))
-    console.log(scrollContainer.length)
     for(var a = 0; a < scrollContainer.length; a++){
-        if(document.getElementById("partner" + a).checked){
-            parceiro = document.getElementById("partnerText" + a).innerHTML
+        if(document.getElementById("partner" + a).checked){ //Busca um por um se há algum parceiro selecionado
+            parceiro = document.getElementById("partnerText" + a).innerHTML //Define qual o parceiro selecionado
             var url = "http://127.0.0.1:3031/partnerFilter";
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", url, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("partner=" + parceiro);
+            xhttp.send("partner=" + parceiro);  //Busca no banco as informações relacionadas ao parceiro selecionado
             var retorno = JSON.parse(xhttp.responseText);
-            console.log(retorno)
+            //Código HTML que define cada coluna do ranking
             var number = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Nº</h5>' + 
@@ -384,15 +368,16 @@ function changePartner(){
             var semrep = {}
             var i = 0
             for (Element of retorno){
-                if(Element.nome in semrep){
-                    semrep[Element.nome]["montante_total"] += Element.montante
-                    semrep[Element.nome]["qtds"] += 1
+                if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
+                    semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep  
+                    semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
                 }else{
-                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
                 }
             }
-            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
             for(Element of semrep){
+                //Define o código html que será colocado no front junto com os dados recebidos
                 number += '<div class="label-roll">' + 
                 '<div class="label2" id="number' + i + '">' + 
                     '<h5>' + (i + 1) + '</h5>' +
@@ -427,7 +412,7 @@ function changePartner(){
             }
         }
     }
-    if(parceiro == undefined){
+    if(parceiro == undefined){  //Caso nenhum filtro esteja selecionado:
         for(var a = 0; a < scrollContainer.length; a++){
             if(!document.getElementById("partner" + a).checked){
                 var i = 0
@@ -435,8 +420,9 @@ function changePartner(){
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("GET", url, false);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send();
+                xhttp.send();   //Pega as informações necessárias no banco de dados
                 var retorno = JSON.parse(xhttp.responseText);
+                //Código HTML que define cada coluna do ranking
                 var number = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Nº</h5>' + 
@@ -473,15 +459,16 @@ function changePartner(){
                 var i = 0
                 var semrep = {}
                 for (Element of retorno){
-                    if(Element.nome in semrep){
-                        semrep[Element.nome]["montante_total"] += Element.montante
-                        semrep[Element.nome]["qtds"] += 1
+                    if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
+                        semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep
+                        semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
                     }else{
-                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}//Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
                     }
                 }
-                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
                 for(Element of semrep){
+                    //Define o código html que será colocado no front junto com os dados recebidos
                     number += '<div class="label-roll">' + 
                     '<div class="label2" id="number' + i + '">' + 
                         '<h5>' + (i + 1) + '</h5>' +
@@ -518,28 +505,30 @@ function changePartner(){
                 
           }
     }
-                document.getElementById('col_number').innerHTML = number
-                document.getElementById('partner_col').innerHTML = partner
-                document.getElementById('rule_col').innerHTML = regra
-                document.getElementById('state_col').innerHTML = estado
-                document.getElementById('qtd').innerHTML = qtd
-                document.getElementById('antecipatedValue').innerHTML = divValor
+    //Coloca o código HTML com os dados do banco na página
+    document.getElementById('col_number').innerHTML = number
+    document.getElementById('partner_col').innerHTML = partner
+    document.getElementById('rule_col').innerHTML = regra
+    document.getElementById('state_col').innerHTML = estado
+    document.getElementById('qtd').innerHTML = qtd
+    document.getElementById('antecipatedValue').innerHTML = divValor
 }
 
+
+//Filtra o ranking a partir do tipo de solicitação
 function changeType(){
     var type
     var scrollContainer = Array.from(document.getElementsByClassName('type-unselected'))
     for(var a = 0; a < scrollContainer.length; a++){
-        if(document.getElementById("type" + a).checked){
-            type = document.getElementById("typeText" + a).innerHTML
-            console.log(type)
+        if(document.getElementById("type" + a).checked){    //Busca um por um se há algum tipo selecionado
+            type = document.getElementById("typeText" + a).innerHTML    //Define qual o tipo selecionado
             var url = "http://127.0.0.1:3031/typeFilter";
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", url, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("regra=" + type);
+            xhttp.send("regra=" + type);    //Busca no banco as informações relacionadas ao tipo selecionado
             var retorno = JSON.parse(xhttp.responseText);
-            console.log(retorno)
+            //Código HTML que define cada coluna do ranking
             var number = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Nº</h5>' + 
@@ -576,15 +565,16 @@ function changeType(){
             var i = 0
             var semrep = {};
             for (Element of retorno){
-                if(Element.nome in semrep){
-                    semrep[Element.nome]["montante_total"] += Element.montante
-                    semrep[Element.nome]["qtds"] += 1
+                if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
+                    semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep
+                    semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
                 }else{
-                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
                 }
             }
-            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
             for(Element of semrep){
+                //Define o código html que será colocado no front junto com os dados recebidos
                 number += '<div class="label-roll">' + 
                 '<div class="label2" id="number' + i + '">' + 
                     '<h5>' + (i + 1) + '</h5>' +
@@ -619,15 +609,16 @@ function changeType(){
             }
         }
         }
-    if(type == undefined){
+    if(type == undefined){  //Caso nenhum filtro esteja selecionado:
         for(var a = 0; a < scrollContainer.length; a++){
             if(!document.getElementById("type" + a).checked){
                 var url = "http://127.0.0.1:3031/ranking";
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("GET", url, false);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send();
+                xhttp.send();   //Pega as informações necessárias no banco de dados
                 var retorno = JSON.parse(xhttp.responseText);
+                 //Código HTML que define cada coluna do ranking
                 var number = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Nº</h5>' + 
@@ -664,15 +655,16 @@ function changeType(){
                 var i = 0
                 var semrep = {}
                 for (Element of retorno){
-                    if(Element.nome in semrep){
-                        semrep[Element.nome]["montante_total"] += Element.montante
-                        semrep[Element.nome]["qtds"] += 1
+                    if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
+                        semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep
+                        semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
                     }else{
-                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
                     }
                 }
-                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
                 for(Element of semrep){
+                    //Define o código html que será colocado no front junto com os dados recebidos
                     number += '<div class="label-roll">' + 
                     '<div class="label2" id="number' + i + '">' + 
                         '<h5>' + (i + 1) + '</h5>' +
@@ -709,6 +701,7 @@ function changeType(){
                 
           }
     }
+    //Coloca o código HTML com os dados do banco na página
     document.getElementById('col_number').innerHTML = number
     document.getElementById('partner_col').innerHTML = partner
     document.getElementById('rule_col').innerHTML = regra
@@ -718,6 +711,7 @@ function changeType(){
 }
 
 function ranking(){
+    //Código HTML que define cada coluna do ranking
     var number = '<div class="label-roll">' + 
     '<div class="label1">' + 
         '<h5>Nº</h5>' + 
@@ -755,20 +749,20 @@ function ranking(){
     var url = "http://127.0.0.1:3031/ranking";
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, false);
-    xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
+    xhttp.send();//Pega as informações necessárias no banco de dados
     var retorno = JSON.parse(xhttp.responseText);
     var semrep = {};
-    //Exemplo: semrep = {"Inteli":{"montante_total": 5000, "regra":"D+7"}, "Hurb": {"montante_total": 2000, "regra":"D+7"}
     for (Element of retorno){
-        if(Element.nome in semrep){
-            semrep[Element.nome]["montante_total"] += Element.montante
-            semrep[Element.nome]["qtds"] += 1
+        if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
+            semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep
+            semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
         }else{
-            semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+            semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
         }
     }    
-    semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+    semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
     for(Element of semrep){
+        //Define o código html que será colocado no front junto com os dados recebidos
         number += '<div class="label-roll">' + 
         '<div class="label2" id="number' + i + '">' + 
             '<h5>' + (i + 1) + '</h5>' +
@@ -801,6 +795,7 @@ function ranking(){
     '</div>'
     i++
     }
+    //Coloca o código HTML com os dados do banco na página
     document.getElementById('col_number').innerHTML = number
     document.getElementById('partner_col').innerHTML = partner
     document.getElementById('rule_col').innerHTML = regra
