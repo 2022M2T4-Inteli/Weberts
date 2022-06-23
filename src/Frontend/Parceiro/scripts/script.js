@@ -3,32 +3,32 @@ function load(){
    // Hotel info
    var text = ''
    var i = 0
-   var url = "http://127.0.0.1:3031/hotelReserva";
+   var url = "http://127.0.0.1:3031/hotelReservation";
    var xhttp = new XMLHttpRequest();
    xhttp.open("GET", url, false);
    xhttp.send();//The script's execution stops here until the server returns the requirements 
-   var retorno = JSON.parse(xhttp.responseText);
-   for(Element in retorno){
+   var dataReserve = JSON.parse(xhttp.responseText);
+   for(Element in dataReserve){
    // HTML code that puts every line of the antecipation page
        text += '<div class="reserveContainer" id="reserveContainer"' + i + '>' + 
       ' <input type="checkbox" name="D+15" class="agree" id="agree' + i + '" onclick="javaScript:check()" />' +
        '<div class="reserveInfos">'+
          '<div class="textInfos">' + 
-           '<h1 class="hotelName" id="hotel' + i + '">' + retorno[i].nome + '</h1>' + 
+           '<h1 class="hotelName" id="hotel' + i + '">' + dataReserve[i].nome + '</h1>' + 
            '<div class="codeAndCheckOutDate">' +
              '<div class="ccBoxLeft">' + 
                '<p class="ccText">Código</p>' + 
-               '<p class="ccNumber" id="code' + i + '">' + retorno[i].code + '</p>' +
+               '<p class="ccNumber" id="code' + i + '">' + dataReserve[i].code + '</p>' +
              '</div>' + 
              '<div class="ccBoxRight">' + 
                '<p class="ccText">Check-Out</p>' + 
-               '<p class="ccNumber" id="checkOut' + i +'">' + retorno[i].data_checkout + '</p>' +
+               '<p class="ccNumber" id="checkOut' + i +'">' + dataReserve[i].data_checkout + '</p>' +
              '</div>'+
            '</div>' + 
          '</div>' + 
          '<div class="valueInfos">' + 
            '<p class="valueText">Valor</p>' + 
-           '<p class="valueNumber" id="value' + i +'"> R$ ' + retorno[i].valor + '</p>' + 
+           '<p class="valueNumber" id="value' + i +'"> R$ ' + dataReserve[i].valor + '</p>' + 
          '</div>' + 
        '</div>' + 
      '</div>'
@@ -41,23 +41,23 @@ function load(){
 //Sums the selected items
 
 function check(){
-  var soma = 0
+  var sum = 0
   var i = 0
-  var retorno
+  var returnCheck
   var scrollContainer = Array.from(document.getElementsByClassName('reserveContainer'))
       for(i; i < scrollContainer.length; i++){
       if(document.getElementById("agree" + i).checked){
-          retorno = document.getElementById('value' + i).innerHTML
-          soma += parseInt(retorno.substring(3))  // Sums the selected reserves
+          returnCheck = document.getElementById('value' + i).innerHTML
+          sum += parseInt(returnCheck.substring(3))  // Sums the selected reserves
       }
       if(document.getElementById('D+15').checked){  // Make the discounts according to the business rule
-        document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(soma * (94/100))
+        document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(sum * (94/100))
       }else if(document.getElementById('D+7').checked){
-        document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(soma * (91/100))
+        document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(sum * (91/100))
       }else if(document.getElementById('D+2').checked){
-        document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(soma * (88/100))
+        document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(sum * (88/100))
       }else{
-        document.getElementById('fullValue').innerHTML = 'R$ ' + soma
+        document.getElementById('fullValue').innerHTML = 'R$ ' + sum
       }
   };
 }
@@ -65,18 +65,18 @@ function check(){
 // Revenue recival date
 
 function regra(){
-  var soma = 0
+  var sum = 0
   var D30 = document.getElementById('D+30')
   var D15 = document.getElementById('D+15')
   var D7 = document.getElementById('D+7')
   var D2 = document.getElementById('D+2')
   var i = 0
-  var retorno
+  var returnRule
   var scrollContainer = Array.from(document.getElementsByClassName('reserveContainer'))
       for(i; i < scrollContainer.length; i++){
       if(document.getElementById("agree" + i).checked){
-          retorno = document.getElementById('value' + i).innerHTML
-          soma += parseInt(retorno.substring(3))
+          returnRule = document.getElementById('value' + i).innerHTML
+          sum += parseInt(returnRule.substring(3))
       }
     }
   var today = new Date();
@@ -87,15 +87,15 @@ function regra(){
   }else if(D15.checked){
     document.getElementById('selectedAntecipationText').innerHTML = 'D+15'
     today.setDate( today.getDate() + 15)
-    document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round((soma * (94/100)))
+    document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round((sum * (94/100)))
   }else if(D7.checked){
     document.getElementById('selectedAntecipationText').innerHTML = 'D+7'
     today.setDate( today.getDate() + 7)
-    document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round((soma * (91/100)))
+    document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round((sum * (91/100)))
   }else if(D2.checked){
     document.getElementById('selectedAntecipationText').innerHTML = 'D+2'
     today.setDate( today.getDate() + 2)
-    document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round((soma * (88/100)))
+    document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round((sum * (88/100)))
   }
   document.getElementById('Data').innerHTML = today.toLocaleDateString([], {
     year: 'numeric',
@@ -107,25 +107,25 @@ function regra(){
 // Opens the solicitation confirmation popup
   function abrirAntecipacoes(){
     var reset = 0
-    var taxa = ''
-    var regra = document.getElementById('selectedAntecipationText').innerHTML
-    var montante = (document.getElementById('fullValue').innerHTML).substring(3)
+    var percentage = ''
+    var rule = document.getElementById('selectedAntecipationText').innerHTML
+    var ammount = (document.getElementById('fullValue').innerHTML).substring(3)
     // According to the business rule, it shows the text that will be charged
     if(regra == 'D+15'){
-      taxa = '6%'
+      percentage = '6%'
       reset = (100/94)
     }else if(regra == 'D+7'){
-      taxa = '9%'
+      percentage = '9%'
       reset = (100/91)
     }else{
-      taxa = '12%'
+      percentage = '12%'
       reset = (100/88)
     }
     //Places the text in the page
-    document.getElementById("soma").innerHTML = 'Você está antecipando: R$ ' + parseInt(montante * reset)
-    document.getElementById("taxa").innerHTML = 'Taxa: ' + taxa
-    document.getElementById("regra").innerHTML = 'Regra de negócio: ' + regra
-    document.getElementById("montante").innerHTML = 'Total: R$ ' + montante
+    document.getElementById("soma").innerHTML = 'Você está antecipando: R$ ' + parseInt(ammount * reset)
+    document.getElementById("taxa").innerHTML = 'Taxa: ' + percentage
+    document.getElementById("regra").innerHTML = 'Regra de negócio: ' + rule
+    document.getElementById("montante").innerHTML = 'Total: R$ ' + ammount
     document.getElementById("popUp").style.display = "block";
     document.getElementById("container").style.filter = "blur(10px) brightness(90%)";
     document.getElementById("header").style.filter = "blur(10px) brightness(90%)";
@@ -133,15 +133,15 @@ function regra(){
 }
   // Sends the antecipation request to the database
 function confirmar(){
-  var url = "http://127.0.0.1:3031/mandarAntecipacao";
-  var regra = document.getElementById('selectedAntecipationText').innerHTML
-  var montante = (document.getElementById('fullValue').innerHTML).substring(3)
-  var data_pedido = new Date().toLocaleDateString([], {
+  var url = "http://127.0.0.1:3031/sendAntecipation";
+  var rule = document.getElementById('selectedAntecipationText').innerHTML
+  var ammount = (document.getElementById('fullValue').innerHTML).substring(3)
+  var dateRequest = new Date().toLocaleDateString([], {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
     })
-  var data_recebimento = document.getElementById('Data').innerHTML
+  var dateRequest = document.getElementById('Data').innerHTML
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
   if(this.readyState == 4 && this.status == 200){
@@ -151,25 +151,25 @@ function confirmar(){
   };
   xhttp.open("POST", url, true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("regra=" + regra + "&data_pedido=" + data_pedido + "&data_recebimento=" + data_recebimento + "&montante=" + montante + "&reserva_code=1");
+  xhttp.send("regra=" + regra + "&data_pedido=" + dateRequest + "&data_recebimento=" + dateRecieve + "&montante=" + ammount + "&reserva_code=1");
 }
 
 
 // Allows the creation of a user in the database
 function editData(){
-  var hoteleiro_nome = document.getElementById('nome').value
+  var hotelOwnerName = document.getElementById('nome').value
   var cpf = document.getElementById('cpf').value
-  var hotel_name = document.getElementById('hotel_name').value
+  var hotelName = document.getElementById('hotel_name').value
   var cnpj = document.getElementById('cnpj').value
   var cep = document.getElementById('cep').value
-  var rua = document.getElementById('adress').value
-  var numero = document.getElementById('adress_number').value
-  var estado = document.getElementById('estado1').value
-  var cidade = document.getElementById('cidade1').value
-  var conta = document.getElementById('inputConta').value
-  var agencia = document.getElementById('agencia').value
-  var banco = document.getElementById('banco').value
-  var url = "http://127.0.0.1:3031/editarDados";
+  var street = document.getElementById('adress').value
+  var number = document.getElementById('adress_number').value
+  var state = document.getElementById('estado1').value
+  var city = document.getElementById('cidade1').value
+  var account = document.getElementById('inputConta').value
+  var agency = document.getElementById('agencia').value
+  var bank = document.getElementById('banco').value
+  var url = "http://127.0.0.1:3031/editData";
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -180,22 +180,22 @@ function editData(){
   };
   xhttp.open("POST", url, true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("hoteleiro_nome=" + hoteleiro_nome + "&hotel_nome=" + hotel_name + "&cpf=" + cpf + "&cnpj=" + cnpj + "&cep=" + cep + "&rua=" + rua + "&numero=" + numero + "&estado=" + estado + "&cidade=" + cidade + "&banco=" + banco + "&agencia=" + agencia + "&conta=" + conta);
+  xhttp.send("hoteleiro_nome=" + hotelOwnerName + "&hotel_nome=" + hotelName + "&cpf=" + cpf + "&cnpj=" + cnpj + "&cep=" + cep + "&rua=" + street + "&numero=" + number + "&estado=" + state + "&cidade=" + city + "&banco=" + bank + "&agencia=" + agency + "&conta=" + account);
 }
 
 function historico() {
   // Hotel Info
   var text = ''
   var i = 0
-  var url = "http://127.0.0.1:3031/historicodata";
+  var url = "http://127.0.0.1:3031/historyData";
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", url, false);
   xhttp.send();// The script's execution stops here until the server returns the requirements 
-  var retorno = JSON.parse(xhttp.responseText);
-  for (Element in retorno) {
-    text += '<p class="columElements" id="data' + i + '">' + retorno[i].data_recebimento + '</p> ' +
-      '<p class="columElements" id="regra' + i + '">' + retorno[i].regra + '</p> ' +
-      '<p class="columElements" id="montante' + i + '">R$' + retorno[i].montante + '</p> '
+  var returnHistory = JSON.parse(xhttp.responseText);
+  for (Element in returnHistory) {
+    text += '<p class="columElements" id="data' + i + '">' + returnHistory[i].data_recebimento + '</p> ' +
+      '<p class="columElements" id="regra' + i + '">' + returnHistory[i].regra + '</p> ' +
+      '<p class="columElements" id="montante' + i + '">R$' + returnHistory[i].montante + '</p> '
     i++
   }
   document.getElementById('scrollContainer').innerHTML = text
@@ -207,24 +207,20 @@ function mouseIn(){
   var option0 = document.querySelector("#option0")
   var option1 = document.querySelector("#option1")
   var option2 = document.querySelector("#option2")
-  var option3 = document.querySelector("#option3")
 
   option0.classList.remove('none')
   option1.classList.remove('none')
   option2.classList.remove('none')
-  option3.classList.remove('none')
 }
 
 function mouseOut(){
   var option0 = document.querySelector("#option0")
   var option1 = document.querySelector("#option1")
   var option2 = document.querySelector("#option2")
-  var option3 = document.querySelector("#option3")
 
   option0.classList.add('none')
   option1.classList.add('none')
   option2.classList.add('none')
-  option3.classList.add('none')
 }
 
 // City and state selection script
@@ -255,7 +251,7 @@ var dgCidadesEstados = function(data) {
     }
   }
   var keys = ['estado', 'cidade'];
-  if (data['change']) { // If change: true, it isnt a select that needs to be filled
+  if (data['change']) { //If change is true, it isnt a selected to be filled
     var nome, length = keys.length;
     for (var a=0; a<length; a++ ) {
       nome = keys[a];
@@ -280,20 +276,20 @@ var dgCidadesEstados = function(data) {
 
   var nome, length = keys.length;
   for (var i=0; i<length; i++) {
-    nome = keys[i]; // State and city
+    nome = keys[i]; // State and City
 	
     if (this[nome].getAttribute('value')) {
       data[nome+'Val'] = this[nome].getAttribute('value');
     }
 	
-    if (data[nome+'Val']) { // Fills stateVal and cityCal if given in the creation of dgCityStates
+    if (data[nome+'Val']) { // Fills estadoVal and cityVal if provided in the creation of dgCidadesEstados
 		var options = this[nome].options;
-		if (nome=='estado') this.estado.onchange(); // If the state is filled, use run() to fill the cities
-		for (var j = 0; j<options.length; j++) { // Searches every line until it finds the wanted one than places it as selected
+		if (nome=='estado') this.estado.onchange(); // If the state is filled, run()
+		for (var j = 0; j<options.length; j++) { // Check all lines and make sure it is the wanted one, than class it as selected
 			if (options[j].tagName == 'OPTION') {
 				if (options[j].value == data[nome+'Val']) {
 					options[j].setAttribute('selected',true);
-					if (nome=='estado'){ // These two steps are necessary for the IE6
+					if (nome=='estado'){ // This two steps are necessary for IE6
 						this.estado.selectedIndex=j;
 						this.estado.onchange();
 					}
@@ -309,7 +305,7 @@ var dgCidadesEstados = function(data) {
 dgCidadesEstados.prototype = {
   estado: document.createElement('select'),
   cidade: document.createElement('select'),
-  set: function(estado, cidade) { // Defines the DOM elements that need to be filled
+  set: function(estado, cidade) { // Define the DOM elements to be filled
     this.estado=estado;
     this.estado.dgCidadesEstados=this;
     this.cidade=cidade;
@@ -321,15 +317,15 @@ dgCidadesEstados.prototype = {
     for (var i=0;i<this.estados.length;i++) this.addOption(estado, this.estados[i][0], this.estados[i][1]);
   },
   run: function () { // Fills the cities according to the chosen state
-	var sel = this.estado.selectedIndex; // Chosen state
-    var itens = this.cidades[sel]; // Grabs the corresponding cities
+	var sel = this.estado.selectedIndex; // Picked state
+    var itens = this.cidades[sel]; // Picks the corresponding cities
     var itens_total = itens.length;
 	
     var opts = this.cidade;
-    while (opts.childNodes.length) opts.removeChild(opts.firstChild); // Clears the atual list
+    while (opts.childNodes.length) opts.removeChild(opts.firstChild); // Clears the current list
 	
     this.addOption(opts, '', 'Selecione uma cidade');
-    for (var i=0;i<itens_total;i++) this.addOption(opts, itens[i], itens[i]); // Adds corresponding cities
+    for (var i=0;i<itens_total;i++) this.addOption(opts, itens[i], itens[i]); // Adds the corresponding cities
   },
   addOption: function (elm, val, text) {
     var opt = document.createElement('option');

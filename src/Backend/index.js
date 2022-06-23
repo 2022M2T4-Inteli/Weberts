@@ -99,7 +99,7 @@ app.post("/login", (req, res) => {
 });
 
 //GET value that may be anticipated
-app.get("/valor1", (req, res) => {
+app.get("/value1", (req, res) => {
   db.get(
     `SELECT SUM(valor) FROM reserva`,
     (error, data) => {
@@ -109,7 +109,7 @@ app.get("/valor1", (req, res) => {
 });
 
 //GET antecipated value
-app.get("/valor2", (req, res) => {
+app.get("/value2", (req, res) => {
   db.get(
     `SELECT SUM(montante) FROM antecipacao`,
     (error, data) => {
@@ -119,7 +119,7 @@ app.get("/valor2", (req, res) => {
 });
 
 //GET 1st month
-app.get("/mes1", (req, res) => {
+app.get("/month1", (req, res) => {
   db.get(
     `SELECT SUM(montante) FROM antecipacao WHERE data_recebimento == '01/2022'`,
     (error, data) => {
@@ -129,7 +129,7 @@ app.get("/mes1", (req, res) => {
 });
 
 //GET 2nd month
-app.get("/mes2", (req, res) => {
+app.get("/month2", (req, res) => {
   db.get(
     `SELECT SUM(montante) FROM antecipacao WHERE data_recebimento == '02/2022'`,
     (error, data) => {
@@ -140,7 +140,7 @@ app.get("/mes2", (req, res) => {
 
 // Data for the request page 
 
-app.get("/hotelReserva", (req, res) => {
+app.get("/hotelReservation", (req, res) => {
   db.all(
     'SELECT hotel.nome, reserva.code, reserva.data_checkout, reserva.valor FROM reserva, hotel WHERE reserva.hotel_id = hotel.id ORDER BY hotel.id',
     (error, data) => {
@@ -150,7 +150,7 @@ app.get("/hotelReserva", (req, res) => {
 });
 
 // Places in the database the antecipation request
-app.post("/mandarAntecipacao", (req, res) => {
+app.post("/sendAntecipation", (req, res) => {
   const infos = req.body;
   db.get(
     `INSERT INTO antecipacao (regra, data_pedido, data_recebimento, montante, reserva_code) VALUES ('${infos.regra}', '${infos.data_pedido}', '${infos.data_recebimento}', '${infos.montante}', '${infos.reserva_code}')`,
@@ -165,7 +165,7 @@ app.post("/mandarAntecipacao", (req, res) => {
 });
 
 // Creates a new user in the database
-app.post("/editarDados", (req, res) => {
+app.post("/editData", (req, res) => {
   const infos = req.body;
   db.get(
     `INSERT INTO hoteleiro (nome, cpf) VALUES ('${infos.hoteleiro_nome}', '${infos.cpf}')`,
@@ -256,7 +256,7 @@ app.get("/antecipations", (req, res) => {
 })
 
 // Searches the database for the paymentsxdeadline value division
-app.get("/montante", (req, res) => {
+app.get("/fullValue", (req, res) => {
   db.all(
     `SELECT SUM (montante) FROM antecipacao`,
     (error, data) => {
@@ -267,7 +267,7 @@ app.get("/montante", (req, res) => {
 })
 
 // Searches the database for the avarage rentability division
-app.get("/rentabilidade", (req, res) => {
+app.get("/profitability", (req, res) => {
   db.all(
     `SELECT SUM(montante)/SUM(valor) FROM antecipacao INNER JOIN reserva on reserva.code = antecipacao.reserva_code`,
     (error, data) => {
@@ -289,7 +289,7 @@ app.get("/ranking", (req, res) => {
 })
 
 //Hotel history data
-app.get("/historicodata", (req, res) => {
+app.get("/historyData", (req, res) => {
   db.all(
     'SELECT regra, data_recebimento, montante FROM antecipacao',
     (error, data) => {
