@@ -127,30 +127,6 @@ h5{
     color: #3468FC;
 }
 
-#content .row{
-    padding: 0;
-    margin: 0;
-}
-
-#content .col{
-    padding: 0;
-    margin: 0;
-}
-
-#content .col-7{
-    padding: 0;
-    margin: 0;
-}
-
-#content .col-5{
-    padding: 0;
-    margin: 0;
-}
-
-#menu .row {
-    margin: 0;
-}
-
 .solid-card #bar-1{
     background-color: #3468FC;
     border-radius: 15px;
