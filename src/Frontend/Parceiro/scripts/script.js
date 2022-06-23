@@ -183,6 +183,25 @@ function editData(){
   xhttp.send("hoteleiro_nome=" + hoteleiro_nome + "&hotel_nome=" + hotel_name + "&cpf=" + cpf + "&cnpj=" + cnpj + "&cep=" + cep + "&rua=" + rua + "&numero=" + numero + "&estado=" + estado + "&cidade=" + cidade + "&banco=" + banco + "&agencia=" + agencia + "&conta=" + conta);
 }
 
+function historico() {
+  //Info hotel
+  var text = ''
+  var i = 0
+  var url = "/historicodata";
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", url, false);
+  xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
+  var retorno = JSON.parse(xhttp.responseText);
+  for (Element in retorno) {
+    text += '<p class="columElements" id="data' + i + '">' + retorno[i].data_recebimento + '</p> ' +
+      '<p class="columElements" id="regra' + i + '">' + retorno[i].regra + '</p> ' +
+      '<p class="columElements" id="montante' + i + '">R$' + retorno[i].montante + '</p> '
+    i++
+  }
+  document.getElementById('scrollContainer').innerHTML = text
+}
+
+
 //Hover do Dashboard
 function mouseIn(){
   var option0 = document.querySelector("#option0")
