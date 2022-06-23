@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Inicial configuration information -->
     <meta charset="utf-8" />
+    <!-- Website style-->
     <link href="../css/dashboard.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,40 +21,30 @@
     <title>Hurb | Dashboard</title>
   </head>
   <body>
-    <!--Cabeçalho do site-->
+    <!--Website header-->
     <header class="header">
       <a href="/dashboard"
         ><img id="logo" src="../assets/logo.png" alt="logo"
       /></a>
       <div class="toggle"></div>
       <ul class="menu">
-        <!-- <li> -->
           <div id="options" onmouseenter="mouseIn()" onmouseleave="mouseOut()">
             <a id="myAccount"><li>Minha Conta</li></a>
             <div class="list">
               <a id="option0" class="none" style="cursor: pointer;" href="/editarDados"><li class="list">Dados Pessoais</li></a>
             <a id="option1" class="none" style="cursor: pointer;" href="/editarBanco"><li class="list">Dados Bancários</li></a>
             <a id="option2" class="none" style="cursor: pointer;" href="/index"><li class="list">Sair</li></a>
-            </div>
-            
-          </div>
-           
-<!-- <option style="display: none">Minha Conta</option>
-            <option value="/editarDados">Dados Pessoais</option>
-            <option value="/editarBanco">Dados Bancários</option>
-            <option value="/index">Sair</option>
-          </select>
-        </li> -->
+            </div>          
+          </div>        
       </ul>
-      <!-- <img id="menu" src="../assets/menu.png" alt="menu" /> -->
     </header>
-    <!--Corpo principal da página dashboard-->
+    <!--Main body of the dashboard page-->
     <div class="body-dashboard">
-      <!--Centro do dashboard que está dentro do corpo principal-->
+      <!--Dashboard center that is inside of the main body-->
       <div class="dashboard-center">
-        <!--Metade do centro do dashboard-->
+        <!--Half of the dashboard center-->
         <div class="dashboard-row">
-          <!--Botão de solicitação de antecipação-->
+          <!--Button to request the antecipation-->
           <a href="./antecipacoes" class="select-button">
             <img
               id="solicitar-antecipação"
@@ -63,7 +55,7 @@
               <span>Solicitar<br />antecipação</span>
             </div>
           </a>
-          <!--Botão de acompanhamento das finanças do hotel-->
+          <!--Button to acompany the hotel's finance-->
           <a href="/financeiro" class="select-button">
             <img id="finanças" src="../assets/dinheiro.png" />
             <br />
@@ -72,9 +64,9 @@
             </div>
           </a>
         </div>
-        <!--Outra metade do centro do dashboard-->
+        <!--Other half of the dashboard center-->
         <div class="dashboard-row">
-          <!--Botão de ver o histórico de antecipações do hotel-->
+          <!--Button to see the antecipation history of the hotel-->
           <a href="/historico" class="select-button">
             <img id="histórico" src="../assets/time.svg" />
             <br />
@@ -82,7 +74,7 @@
               <span>Histórico</span>
             </div>
           </a>
-          <!--Botão de acompanhar as solicitações de antecipação-->
+          <!--Button to acompany the antecipation requests-->
           <a href="/antecipacoesInfo" class="select-button">
             <img id="info-ant" src="../assets/info.svg" />
             <br />
@@ -100,7 +92,7 @@
         </div>
       </div>
     </div>
-    <!-- Código do menu lateral  -->
+    <!-- Lateral menu coding  -->
     <script type="text/javascript">
       function toggleMenu() {
         var menuToggle = document.querySelector(".toggle");
@@ -109,7 +101,7 @@
         menu.classList.toggle("active");
       }
     </script>
-<!-- Widget para libras -->
+<!-- Widget for the blind -->
     <div vw class="enabled">
       <div vw-access-button class="active"></div>
       <div vw-plugin-wrapper>
