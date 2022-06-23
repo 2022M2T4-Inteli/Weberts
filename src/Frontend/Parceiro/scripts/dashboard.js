@@ -1,5 +1,5 @@
 
-//Abre a seção dos estados no filtro
+//OPEN STATE FILTER SECTION
 function openStates(){
     if ($("#state-options")[0].style.display == "none" || $("#state-options")[0].style.display == ""){
         $("#state-options")[0].style.display = "flex"
@@ -14,7 +14,7 @@ function openStates(){
     
 }
 
-//Abre a seção dos parceiros no filtro
+//OPEN PARTNER FILTER SECTION
 function openPartner(){
     if ($("#partner-options")[0].style.display == "none" || $("#partner-options")[0].style.display == ""){
         $("#partner-options")[0].style.display = "flex"
@@ -28,7 +28,7 @@ function openPartner(){
     }
 }
 
-//Abre a seção dos tipos de antecipação no filtro
+//OPEN TYPE OF ANTECIPATION FILTER SECTION
 function openType(){
     if ($("#type-options")[0].style.display == "none" || $("#type-options")[0].style.display == ""){
         $("#type-options")[0].style.display = "flex"
@@ -43,7 +43,7 @@ function openType(){
 
 }
 
-//
+//LOGOUT POPUP
 function quitPopup(){
     if ($("#quitPopup")[0].style.display == "none" || $("#quitPopup")[0].style.display == ""){
         $("#quitPopup")[0].style.display = "flex"
@@ -56,24 +56,24 @@ function quitPopup(){
 
 function attData() {
     
-    //Cria as opções de filtro na parte de estados
-    $.get("http://localhost:3031/openStates", function(resultado){
+    //CREATE THE OPTIONS OF STATE FILTER
+    $.get("http://localhost:3031/openStates", function(result){
         let i = 0
-        resultado.forEach(row => {
+        result.forEach(row => {
             $("#state-options")[0].innerHTML += `<div class="state-unselected"><input type="checkbox" onclick="changeState()" id="state` + i + `"><h3 id="stateText` + i + `">${row.estado}</h3></div>`;
             i++
         });
     });
 
 
-    //Cria as opções de filtro na parte de parceiros
-    $.get("http://localhost:3031/openPartner", function(resultado){
-        var nomes_usados_qtd = []
+    //CREATE THE OPTIONS OF PARTNER FILTER
+    $.get("http://localhost:3031/openPartner", function(result){
+        var usedNames = []
         let i = 0
-        resultado.forEach(row => {
-            var nome_atual = row.nome
-            if (!nomes_usados_qtd.includes(nome_atual)){ 
-                nomes_usados_qtd.push(nome_atual)             
+        result.forEach(row => {
+            var currentName = row.nome
+            if (!usedNames.includes(currentName)){ 
+                usedNames.push(currentName)             
                 $("#partner-options")[0].innerHTML += `<div class="partner-unselected"><input type="checkbox" onclick="changePartner()" id="partner` + i + `"><h3 id="partnerText` + i + `">${row.nome}</h3></div>`;
             }
             i++
@@ -81,34 +81,34 @@ function attData() {
             }
     )
 
-    //Cria as opções de filtro na parte de tipos de solicitação
-    $.get("http://localhost:3031/openType", function(resultado){
+    //CREATE THE TYPE OF ANTECIPATIONS FILTER OPTIONS
+    $.get("http://localhost:3031/openType", function(result){
         let i = 0
-        resultado.forEach(row => {
+        result.forEach(row => {
             $("#type-options")[0].innerHTML += `<div class="type-unselected"><input type="checkbox" onclick="changeType()" id="type` + i + `"><h3 id="typeText` + i + `">${row.regra}</h3></div>`;
             i++
         });
     });
 
-    //Valor para a div de AntecipaçãoxPrazo
-    $.get("http://localhost:3031/antecipations", function(resultado){
+    //VALUES FOR AntecipaçãoxPrazo DIV
+    $.get("http://localhost:3031/antecipations", function(result){
         
-        $("#antecipation-value")[0].innerHTML = resultado[0]["COUNT (*)"];
+        $("#antecipation-value")[0].innerHTML = result[0]["COUNT (*)"];
         
     });
 
-    //Valor para a div de PagamentosxPrazo
-    $.get("http://localhost:3031/montante", function(resultado){
+    //VALUES FOR PagamentosxPrazo DIV
+    $.get("http://localhost:3031/montante", function(result){
         
-        $("#montate-value")[0].innerHTML ="R$"+parseFloat(resultado[0]["SUM (montante)"]);
+        $("#montate-value")[0].innerHTML ="R$"+parseFloat(result[0]["SUM (montante)"]);
       
         
     });
 
-    //Valor para a div de Rentabilidade Média
-    $.get("http://localhost:3031/rentabilidade", function(resultado){
+    //VALUES FOR Rentabilidade Média DIV
+    $.get("http://localhost:3031/rentabilidade", function(result){
         
-        $("#rentabilidade-value")[0].innerHTML =(resultado[0]["SUM(montante)/SUM(valor)"]*100).toFixed(0)+"%";
+        $("#rentabilidade-value")[0].innerHTML =(result[0]["SUM(montante)/SUM(valor)"]*100).toFixed(0)+"%";
         
         
     });
@@ -117,7 +117,7 @@ function attData() {
 }
 attData()
 
-//Permite abrir o filtro
+//ALLOW THE FILTER TO BE OPEND
 function openFilter() {
     if (document.getElementById("filterPopup").style.display == "flex") {
         document.getElementById("filterPopup").style.display = "none"
@@ -127,20 +127,20 @@ function openFilter() {
     }
 }
 
-//Filtra o ranking a partir do estado
+//FILTERS THE RANKING BY SELECTED STATE
 function changeState(){
-    var estado
+    var state
     var scrollContainer = Array.from(document.getElementsByClassName('state-unselected'))
     for(var a = 0; a < scrollContainer.length; a++){
-        if(document.getElementById("state" + a).checked){ //Busca um por um se há algum estado selecionado
-            estado = document.getElementById("stateText" + a).innerHTML //Define qual o estado selecionado
+        if(document.getElementById("state" + a).checked){ //SEARCHES IF THERE IS ANY STATE SELECTED
+            state = document.getElementById("stateText" + a).innerHTML //DEFINES THE SELECTED STATE
             var url = "http://127.0.0.1:3031/stateFilter";
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", url, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("estado=" + estado); //Busca no banco as informações relacionadas ao estado selecionado
-            var retorno = JSON.parse(xhttp.responseText);
-            //Código HTML que define cada coluna do ranking
+            xhttp.send("estado=" + state); //SEARCHES THE DATABASE FOR INFORMATIONS RELATED TO THE SELECTED STATE
+            var returnData = JSON.parse(xhttp.responseText);
+            //HTML CODE THAT DEFINES EACH COLUMN OF THE RANK
             var number = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Nº</h5>' + 
@@ -153,12 +153,12 @@ function changeState(){
                 '<br>' + 
             '</div>' + 
         '</div>'
-            var regra = '<div class="label-roll">' + 
+            var rule = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Tipo Solicitação</h5>' + 
             '</div>' + 
         '</div>'
-            var estado = '<div class="label-roll">' + 
+            var state = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Estado</h5>' +
                 '<br>' + 
@@ -169,24 +169,24 @@ function changeState(){
                 '<h5>Qtd Solicitações</h5>' + 
             '</div>' + 
         '</div>'
-            var divValor = '<div class="label-roll">' +
+            var divValue = '<div class="label-roll">' +
             '<div class="label1">' +
                 '<h5>Valor Antecipado    </h5>' +
             '</div>' +
         '</div>'
             var i = 0
             var semrep = {};
-            for (Element of retorno){
-                if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
-                    semrep[Element.nome]["montante_total"] += Element.montante //Adiciona ao montante do parceiro que está na lista semrep  
-                    semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
+            for (Element of returnData){
+                if(Element.nome in semrep){ //IF THE PARTNER HAS APEARED BEFORE ON DATABASE RETURN 
+                    semrep[Element.nome]["totalValue"] += Element.montante //ADDS TO PARTNER'S VALUE ON SEMREP LIST
+                    semrep[Element.nome]["qtds"] += 1   //COUNTS HOW MANY TIMES PARTNER HAS ANTECIPATED 
                 }else{
-                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
+                    semrep[Element.nome] = {"name": Element.nome, "totalValue": Element.montante, "rule": Element.regra, "qtds": 1, "state": Element.estado}  //IN CASE PARTNER HASN'T APPEARED YET, CREATES A LINE FOR HIM ON SEMREP LIST
                 }
             }
-            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
+            semrep = Object.values(semrep).sort(function(a,b){return b["totalValue"]- a["totalValue"]});    //ORGANIZES THE PARTNERS IN ORDER ON RANKING
             for(Element of semrep){
-            //Define o código html que será colocado no front junto com os dados recebidos
+            //DEFINES HTML CODE THAT WILL APEAR ON THE PAGE WITH DATA FROM DATABASE
                 number += '<div class="label-roll">' + 
                 '<div class="label2" id="number' + i + '">' + 
                     '<h5>' + (i + 1) + '</h5>' +
@@ -194,17 +194,17 @@ function changeState(){
             '</div>'
                 partner += '<div class="label-roll">' +
                 '<div class="label2" id="partner' + i + '">' +
-                    '<h5>' + Element.nome + '</h5>' +
+                    '<h5>' + Element.name + '</h5>' +
                 '</div>' + 
             '</div>'
-                regra += '<div class="label-roll">' +
-                '<div class="label2" id="regra' + i + '">' +
-                    '<h5>' + Element.regra + '</h5>' + 
+                rule += '<div class="label-roll">' +
+                '<div class="label2" id="rule' + i + '">' +
+                    '<h5>' + Element.rule + '</h5>' + 
                 '</div>' + 
             '</div>'
-                estado += '<div class="label-roll">' + 
-                '<div class="label2" id="estado' + i + '">'+
-                    '<h5>' + Element.estado + '</h5>' + 
+                state += '<div class="label-roll">' + 
+                '<div class="label2" id="state' + i + '">'+
+                    '<h5>' + Element.state + '</h5>' + 
                 '</div>' + 
             '</div>'
                 qtd += '<div class="label-roll">' +
@@ -212,23 +212,23 @@ function changeState(){
                     '<h5>' + Element.qtds + '</h5>' +
                 '</div>' +
             '</div>'
-                divValor += '<div class="label-roll">' + 
+                divValue += '<div class="label-roll">' + 
                 '<div class="label2" id="value' + i + '">' +
-                    '<h5>R$ ' + Element.montante_total + '</h5>' +
+                    '<h5>R$ ' + Element.totalValue + '</h5>' +
                 '</div>' +
             '</div>'
                 i++
             }
         }
         }
-    if(estado == undefined){    //Caso nenhum filtro esteja selecionado:
+    if(state == undefined){    //IN CASE NO FILTERS HAVE BEEN SELECTED:
                 var url = "http://127.0.0.1:3031/ranking";
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("GET", url, false);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send();   //Pega as informações necessárias no banco de dados
-                var retorno = JSON.parse(xhttp.responseText);
-                //Código HTML que define cada coluna do ranking
+                xhttp.send();   //GET NEEDED INFO FROM THE DATABASE
+                var returnData = JSON.parse(xhttp.responseText);
+                //HTML CODE THAT DEFINES EACH COLUMN OF THE RANK
                 var number = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Nº</h5>' + 
@@ -241,12 +241,12 @@ function changeState(){
                     '<br>' + 
                 '</div>' + 
             '</div>'
-                var regra = '<div class="label-roll">' + 
+                var rule = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Tipo Solicitação</h5>' + 
                 '</div>' + 
             '</div>'
-                var estado = '<div class="label-roll">' + 
+                var state = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Estado</h5>' +
                     '<br>' + 
@@ -257,24 +257,24 @@ function changeState(){
                     '<h5>Qtd Solicitações</h5>' + 
                 '</div>' + 
             '</div>'
-                var divValor = '<div class="label-roll">' +
+                var divValue = '<div class="label-roll">' +
                 '<div class="label1">' +
                     '<h5>Valor Antecipado    </h5>' +
                 '</div>' +
             '</div>'
                 var i = 0
                 var semrep = {}
-                for (Element of retorno){
-                    if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
-                        semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep
-                        semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
+                for (Element of returnData){
+                    if(Element.nome in semrep){ //IF THE PARTNER HAS APEARED BEFORE ON DATABASE RETURN 
+                        semrep[Element.nome]["totalValue"] += Element.montante  //ADDS TO PARTNER'S VALUE ON SEMREP LIST
+                        semrep[Element.nome]["qtds"] += 1   //COUNTS HOW MANY TIMES PARTNER HAS ANTECIPATED 
                     }else{
-                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
+                        semrep[Element.nome] = {"name": Element.nome, "totalValue": Element.montante, "rule": Element.regra, "qtds": 1, "state": Element.estado}  //IN CASE PARTNER HASN'T APPEARED YET, CREATES A LINE FOR HIM ON SEMREP LIST
                     }
                 }
-                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
+                semrep = Object.values(semrep).sort(function(a,b){return b["totalValue"]- a["totalValue"]});    //ORGANIZES THE PARTNERS IN ORDER ON RANKING
                 for(Element of semrep){
-                    //Define o código html que será colocado no front junto com os dados recebidos
+                   //DEFINES HTML CODE THAT WILL APEAR ON THE PAGE WITH DATA FROM DATABASE
                     number += '<div class="label-roll">' + 
                     '<div class="label2" id="number' + i + '">' + 
                         '<h5>' + (i + 1) + '</h5>' +
@@ -282,17 +282,17 @@ function changeState(){
                 '</div>'
                     partner += '<div class="label-roll">' +
                     '<div class="label2" id="partner' + i + '">' +
-                        '<h5>' + Element.nome + '</h5>' +
+                        '<h5>' + Element.name + '</h5>' +
                     '</div>' + 
                 '</div>'
-                    regra += '<div class="label-roll">' +
-                    '<div class="label2" id="regra' + i + '">' +
-                        '<h5>' + Element.regra + '</h5>' + 
+                    rule += '<div class="label-roll">' +
+                    '<div class="label2" id="rule' + i + '">' +
+                        '<h5>' + Element.rule + '</h5>' + 
                     '</div>' + 
                 '</div>'
-                    estado += '<div class="label-roll">' + 
-                    '<div class="label2" id="estado' + i + '">'+
-                        '<h5>' + Element.estado + '</h5>' + 
+                    state += '<div class="label-roll">' + 
+                    '<div class="label2" id="state' + i + '">'+
+                        '<h5>' + Element.state + '</h5>' + 
                     '</div>' + 
                 '</div>'
                     qtd += '<div class="label-roll">' +
@@ -300,38 +300,38 @@ function changeState(){
                         '<h5>' + Element.qtds + '</h5>' +
                     '</div>' +
                 '</div>'
-                    divValor += '<div class="label-roll">' + 
+                    divValue += '<div class="label-roll">' + 
                     '<div class="label2" id="value' + i + '">' +
-                        '<h5>R$ ' + Element.montante_total + '</h5>' +
+                        '<h5>R$ ' + Element.totalValue + '</h5>' +
                     '</div>' +
                 '</div>'
                     i++
                 }
     }
-    //Coloca o código HTML com os dados do banco na página
+    //PUTS THE HTML CODE ON THE PAGE
     document.getElementById('col_number').innerHTML = number
     document.getElementById('partner_col').innerHTML = partner
-    document.getElementById('rule_col').innerHTML = regra
-    document.getElementById('state_col').innerHTML = estado
+    document.getElementById('rule_col').innerHTML = rule
+    document.getElementById('state_col').innerHTML = state
     document.getElementById('qtd').innerHTML = qtd
-    document.getElementById('antecipatedValue').innerHTML = divValor
+    document.getElementById('antecipatedValue').innerHTML = divValue
 }
 
 
-//Filtra o ranking a partir do parceiro
+//FILTERS THE RANKING BY SELECTED PARTNER
 function changePartner(){
-    var parceiro
+    var partner
     var scrollContainer = Array.from(document.getElementsByClassName('partner-unselected'))
     for(var a = 0; a < scrollContainer.length; a++){
-        if(document.getElementById("partner" + a).checked){ //Busca um por um se há algum parceiro selecionado
-            parceiro = document.getElementById("partnerText" + a).innerHTML //Define qual o parceiro selecionado
+        if(document.getElementById("partner" + a).checked){ //SEARCHES IF THERE IS ANY STATE PARTNER
+            partner = document.getElementById("partnerText" + a).innerHTML //DEFINES THE SELECTED PARTNER
             var url = "http://127.0.0.1:3031/partnerFilter";
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", url, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("partner=" + parceiro);  //Busca no banco as informações relacionadas ao parceiro selecionado
-            var retorno = JSON.parse(xhttp.responseText);
-            //Código HTML que define cada coluna do ranking
+            xhttp.send("partner=" + partner);  //SEARCHES THE DATABASE FOR INFORMATIONS RELATED TO THE SELECTED PARTNER
+            var returnData = JSON.parse(xhttp.responseText);
+            //HTML CODE THAT DEFINES EACH COLUMN OF THE RANK
             var number = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Nº</h5>' + 
@@ -344,12 +344,12 @@ function changePartner(){
                 '<br>' + 
             '</div>' + 
         '</div>'
-            var regra = '<div class="label-roll">' + 
+            var rule = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Tipo Solicitação</h5>' + 
             '</div>' + 
         '</div>'
-            var estado = '<div class="label-roll">' + 
+            var state = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Estado</h5>' +
                 '<br>' + 
@@ -360,24 +360,24 @@ function changePartner(){
                 '<h5>Qtd Solicitações</h5>' + 
             '</div>' + 
         '</div>'
-            var divValor = '<div class="label-roll">' +
+            var divValue = '<div class="label-roll">' +
             '<div class="label1">' +
                 '<h5>Valor Antecipado    </h5>' +
             '</div>' +
         '</div>'
             var semrep = {}
             var i = 0
-            for (Element of retorno){
-                if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
-                    semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep  
-                    semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
+            for (Element of returnData){
+                if(Element.nome in semrep){ //IF THE PARTNER HAS APEARED BEFORE ON DATABASE RETURN 
+                    semrep[Element.nome]["totalValue"] += Element.montante  //ADDS TO PARTNER'S VALUE ON SEMREP LIST
+                    semrep[Element.nome]["qtds"] += 1   //COUNTS HOW MANY TIMES PARTNER HAS ANTECIPATED 
                 }else{
-                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
+                    semrep[Element.nome] = {"nome": Element.nome, "totalValue": Element.montante, "rule": Element.regra, "qtds": 1, "state": Element.estado}  //IN CASE PARTNER HASN'T APPEARED YET, CREATES A LINE FOR HIM ON SEMREP LIST
                 }
             }
-            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
+            semrep = Object.values(semrep).sort(function(a,b){return b["totalValue"]- a["totalValue"]});    //ORGANIZES THE PARTNERS IN ORDER ON RANKING
             for(Element of semrep){
-                //Define o código html que será colocado no front junto com os dados recebidos
+                //DEFINES HTML CODE THAT WILL APEAR ON THE PAGE WITH DATA FROM DATABASE
                 number += '<div class="label-roll">' + 
                 '<div class="label2" id="number' + i + '">' + 
                     '<h5>' + (i + 1) + '</h5>' +
@@ -388,14 +388,14 @@ function changePartner(){
                     '<h5>' + Element.nome + '</h5>' +
                 '</div>' + 
             '</div>'
-                regra += '<div class="label-roll">' +
-                '<div class="label2" id="regra' + i + '">' +
-                    '<h5>' + Element.regra + '</h5>' + 
+                rule += '<div class="label-roll">' +
+                '<div class="label2" id="rule' + i + '">' +
+                    '<h5>' + Element.rule + '</h5>' + 
                 '</div>' + 
             '</div>'
-                estado += '<div class="label-roll">' + 
-                '<div class="label2" id="estado' + i + '">'+
-                    '<h5>' + Element.estado + '</h5>' + 
+                state += '<div class="label-roll">' + 
+                '<div class="label2" id="state' + i + '">'+
+                    '<h5>' + Element.state + '</h5>' + 
                 '</div>' + 
             '</div>'
                 qtd += '<div class="label-roll">' +
@@ -403,16 +403,16 @@ function changePartner(){
                     '<h5>' + Element.qtds + '</h5>' +
                 '</div>' +
             '</div>'
-                divValor += '<div class="label-roll">' + 
+                divValue += '<div class="label-roll">' + 
                 '<div class="label2" id="value' + i + '">' +
-                    '<h5>R$ ' + Element.montante_total + '</h5>' +
+                    '<h5>R$ ' + Element.totalValue + '</h5>' +
                 '</div>' +
             '</div>'
                 i++
             }
         }
     }
-    if(parceiro == undefined){  //Caso nenhum filtro esteja selecionado:
+    if(partner == undefined){  //IN CASE NO FILTERS HAVE BEEN SELECTED:
         for(var a = 0; a < scrollContainer.length; a++){
             if(!document.getElementById("partner" + a).checked){
                 var i = 0
@@ -420,9 +420,9 @@ function changePartner(){
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("GET", url, false);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send();   //Pega as informações necessárias no banco de dados
-                var retorno = JSON.parse(xhttp.responseText);
-                //Código HTML que define cada coluna do ranking
+                xhttp.send();   //GET NEEDED INFO FROM THE DATABASE
+                var returnData = JSON.parse(xhttp.responseText);
+                //HTML CODE THAT DEFINES EACH COLUMN OF THE RANK
                 var number = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Nº</h5>' + 
@@ -435,12 +435,12 @@ function changePartner(){
                     '<br>' + 
                 '</div>' + 
             '</div>'
-                var regra = '<div class="label-roll">' + 
+                var rule = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Tipo Solicitação</h5>' + 
                 '</div>' + 
             '</div>'
-                var estado = '<div class="label-roll">' + 
+                var state = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Estado</h5>' +
                     '<br>' + 
@@ -451,24 +451,24 @@ function changePartner(){
                     '<h5>Qtd Solicitações</h5>' + 
                 '</div>' + 
             '</div>'
-                var divValor = '<div class="label-roll">' +
+                var divValue = '<div class="label-roll">' +
                 '<div class="label1">' +
                     '<h5>Valor Antecipado    </h5>' +
                 '</div>' +
             '</div>'
                 var i = 0
                 var semrep = {}
-                for (Element of retorno){
-                    if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
-                        semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep
-                        semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
+                for (Element of returnData){
+                    if(Element.nome in semrep){ //IF THE PARTNER HAS APEARED BEFORE ON DATABASE RETURN 
+                        semrep[Element.nome]["totalValue"] += Element.montante  //ADDS TO PARTNER'S VALUE ON SEMREP LIST
+                        semrep[Element.nome]["qtds"] += 1  //COUNTS HOW MANY TIMES PARTNER HAS ANTECIPATED 
                     }else{
-                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}//Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
+                        semrep[Element.nome] = {"nome": Element.nome, "totalValue": Element.montante, "rule": Element.regra, "qtds": 1, "state": Element.estado}//IN CASE PARTNER HASN'T APPEARED YET, CREATES A LINE FOR HIM ON SEMREP LIST
                     }
                 }
-                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
+                semrep = Object.values(semrep).sort(function(a,b){return b["totalValue"]- a["totalValue"]});   //ORGANIZES THE PARTNERS IN ORDER ON RANKING
                 for(Element of semrep){
-                    //Define o código html que será colocado no front junto com os dados recebidos
+                   //DEFINES HTML CODE THAT WILL APEAR ON THE PAGE WITH DATA FROM DATABASE
                     number += '<div class="label-roll">' + 
                     '<div class="label2" id="number' + i + '">' + 
                         '<h5>' + (i + 1) + '</h5>' +
@@ -479,14 +479,14 @@ function changePartner(){
                         '<h5>' + Element.nome + '</h5>' +
                     '</div>' + 
                 '</div>'
-                    regra += '<div class="label-roll">' +
-                    '<div class="label2" id="regra' + i + '">' +
-                        '<h5>' + Element.regra + '</h5>' + 
+                    rule += '<div class="label-roll">' +
+                    '<div class="label2" id="rule' + i + '">' +
+                        '<h5>' + Element.rule + '</h5>' + 
                     '</div>' + 
                 '</div>'
-                    estado += '<div class="label-roll">' + 
-                    '<div class="label2" id="estado' + i + '">'+
-                        '<h5>' + Element.estado + '</h5>' + 
+                    state += '<div class="label-roll">' + 
+                    '<div class="label2" id="state' + i + '">'+
+                        '<h5>' + Element.state + '</h5>' + 
                     '</div>' + 
                 '</div>'
                     qtd += '<div class="label-roll">' +
@@ -494,9 +494,9 @@ function changePartner(){
                         '<h5>' + Element.qtds + '</h5>' +
                     '</div>' +
                 '</div>'
-                    divValor += '<div class="label-roll">' + 
+                    divValue += '<div class="label-roll">' + 
                     '<div class="label2" id="value' + i + '">' +
-                        '<h5>R$ ' + Element.montante_total + '</h5>' +
+                        '<h5>R$ ' + Element.totalValue + '</h5>' +
                     '</div>' +
                 '</div>'
                     i++
@@ -505,30 +505,30 @@ function changePartner(){
                 
           }
     }
-    //Coloca o código HTML com os dados do banco na página
+    //PUTS THE HTML CODE ON THE PAGE
     document.getElementById('col_number').innerHTML = number
     document.getElementById('partner_col').innerHTML = partner
-    document.getElementById('rule_col').innerHTML = regra
-    document.getElementById('state_col').innerHTML = estado
+    document.getElementById('rule_col').innerHTML = rule
+    document.getElementById('state_col').innerHTML = state
     document.getElementById('qtd').innerHTML = qtd
-    document.getElementById('antecipatedValue').innerHTML = divValor
+    document.getElementById('antecipatedValue').innerHTML = divValue
 }
 
 
-//Filtra o ranking a partir do tipo de solicitação
+//FILTERS THE RANKING BY SELECTED TYPE
 function changeType(){
     var type
     var scrollContainer = Array.from(document.getElementsByClassName('type-unselected'))
     for(var a = 0; a < scrollContainer.length; a++){
-        if(document.getElementById("type" + a).checked){    //Busca um por um se há algum tipo selecionado
-            type = document.getElementById("typeText" + a).innerHTML    //Define qual o tipo selecionado
+        if(document.getElementById("type" + a).checked){    //SEARCHES IF THERE IS ANY TYPE SELECTED
+            type = document.getElementById("typeText" + a).innerHTML    //DEFINES THE SELECTED TYPE
             var url = "http://127.0.0.1:3031/typeFilter";
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", url, false);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("regra=" + type);    //Busca no banco as informações relacionadas ao tipo selecionado
-            var retorno = JSON.parse(xhttp.responseText);
-            //Código HTML que define cada coluna do ranking
+            xhttp.send("regra=" + type);    //SEARCHES THE DATABASE FOR INFORMATIONS RELATED TO THE SELECTED TYPE
+            var returnData = JSON.parse(xhttp.responseText);
+            //HTML CODE THAT DEFINES EACH COLUMN OF THE RANK
             var number = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Nº</h5>' + 
@@ -541,12 +541,12 @@ function changeType(){
                 '<br>' + 
             '</div>' + 
         '</div>'
-            var regra = '<div class="label-roll">' + 
+            var rule = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Tipo Solicitação</h5>' + 
             '</div>' + 
         '</div>'
-            var estado = '<div class="label-roll">' + 
+            var state = '<div class="label-roll">' + 
             '<div class="label1">' + 
                 '<h5>Estado</h5>' +
                 '<br>' + 
@@ -557,24 +557,24 @@ function changeType(){
                 '<h5>Qtd Solicitações</h5>' + 
             '</div>' + 
         '</div>'
-            var divValor = '<div class="label-roll">' +
+            var divValue = '<div class="label-roll">' +
             '<div class="label1">' +
                 '<h5>Valor Antecipado    </h5>' +
             '</div>' +
         '</div>'
             var i = 0
             var semrep = {};
-            for (Element of retorno){
-                if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
-                    semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep
-                    semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
+            for (Element of returnData){
+                if(Element.nome in semrep){ //IF THE PARTNER HAS APEARED BEFORE ON DATABASE RETURN 
+                    semrep[Element.nome]["totalValue"] += Element.montante  //ADDS TO PARTNER'S VALUE ON SEMREP LIST
+                    semrep[Element.nome]["qtds"] += 1  //COUNTS HOW MANY TIMES PARTNER HAS ANTECIPATED
                 }else{
-                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
+                    semrep[Element.nome] = {"nome": Element.nome, "totalValue": Element.montante, "rule": Element.regra, "qtds": 1, "state": Element.estado}  //IN CASE PARTNER HASN'T APPEARED YET, CREATES A LINE FOR HIM ON SEMREP LIST
                 }
             }
-            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
+            semrep = Object.values(semrep).sort(function(a,b){return b["totalValue"]- a["totalValue"]});    //ORGANIZES THE PARTNERS IN ORDER ON RANKING
             for(Element of semrep){
-                //Define o código html que será colocado no front junto com os dados recebidos
+                //DEFINES HTML CODE THAT WILL APEAR ON THE PAGE WITH DATA FROM DATABASE
                 number += '<div class="label-roll">' + 
                 '<div class="label2" id="number' + i + '">' + 
                     '<h5>' + (i + 1) + '</h5>' +
@@ -585,14 +585,14 @@ function changeType(){
                     '<h5>' + Element.nome + '</h5>' +
                 '</div>' + 
             '</div>'
-                regra += '<div class="label-roll">' +
-                '<div class="label2" id="regra' + i + '">' +
-                    '<h5>' + Element.regra + '</h5>' + 
+                rule += '<div class="label-roll">' +
+                '<div class="label2" id="rule' + i + '">' +
+                    '<h5>' + Element.rule + '</h5>' + 
                 '</div>' + 
             '</div>'
-                estado += '<div class="label-roll">' + 
-                '<div class="label2" id="estado' + i + '">'+
-                    '<h5>' + Element.estado + '</h5>' + 
+                state += '<div class="label-roll">' + 
+                '<div class="label2" id="state' + i + '">'+
+                    '<h5>' + Element.state + '</h5>' + 
                 '</div>' + 
             '</div>'
                 qtd += '<div class="label-roll">' +
@@ -600,25 +600,25 @@ function changeType(){
                     '<h5>' + Element.qtds + '</h5>' +
                 '</div>' +
             '</div>'
-                divValor += '<div class="label-roll">' + 
+                divValue += '<div class="label-roll">' + 
                 '<div class="label2" id="value' + i + '">' +
-                    '<h5>R$ ' + Element.montante_total + '</h5>' +
+                    '<h5>R$ ' + Element.totalValue + '</h5>' +
                 '</div>' +
             '</div>'
                 i++
             }
         }
         }
-    if(type == undefined){  //Caso nenhum filtro esteja selecionado:
+    if(type == undefined){  //IN CASE NO FILTERS HAVE BEEN SELECTED:
         for(var a = 0; a < scrollContainer.length; a++){
             if(!document.getElementById("type" + a).checked){
                 var url = "http://127.0.0.1:3031/ranking";
                 var xhttp = new XMLHttpRequest();
                 xhttp.open("GET", url, false);
                 xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xhttp.send();   //Pega as informações necessárias no banco de dados
-                var retorno = JSON.parse(xhttp.responseText);
-                 //Código HTML que define cada coluna do ranking
+                xhttp.send();  //GET NEEDED INFO FROM THE DATABASE
+                var returnData = JSON.parse(xhttp.responseText);
+                 //HTML CODE THAT DEFINES EACH COLUMN OF THE RANK
                 var number = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Nº</h5>' + 
@@ -631,12 +631,12 @@ function changeType(){
                     '<br>' + 
                 '</div>' + 
             '</div>'
-                var regra = '<div class="label-roll">' + 
+                var rule = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Tipo Solicitação</h5>' + 
                 '</div>' + 
             '</div>'
-                var estado = '<div class="label-roll">' + 
+                var state = '<div class="label-roll">' + 
                 '<div class="label1">' + 
                     '<h5>Estado</h5>' +
                     '<br>' + 
@@ -647,24 +647,24 @@ function changeType(){
                     '<h5>Qtd Solicitações</h5>' + 
                 '</div>' + 
             '</div>'
-                var divValor = '<div class="label-roll">' +
+                var divValue = '<div class="label-roll">' +
                 '<div class="label1">' +
                     '<h5>Valor Antecipado    </h5>' +
                 '</div>' +
             '</div>'
                 var i = 0
                 var semrep = {}
-                for (Element of retorno){
-                    if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
-                        semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep
-                        semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
+                for (Element of returnData){
+                    if(Element.nome in semrep){ //IF THE PARTNER HAS APEARED BEFORE ON DATABASE RETURN 
+                        semrep[Element.nome]["totalValue"] += Element.montante  //ADDS TO PARTNER'S VALUE ON SEMREP LIST
+                        semrep[Element.nome]["qtds"] += 1   //COUNTS HOW MANY TIMES PARTNER HAS ANTECIPATED 
                     }else{
-                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
+                        semrep[Element.nome] = {"nome": Element.nome, "totalValue": Element.montante, "rule": Element.regra, "qtds": 1, "state": Element.estado}  //IN CASE PARTNER HASN'T APPEARED YET, CREATES A LINE FOR HIM ON SEMREP LIST
                     }
                 }
-                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
+                semrep = Object.values(semrep).sort(function(a,b){return b["totalValue"]- a["totalValue"]});    //ORGANIZES THE PARTNERS IN ORDER ON RANKING
                 for(Element of semrep){
-                    //Define o código html que será colocado no front junto com os dados recebidos
+                    //DEFINES HTML CODE THAT WILL APEAR ON THE PAGE WITH DATA FROM DATABASE
                     number += '<div class="label-roll">' + 
                     '<div class="label2" id="number' + i + '">' + 
                         '<h5>' + (i + 1) + '</h5>' +
@@ -675,14 +675,14 @@ function changeType(){
                         '<h5>' + Element.nome + '</h5>' +
                     '</div>' + 
                 '</div>'
-                    regra += '<div class="label-roll">' +
-                    '<div class="label2" id="regra' + i + '">' +
-                        '<h5>' + Element.regra + '</h5>' + 
+                    rule += '<div class="label-roll">' +
+                    '<div class="label2" id="rule' + i + '">' +
+                        '<h5>' + Element.rule + '</h5>' + 
                     '</div>' + 
                 '</div>'
-                    estado += '<div class="label-roll">' + 
-                    '<div class="label2" id="estado' + i + '">'+
-                        '<h5>' + Element.estado + '</h5>' + 
+                    state += '<div class="label-roll">' + 
+                    '<div class="label2" id="state' + i + '">'+
+                        '<h5>' + Element.state + '</h5>' + 
                     '</div>' + 
                 '</div>'
                     qtd += '<div class="label-roll">' +
@@ -690,9 +690,9 @@ function changeType(){
                         '<h5>' + Element.qtds + '</h5>' +
                     '</div>' +
                 '</div>'
-                    divValor += '<div class="label-roll">' + 
+                    divValue += '<div class="label-roll">' + 
                     '<div class="label2" id="value' + i + '">' +
-                        '<h5>R$ ' + Element.montante_total + '</h5>' +
+                        '<h5>R$ ' + Element.totalValue + '</h5>' +
                     '</div>' +
                 '</div>'
                     i++
@@ -701,17 +701,17 @@ function changeType(){
                 
           }
     }
-    //Coloca o código HTML com os dados do banco na página
+    //PUTS THE HTML CODE ON THE PAGE
     document.getElementById('col_number').innerHTML = number
     document.getElementById('partner_col').innerHTML = partner
-    document.getElementById('rule_col').innerHTML = regra
-    document.getElementById('state_col').innerHTML = estado
+    document.getElementById('rule_col').innerHTML = rule
+    document.getElementById('state_col').innerHTML = state
     document.getElementById('qtd').innerHTML = qtd
-    document.getElementById('antecipatedValue').innerHTML = divValor
+    document.getElementById('antecipatedValue').innerHTML = divValue
 }
 
 function ranking(){
-    //Código HTML que define cada coluna do ranking
+   //HTML CODE THAT DEFINES EACH COLUMN OF THE RANK
     var number = '<div class="label-roll">' + 
     '<div class="label1">' + 
         '<h5>Nº</h5>' + 
@@ -724,12 +724,12 @@ function ranking(){
         '<br>' + 
     '</div>' + 
 '</div>'
-    var regra = '<div class="label-roll">' + 
+    var rule = '<div class="label-roll">' + 
     '<div class="label1">' + 
         '<h5>Tipo Solicitação</h5>' + 
     '</div>' + 
 '</div>'
-    var estado = '<div class="label-roll">' + 
+    var state = '<div class="label-roll">' + 
     '<div class="label1">' + 
         '<h5>Estado</h5>' +
         '<br>' + 
@@ -740,7 +740,7 @@ function ranking(){
         '<h5>Qtd Solicitações</h5>' + 
     '</div>' + 
 '</div>'
-    var divValor = '<div class="label-roll">' +
+    var divValue = '<div class="label-roll">' +
     '<div class="label1">' +
         '<h5>Valor Antecipado    </h5>' +
     '</div>' +
@@ -749,20 +749,20 @@ function ranking(){
     var url = "http://127.0.0.1:3031/ranking";
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, false);
-    xhttp.send();//Pega as informações necessárias no banco de dados
-    var retorno = JSON.parse(xhttp.responseText);
+    xhttp.send();//GET NEEDED INFO FROM THE DATABASE
+    var returnData = JSON.parse(xhttp.responseText);
     var semrep = {};
-    for (Element of retorno){
-        if(Element.nome in semrep){ //Caso o parceiro tenha aparecido antes no retorno do banco:
-            semrep[Element.nome]["montante_total"] += Element.montante  //Adiciona ao montante do parceiro que está na lista semrep
-            semrep[Element.nome]["qtds"] += 1   //Conta quantas vezes o parceiro solicitou antecipações
+    for (Element of returnData){
+        if(Element.nome in semrep){ //IF THE PARTNER HAS APEARED BEFORE ON DATABASE RETURN 
+            semrep[Element.nome]["totalValue"] += Element.montante  //ADDS TO PARTNER'S VALUE ON SEMREP LIST
+            semrep[Element.nome]["qtds"] += 1    //COUNTS HOW MANY TIMES PARTNER HAS ANTECIPATED 
         }else{
-            semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}  //Caso o parceiro não tenha aparecido ainda, cria uma linha para ele na lista dos elementos do ranking
+            semrep[Element.nome] = {"nome": Element.nome, "totalValue": Element.montante, "rule": Element.regra, "qtds": 1, "state": Element.estado}  //IN CASE PARTNER HASN'T APPEARED YET, CREATES A LINE FOR HIM ON SEMREP LIST
         }
     }    
-    semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});    //Organiza de forma crescente os parceiros da lista do ranking
+    semrep = Object.values(semrep).sort(function(a,b){return b["totalValue"]- a["totalValue"]});    //ORGANIZES THE PARTNERS IN ORDER ON RANKING
     for(Element of semrep){
-        //Define o código html que será colocado no front junto com os dados recebidos
+        //DEFINES HTML CODE THAT WILL APEAR ON THE PAGE WITH DATA FROM DATABASE
         number += '<div class="label-roll">' + 
         '<div class="label2" id="number' + i + '">' + 
             '<h5>' + (i + 1) + '</h5>' +
@@ -773,14 +773,14 @@ function ranking(){
             '<h5>' + Element.nome + '</h5>' +
         '</div>' + 
     '</div>'
-        regra += '<div class="label-roll">' +
-        '<div class="label2" id="regra' + i + '">' +
-            '<h5>' + Element.regra + '</h5>' + 
+        rule += '<div class="label-roll">' +
+        '<div class="label2" id="rule' + i + '">' +
+            '<h5>' + Element.rule + '</h5>' + 
         '</div>' + 
     '</div>'
-        estado += '<div class="label-roll">' + 
-        '<div class="label2" id="estado' + i + '">'+
-            '<h5>' + Element.estado + '</h5>' + 
+        state += '<div class="label-roll">' + 
+        '<div class="label2" id="state' + i + '">'+
+            '<h5>' + Element.state + '</h5>' + 
         '</div>' + 
     '</div>'
         qtd += '<div class="label-roll">' +
@@ -788,19 +788,19 @@ function ranking(){
             '<h5>' + Element.qtds + '</h5>' +
         '</div>' +
     '</div>'
-        divValor += '<div class="label-roll">' + 
+        divValue += '<div class="label-roll">' + 
         '<div class="label2" id="value' + i + '">' +
-            '<h5>R$ ' + Element.montante_total + '</h5>' +
+            '<h5>R$ ' + Element.totalValue + '</h5>' +
         '</div>' +
     '</div>'
     i++
     }
-    //Coloca o código HTML com os dados do banco na página
+    //PUTS THE HTML CODE ON THE PAGE
     document.getElementById('col_number').innerHTML = number
     document.getElementById('partner_col').innerHTML = partner
-    document.getElementById('rule_col').innerHTML = regra
-    document.getElementById('state_col').innerHTML = estado
+    document.getElementById('rule_col').innerHTML = rule
+    document.getElementById('state_col').innerHTML = state
     document.getElementById('qtd').innerHTML = qtd
-    document.getElementById('antecipatedValue').innerHTML = divValor
+    document.getElementById('antecipatedValue').innerHTML = divValue
 }
 
