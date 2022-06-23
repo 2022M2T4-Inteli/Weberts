@@ -183,6 +183,31 @@ function editData(){
   xhttp.send("hoteleiro_nome=" + hoteleiro_nome + "&hotel_nome=" + hotel_name + "&cpf=" + cpf + "&cnpj=" + cnpj + "&cep=" + cep + "&rua=" + rua + "&numero=" + numero + "&estado=" + estado + "&cidade=" + cidade + "&banco=" + banco + "&agencia=" + agencia + "&conta=" + conta);
 }
 
+//Hover do Dashboard
+function mouseIn(){
+  var option0 = document.querySelector("#option0")
+  var option1 = document.querySelector("#option1")
+  var option2 = document.querySelector("#option2")
+  var option3 = document.querySelector("#option3")
+
+  option0.classList.remove('none')
+  option1.classList.remove('none')
+  option2.classList.remove('none')
+  option3.classList.remove('none')
+}
+
+function mouseOut(){
+  var option0 = document.querySelector("#option0")
+  var option1 = document.querySelector("#option1")
+  var option2 = document.querySelector("#option2")
+  var option3 = document.querySelector("#option3")
+
+  option0.classList.add('none')
+  option1.classList.add('none')
+  option2.classList.add('none')
+  option3.classList.add('none')
+}
+
 //Script da seleção de cidades e estados
 
 window.onDomReady = function dgDomReady(fn){
