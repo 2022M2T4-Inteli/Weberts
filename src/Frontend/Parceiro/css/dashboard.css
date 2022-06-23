@@ -207,6 +207,25 @@ header ul li a:hover {
   width: 49px;
 }
 
+.none{
+  display: none;
+}
+
+.list{
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 3px;
+  margin-bottom: 3px;
+}
+
+#myAccount li{
+  color: #ffffff;
+  font-weight: 600;
+  width: 200px;
+  display: flex;
+}
+
 .select-button:hover {
   background-position: 100% 0;
   cursor: pointer;
@@ -220,6 +239,54 @@ header ul li a:hover {
     ;
 }
 
+.menu {
+  justify-content: space-evenly;
+  align-items: flex-start;
+  transition: 500ms;
+  /* padding: 40px 0px; */
+  position: fixed;
+  display: flex;
+  z-index: 1000;
+  /* width: 100%; */
+  top: 8px;
+} 
+
+.menu.sticky{
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px 0px 10px;
+  background-color: black;
+  background-image: none;
+} 
+
+.menu a{
+  position: relative;
+  list-style: none;
+}
+
+.menu a li {
+  border-bottom: 4px solid transparent;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  transition: 200ms;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #3d3d3d;
+  margin: 0px 15px;
+  text-align: center;
+  font-size: 17px;
+
+}
+
+.menu a li:hover{
+  border-bottom: 4px solid #3E6FFC;
+  /* font-weight: bold; */
+}
+
+#options{
+  display: flex;
+  flex-direction: column;
+}
 span {
   font-weight: 510;
   color: #3d3d3d;

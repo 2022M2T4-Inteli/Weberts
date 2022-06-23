@@ -14,6 +14,7 @@
       href="../assets/favicon.png"
       type="image/x-icon"
     />
+    <script src="../scripts/script.js"></script>
 
     <title>Hurb | Dashboard</title>
   </head>
@@ -25,26 +26,23 @@
       /></a>
       <div class="toggle"></div>
       <ul class="menu">
-        <li>
-          <select
-            name="myAccount"
-            id="myAccount"
-            onchange="location.href=this.value"
-          >
-            <option style="display: none">Minha Conta</option>
+        <!-- <li> -->
+          <div id="options" onmouseenter="mouseIn()" onmouseleave="mouseOut()">
+            <a id="myAccount"><li>Minha Conta</li></a>
+            <div class="list">
+              <a id="option0" class="none" style="cursor: pointer;" href="/editarDados"><li class="list">Dados Pessoais</li></a>
+            <a id="option1" class="none" style="cursor: pointer;" href="/editarBanco"><li class="list">Dados Bancários</li></a>
+            <a id="option2" class="none" style="cursor: pointer;" href="/index"><li class="list">Sair</li></a>
+            </div>
+            
+          </div>
+           
+<!-- <option style="display: none">Minha Conta</option>
             <option value="/editarDados">Dados Pessoais</option>
             <option value="/editarBanco">Dados Bancários</option>
             <option value="/index">Sair</option>
           </select>
-        </li>
-        <li>
-          <select name="myHotels" id="myHotels">
-            <option value="1">Meus Hotéis</option>
-            <option value="2">Hotel Por do Sol</option>
-            <option value="3">Hotel Itatiaia</option>
-            <option value="4">Pousada Tradição</option>
-          </select>
-        </li>
+        </li> -->
       </ul>
       <!-- <img id="menu" src="../assets/menu.png" alt="menu" /> -->
     </header>
