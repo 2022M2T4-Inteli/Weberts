@@ -98,7 +98,7 @@ function attData() {
     });
 
     //VALUES FOR PagamentosxPrazo DIV
-    $.get("http://localhost:3031/montante", function(result){
+    $.get("http://localhost:3031/fullValue", function(result){
         
         $("#montate-value")[0].innerHTML ="R$"+parseFloat(result[0]["SUM (montante)"]);
       
@@ -106,7 +106,7 @@ function attData() {
     });
 
     //VALUES FOR Rentabilidade Média DIV
-    $.get("http://localhost:3031/rentabilidade", function(result){
+    $.get("http://localhost:3031/profitability", function(result){
         
         $("#rentabilidade-value")[0].innerHTML =(result[0]["SUM(montante)/SUM(valor)"]*100).toFixed(0)+"%";
         
