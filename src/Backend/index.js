@@ -203,7 +203,7 @@ app.get("/antecipacao", (req, res) => {
   )
 })
 
-app.get("/stateFilter", (req, res) => {
+app.get("/openStates", (req, res) => {
   db.all(
     `SELECT DISTINCT (estado) FROM hotel `,
     (error, data) => {
@@ -211,38 +211,52 @@ app.get("/stateFilter", (req, res) => {
     }
   )
 })
-app.get("/cityFilter", (req, res) => {
+
+app.post("/stateFilter", (req, res) => {
   db.all(
-    `SELECT DISTINCT (cidade) FROM hotel `,
+    `SELECT montante,hotel.nome, antecipacao.regra, hotel.estado FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code and hotel.estado = '${req.body.estado}'`,
     (error, data) => {
       res.json(data)
     }
   )
 })
-app.get("/partnerFilter", (req, res) => {
+
+app.get("/openPartner", (req, res) => {
   db.all(
-    `SELECT DISTINCT (nome) FROM hotel `,
+    `SELECT nome, hotel.id, code, reserva_code, hotel_id FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code `,
     (error, data) => {
       res.json(data)
     }
   )
 })
-app.get("/periodFilter", (req, res) => {
+
+app.post("/partnerFilter", (req, res) => {
   db.all(
-    `SELECT DISTINCT (data_recebimento) FROM antecipacao `,
+    `SELECT montante,hotel.nome, antecipacao.regra, hotel.estado FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code and hotel.nome = '${req.body.partner}'`,
     (error, data) => {
       res.json(data)
     }
   )
 })
-app.get("/typeFilter", (req, res) => {
+
+app.get("/openType", (req, res) => {
   db.all(
-    `SELECT DISTINCT (regra) FROM antecipacao `,
+    `SELECT DISTINCT (regra) FROM antecipacao`,
     (error, data) => {
       res.json(data)
     }
   )
 })
+
+app.post("/typeFilter", (req, res) => {
+  db.all(
+    `SELECT montante,hotel.nome, antecipacao.regra, hotel.estado FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code and antecipacao.regra = '${req.body.regra}'`,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
+
 app.get("/antecipations?states=[]", (req, res) => {
   var stateFiltered = JSON.parse(req.query.state);
   console.log(stateFiltered)
@@ -316,7 +330,16 @@ app.get("/antecipations?states=[]", (req, res) => {
 
 app.get("/ranking", (req, res) => {
   db.all(
-    `SELECT montante,hotel.nome, antecipacao.regra, hotel.estado FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code`,
+    `SELECT montante,hotel.nome, antecipacao.regra, hotel.estado FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code ORDER BY antecipacao.montante ASC`,
+    (error, data) => {
+      res.json(data)
+    }
+  )
+})
+
+app.get("/historicodata", (req, res) => {
+  db.all(
+    'SELECT regra, data_recebimento, montante FROM antecipacao',
     (error, data) => {
       res.json(data)
     }

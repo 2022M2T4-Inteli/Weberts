@@ -12,19 +12,19 @@ function openStates(){
     
 }
 
-function openCities(){
-    if ($("#city-options")[0].style.display == "none" || $("#city-options")[0].style.display == ""){
-        $("#city-options")[0].style.display = "flex"
-        off = false
-        $("#cidades-filter")[0].style.backgroundColor = "#3468FC"
-        $("#cidades-filter")[0].style.color = "#FFF"
-    } else{
-        $("#city-options")[0].style.display = "none"
-        $("#cidades-filter")[0].style.backgroundColor = "#DDE6FF"
-        $("#cidades-filter")[0].style.color = "#373737"
-    }
+// function openCities(){
+//     if ($("#city-options")[0].style.display == "none" || $("#city-options")[0].style.display == ""){
+//         $("#city-options")[0].style.display = "flex"
+//         off = false
+//         $("#cidades-filter")[0].style.backgroundColor = "#3468FC"
+//         $("#cidades-filter")[0].style.color = "#FFF"
+//     } else{
+//         $("#city-options")[0].style.display = "none"
+//         $("#cidades-filter")[0].style.backgroundColor = "#DDE6FF"
+//         $("#cidades-filter")[0].style.color = "#373737"
+//     }
 
-}
+// }
 function openPartner(){
     if ($("#partner-options")[0].style.display == "none" || $("#partner-options")[0].style.display == ""){
         $("#partner-options")[0].style.display = "flex"
@@ -79,34 +79,34 @@ function quitPopup(){
 }
 
 function attData() {
-
-    $.get("http://localhost:3031/stateFilter", function(resultado){
+    
+    $.get("http://localhost:3031/openStates", function(resultado){
+        let i = 0
         resultado.forEach(row => {
-            $("#state-options")[0].innerHTML += `<div class="state-unselected" onclick="changeStatus(this)">${row.estado}</div>`;
+            $("#state-options")[0].innerHTML += `<div class="state-unselected"><input type="checkbox" onclick="changeState()" id="state` + i + `"><h3 id="stateText` + i + `">${row.estado}</h3></div>`;
+            i++
         });
     });
 
-    $.get("http://localhost:3031/cityFilter", function(resultado){
+    $.get("http://localhost:3031/openPartner", function(resultado){
+        var nomes_usados_qtd = []
+        let i = 0
         resultado.forEach(row => {
-            $("#city-options")[0].innerHTML += `<div class="city-unselected" onclick="changeStatus(this)">${row.cidade}</div>`;
-        });
+            var nome_atual = row.nome
+            if (!nomes_usados_qtd.includes(nome_atual)){ 
+                nomes_usados_qtd.push(nome_atual)             
+                $("#partner-options")[0].innerHTML += `<div class="partner-unselected"><input type="checkbox" onclick="changePartner()" id="partner` + i + `"><h3 id="partnerText` + i + `">${row.nome}</h3></div>`;
+            }
+            i++
     });
+            }
+    )
 
-    $.get("http://localhost:3031/partnerFilter", function(resultado){
+    $.get("http://localhost:3031/openType", function(resultado){
+        let i = 0
         resultado.forEach(row => {
-            $("#partner-options")[0].innerHTML += `<div class="partner-unselected" onclick="changeStatus(this)">${row.nome}</div>`;
-        });
-    });
-
-    $.get("http://localhost:3031/periodFilter", function(resultado){
-        resultado.forEach(row => {
-            $("#period-options")[0].innerHTML += `<div class="period-unselected" onclick="changeStatus(this)">${row.data_recebimento}</div>`;
-        });
-    });
-
-    $.get("http://localhost:3031/typeFilter", function(resultado){
-        resultado.forEach(row => {
-            $("#type-options")[0].innerHTML += `<div class="type-unselected" onclick="changeStatus(this)">${row.regra}</div>`;
+            $("#type-options")[0].innerHTML += `<div class="type-unselected"><input type="checkbox" onclick="changeType()" id="type` + i + `"><h3 id="typeText` + i + `">${row.regra}</h3></div>`;
+            i++
         });
     });
 
@@ -144,132 +144,580 @@ function openFilter() {
     }
 }
 
-function changeStatus(event) {
-    var value = event.parentElement.id
-    
-
-    if (event.className == "state-unselected" || event.className == "city-unselected" || event.className == "partner-unselected" || event.className == "period-unselected" || event.className == "type-unselected")
-        switch (value) {
-            case "state-options":
-                event.className = "state-selected"
-                break
-            case "city-options":
-                event.className = "city-selected"
-                break
-            case "partner-options":
-                event.className = "partner-selected"
-                break
-            case "period-options":
-                event.className = "period-selected"
-                break
-            case "type-options":
-                event.className = "type-selected"
-                break
+function changeState(){
+    var estado
+    var scrollContainer = Array.from(document.getElementsByClassName('state-unselected'))
+    for(var a = 0; a < scrollContainer.length; a++){
+        if(document.getElementById("state" + a).checked){
+            estado = document.getElementById("stateText" + a).innerHTML
+            var url = "http://127.0.0.1:3031/stateFilter";
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", url, false);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("estado=" + estado);
+            var retorno = JSON.parse(xhttp.responseText);
+            var number = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Nº</h5>' + 
+                '<br>' + 
+            '</div>' + 
+        '</div>'
+            var partner = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Parceiro</h5>' + 
+                '<br>' + 
+            '</div>' + 
+        '</div>'
+            var regra = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Tipo Solicitação</h5>' + 
+            '</div>' + 
+        '</div>'
+            var estado = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Estado</h5>' +
+                '<br>' + 
+            '</div>' + 
+        '</div>'
+            var qtd = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Qtd Solicitações</h5>' + 
+            '</div>' + 
+        '</div>'
+            var divValor = '<div class="label-roll">' +
+            '<div class="label1">' +
+                '<h5>Valor Antecipado    </h5>' +
+            '</div>' +
+        '</div>'
+            var i = 0
+            var semrep = {};
+            for (Element of retorno){
+                if(Element.nome in semrep){
+                    semrep[Element.nome]["montante_total"] += Element.montante
+                    semrep[Element.nome]["qtds"] += 1
+                }else{
+                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                }
+            }
+            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+            for(Element of semrep){
+                number += '<div class="label-roll">' + 
+                '<div class="label2" id="number' + i + '">' + 
+                    '<h5>' + (i + 1) + '</h5>' +
+            '</div>' + 
+            '</div>'
+                partner += '<div class="label-roll">' +
+                '<div class="label2" id="partner' + i + '">' +
+                    '<h5>' + Element.nome + '</h5>' +
+                '</div>' + 
+            '</div>'
+                regra += '<div class="label-roll">' +
+                '<div class="label2" id="regra' + i + '">' +
+                    '<h5>' + Element.regra + '</h5>' + 
+                '</div>' + 
+            '</div>'
+                estado += '<div class="label-roll">' + 
+                '<div class="label2" id="estado' + i + '">'+
+                    '<h5>' + Element.estado + '</h5>' + 
+                '</div>' + 
+            '</div>'
+                qtd += '<div class="label-roll">' +
+                '<div class="label2" id="qtd' + i + '">' +
+                    '<h5>' + Element.qtds + '</h5>' +
+                '</div>' +
+            '</div>'
+                divValor += '<div class="label-roll">' + 
+                '<div class="label2" id="value' + i + '">' +
+                    '<h5>R$ ' + Element.montante_total + '</h5>' +
+                '</div>' +
+            '</div>'
+                i++
+            }
         }
-    else {
-        switch (value) {
-            case "state-options":
-                event.className = "state-unselected"
-                break
-            case "city-options":
-                event.className = "city-unselected"
-                break
-            case "partner-options":
-                event.className = "partner-unselected"
-                break
-            case "period-options":
-                event.className = "period-unselected"
-                break
-            case "type-options":
-                event.className = "type-unselected"
-                break
         }
+    if(estado == undefined){
+        for(var a = 0; a < scrollContainer.length; a++){
+            if(!document.getElementById("state" + a).checked){
+                var url = "http://127.0.0.1:3031/ranking";
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, false);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send();
+                var retorno = JSON.parse(xhttp.responseText);
+                var number = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Nº</h5>' + 
+                    '<br>' + 
+                '</div>' + 
+            '</div>'
+                var partner = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Parceiro</h5>' + 
+                    '<br>' + 
+                '</div>' + 
+            '</div>'
+                var regra = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Tipo Solicitação</h5>' + 
+                '</div>' + 
+            '</div>'
+                var estado = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Estado</h5>' +
+                    '<br>' + 
+                '</div>' + 
+            '</div>'
+                var qtd = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Qtd Solicitações</h5>' + 
+                '</div>' + 
+            '</div>'
+                var divValor = '<div class="label-roll">' +
+                '<div class="label1">' +
+                    '<h5>Valor Antecipado    </h5>' +
+                '</div>' +
+            '</div>'
+                var i = 0
+                var semrep = {}
+                for (Element of retorno){
+                    if(Element.nome in semrep){
+                        semrep[Element.nome]["montante_total"] += Element.montante
+                        semrep[Element.nome]["qtds"] += 1
+                    }else{
+                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                    }
+                }
+                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+                for(Element of semrep){
+                    number += '<div class="label-roll">' + 
+                    '<div class="label2" id="number' + i + '">' + 
+                        '<h5>' + (i + 1) + '</h5>' +
+                '</div>' + 
+                '</div>'
+                    partner += '<div class="label-roll">' +
+                    '<div class="label2" id="partner' + i + '">' +
+                        '<h5>' + Element.nome + '</h5>' +
+                    '</div>' + 
+                '</div>'
+                    regra += '<div class="label-roll">' +
+                    '<div class="label2" id="regra' + i + '">' +
+                        '<h5>' + Element.regra + '</h5>' + 
+                    '</div>' + 
+                '</div>'
+                    estado += '<div class="label-roll">' + 
+                    '<div class="label2" id="estado' + i + '">'+
+                        '<h5>' + Element.estado + '</h5>' + 
+                    '</div>' + 
+                '</div>'
+                    qtd += '<div class="label-roll">' +
+                    '<div class="label2" id="qtd' + i + '">' +
+                        '<h5>' + Element.qtds + '</h5>' +
+                    '</div>' +
+                '</div>'
+                    divValor += '<div class="label-roll">' + 
+                    '<div class="label2" id="value' + i + '">' +
+                        '<h5>R$ ' + Element.montante_total + '</h5>' +
+                    '</div>' +
+                '</div>'
+                    i++
+                }
+            }
+                
+          }
     }
-    filter()
+    document.getElementById('col_number').innerHTML = number
+    document.getElementById('partner_col').innerHTML = partner
+    document.getElementById('rule_col').innerHTML = regra
+    document.getElementById('state_col').innerHTML = estado
+    document.getElementById('qtd').innerHTML = qtd
+    document.getElementById('antecipatedValue').innerHTML = divValor
 }
 
-function filter() {
-    var stateVector = document.getElementsByClassName("state-selected");
-    var stateFiltered = [];
-    for(var i = 0; i < stateVector.length; i++){
-        stateFiltered.push(stateVector[i].innerText)
-        
-    }
-    var cityVector = document.getElementsByClassName("city-selected");
-    var cityFiltered = [];
-    for(var i = 0; i < cityVector.length; i++){
-        cityFiltered.push(cityVector[i].innerText)
-        
-    }
-    var partnerVector = document.getElementsByClassName("partner-selected");
-    var partnerFiltered = [];
-    for(var i = 0; i < partnerVector.length; i++){
-        partnerFiltered.push(partnerVector[i].innerText)
-        
-    }
-    var periodVector = document.getElementsByClassName("period-selected");
-    var periodFiltered = [];
-    for(var i = 0; i < periodVector.length; i++){
-        periodFiltered.push(periodVector[i].innerText)
-        
-    }
-    var typeVector = document.getElementsByClassName("type-selected");
-    var typeFiltered = [];
-    for(var i = 0; i < typeVector.length; i++){
-        typeFiltered.push(typeVector[i].innerText)
-        
-    }
 
-        var estado_hotel = stateFiltered
-        var cidade_hotel = cityFiltered
-        var nome_hotel = partnerFiltered
-        var data_recebimento_antecipacao = periodFiltered
-        var regra_antecipacao = typeFiltered
-        
-        await(
-            $.ajax({
-                dataType: "json",
-                contentType: "application/json",
-                url: "http://127.0.0.1:3031/hotel",
-                type: "post",
-                cors: true,
-                headers: {
-                    'Acces-Control-Allow-Origin': '*',
-                },
-                data: JSON.stringify({ estado_hotel: estado_hotel,
-                     cidade_hotel: cidade_hotel, 
-                     nome_hotel: nome_hotel 
-                  }),
-                success: function (resultData) {
-                    console.log("Sucesso")
-                    getSkills();
+function changePartner(){
+    var parceiro
+    var scrollContainer = Array.from(document.getElementsByClassName('partner-unselected'))
+    console.log(scrollContainer.length)
+    for(var a = 0; a < scrollContainer.length; a++){
+        if(document.getElementById("partner" + a).checked){
+            parceiro = document.getElementById("partnerText" + a).innerHTML
+            var url = "http://127.0.0.1:3031/partnerFilter";
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", url, false);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("partner=" + parceiro);
+            var retorno = JSON.parse(xhttp.responseText);
+            console.log(retorno)
+            var number = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Nº</h5>' + 
+                '<br>' + 
+            '</div>' + 
+        '</div>'
+            var partner = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Parceiro</h5>' + 
+                '<br>' + 
+            '</div>' + 
+        '</div>'
+            var regra = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Tipo Solicitação</h5>' + 
+            '</div>' + 
+        '</div>'
+            var estado = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Estado</h5>' +
+                '<br>' + 
+            '</div>' + 
+        '</div>'
+            var qtd = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Qtd Solicitações</h5>' + 
+            '</div>' + 
+        '</div>'
+            var divValor = '<div class="label-roll">' +
+            '<div class="label1">' +
+                '<h5>Valor Antecipado    </h5>' +
+            '</div>' +
+        '</div>'
+            var semrep = {}
+            var i = 0
+            for (Element of retorno){
+                if(Element.nome in semrep){
+                    semrep[Element.nome]["montante_total"] += Element.montante
+                    semrep[Element.nome]["qtds"] += 1
+                }else{
+                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
                 }
-            }))
-            await(
-            $.ajax({
-                dataType: "json",
-                contentType: "application/json",
-                url: "http://127.0.0.1:3031/antecipacao",
-                type: "post",
-                cors: true,
-                headers: {
-                    'Acces-Control-Allow-Origin': '*',
-                },
-                data: JSON.stringify({ data_recebimento_antecipacao: data_recebimento_antecipacao, 
-                    regra_antecipacao: regra_antecipacao
-                  }),
-                success: function (resultData) {
-                    console.log("Sucesso")
-                    getSkills();
+            }
+            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+            for(Element of semrep){
+                number += '<div class="label-roll">' + 
+                '<div class="label2" id="number' + i + '">' + 
+                    '<h5>' + (i + 1) + '</h5>' +
+            '</div>' + 
+            '</div>'
+                partner += '<div class="label-roll">' +
+                '<div class="label2" id="partner' + i + '">' +
+                    '<h5>' + Element.nome + '</h5>' +
+                '</div>' + 
+            '</div>'
+                regra += '<div class="label-roll">' +
+                '<div class="label2" id="regra' + i + '">' +
+                    '<h5>' + Element.regra + '</h5>' + 
+                '</div>' + 
+            '</div>'
+                estado += '<div class="label-roll">' + 
+                '<div class="label2" id="estado' + i + '">'+
+                    '<h5>' + Element.estado + '</h5>' + 
+                '</div>' + 
+            '</div>'
+                qtd += '<div class="label-roll">' +
+                '<div class="label2" id="qtd' + i + '">' +
+                    '<h5>' + Element.qtds + '</h5>' +
+                '</div>' +
+            '</div>'
+                divValor += '<div class="label-roll">' + 
+                '<div class="label2" id="value' + i + '">' +
+                    '<h5>R$ ' + Element.montante_total + '</h5>' +
+                '</div>' +
+            '</div>'
+                i++
+            }
+        }
+    }
+    if(parceiro == undefined){
+        for(var a = 0; a < scrollContainer.length; a++){
+            if(!document.getElementById("partner" + a).checked){
+                var i = 0
+                var url = "http://127.0.0.1:3031/ranking";
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, false);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send();
+                var retorno = JSON.parse(xhttp.responseText);
+                var number = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Nº</h5>' + 
+                    '<br>' + 
+                '</div>' + 
+            '</div>'
+                var partner = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Parceiro</h5>' + 
+                    '<br>' + 
+                '</div>' + 
+            '</div>'
+                var regra = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Tipo Solicitação</h5>' + 
+                '</div>' + 
+            '</div>'
+                var estado = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Estado</h5>' +
+                    '<br>' + 
+                '</div>' + 
+            '</div>'
+                var qtd = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Qtd Solicitações</h5>' + 
+                '</div>' + 
+            '</div>'
+                var divValor = '<div class="label-roll">' +
+                '<div class="label1">' +
+                    '<h5>Valor Antecipado    </h5>' +
+                '</div>' +
+            '</div>'
+                var i = 0
+                var semrep = {}
+                for (Element of retorno){
+                    if(Element.nome in semrep){
+                        semrep[Element.nome]["montante_total"] += Element.montante
+                        semrep[Element.nome]["qtds"] += 1
+                    }else{
+                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                    }
                 }
-            }))
+                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+                for(Element of semrep){
+                    number += '<div class="label-roll">' + 
+                    '<div class="label2" id="number' + i + '">' + 
+                        '<h5>' + (i + 1) + '</h5>' +
+                '</div>' + 
+                '</div>'
+                    partner += '<div class="label-roll">' +
+                    '<div class="label2" id="partner' + i + '">' +
+                        '<h5>' + Element.nome + '</h5>' +
+                    '</div>' + 
+                '</div>'
+                    regra += '<div class="label-roll">' +
+                    '<div class="label2" id="regra' + i + '">' +
+                        '<h5>' + Element.regra + '</h5>' + 
+                    '</div>' + 
+                '</div>'
+                    estado += '<div class="label-roll">' + 
+                    '<div class="label2" id="estado' + i + '">'+
+                        '<h5>' + Element.estado + '</h5>' + 
+                    '</div>' + 
+                '</div>'
+                    qtd += '<div class="label-roll">' +
+                    '<div class="label2" id="qtd' + i + '">' +
+                        '<h5>' + Element.qtds + '</h5>' +
+                    '</div>' +
+                '</div>'
+                    divValor += '<div class="label-roll">' + 
+                    '<div class="label2" id="value' + i + '">' +
+                        '<h5>R$ ' + Element.montante_total + '</h5>' +
+                    '</div>' +
+                '</div>'
+                    i++
+                }
+            }
+                
+          }
+    }
+                document.getElementById('col_number').innerHTML = number
+                document.getElementById('partner_col').innerHTML = partner
+                document.getElementById('rule_col').innerHTML = regra
+                document.getElementById('state_col').innerHTML = estado
+                document.getElementById('qtd').innerHTML = qtd
+                document.getElementById('antecipatedValue').innerHTML = divValor
+}
 
-            
+function changeType(){
+    var type
+    var scrollContainer = Array.from(document.getElementsByClassName('type-unselected'))
+    for(var a = 0; a < scrollContainer.length; a++){
+        if(document.getElementById("type" + a).checked){
+            type = document.getElementById("typeText" + a).innerHTML
+            console.log(type)
+            var url = "http://127.0.0.1:3031/typeFilter";
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", url, false);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("regra=" + type);
+            var retorno = JSON.parse(xhttp.responseText);
+            console.log(retorno)
+            var number = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Nº</h5>' + 
+                '<br>' + 
+            '</div>' + 
+        '</div>'
+            var partner = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Parceiro</h5>' + 
+                '<br>' + 
+            '</div>' + 
+        '</div>'
+            var regra = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Tipo Solicitação</h5>' + 
+            '</div>' + 
+        '</div>'
+            var estado = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Estado</h5>' +
+                '<br>' + 
+            '</div>' + 
+        '</div>'
+            var qtd = '<div class="label-roll">' + 
+            '<div class="label1">' + 
+                '<h5>Qtd Solicitações</h5>' + 
+            '</div>' + 
+        '</div>'
+            var divValor = '<div class="label-roll">' +
+            '<div class="label1">' +
+                '<h5>Valor Antecipado    </h5>' +
+            '</div>' +
+        '</div>'
+            var i = 0
+            var semrep = {};
+            for (Element of retorno){
+                if(Element.nome in semrep){
+                    semrep[Element.nome]["montante_total"] += Element.montante
+                    semrep[Element.nome]["qtds"] += 1
+                }else{
+                    semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                }
+            }
+            semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+            for(Element of semrep){
+                number += '<div class="label-roll">' + 
+                '<div class="label2" id="number' + i + '">' + 
+                    '<h5>' + (i + 1) + '</h5>' +
+            '</div>' + 
+            '</div>'
+                partner += '<div class="label-roll">' +
+                '<div class="label2" id="partner' + i + '">' +
+                    '<h5>' + Element.nome + '</h5>' +
+                '</div>' + 
+            '</div>'
+                regra += '<div class="label-roll">' +
+                '<div class="label2" id="regra' + i + '">' +
+                    '<h5>' + Element.regra + '</h5>' + 
+                '</div>' + 
+            '</div>'
+                estado += '<div class="label-roll">' + 
+                '<div class="label2" id="estado' + i + '">'+
+                    '<h5>' + Element.estado + '</h5>' + 
+                '</div>' + 
+            '</div>'
+                qtd += '<div class="label-roll">' +
+                '<div class="label2" id="qtd' + i + '">' +
+                    '<h5>' + Element.qtds + '</h5>' +
+                '</div>' +
+            '</div>'
+                divValor += '<div class="label-roll">' + 
+                '<div class="label2" id="value' + i + '">' +
+                    '<h5>R$ ' + Element.montante_total + '</h5>' +
+                '</div>' +
+            '</div>'
+                i++
+            }
+        }
+        }
+    if(type == undefined){
+        for(var a = 0; a < scrollContainer.length; a++){
+            if(!document.getElementById("type" + a).checked){
+                var url = "http://127.0.0.1:3031/ranking";
+                var xhttp = new XMLHttpRequest();
+                xhttp.open("GET", url, false);
+                xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhttp.send();
+                var retorno = JSON.parse(xhttp.responseText);
+                var number = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Nº</h5>' + 
+                    '<br>' + 
+                '</div>' + 
+            '</div>'
+                var partner = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Parceiro</h5>' + 
+                    '<br>' + 
+                '</div>' + 
+            '</div>'
+                var regra = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Tipo Solicitação</h5>' + 
+                '</div>' + 
+            '</div>'
+                var estado = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Estado</h5>' +
+                    '<br>' + 
+                '</div>' + 
+            '</div>'
+                var qtd = '<div class="label-roll">' + 
+                '<div class="label1">' + 
+                    '<h5>Qtd Solicitações</h5>' + 
+                '</div>' + 
+            '</div>'
+                var divValor = '<div class="label-roll">' +
+                '<div class="label1">' +
+                    '<h5>Valor Antecipado    </h5>' +
+                '</div>' +
+            '</div>'
+                var i = 0
+                var semrep = {}
+                for (Element of retorno){
+                    if(Element.nome in semrep){
+                        semrep[Element.nome]["montante_total"] += Element.montante
+                        semrep[Element.nome]["qtds"] += 1
+                    }else{
+                        semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+                    }
+                }
+                semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+                for(Element of semrep){
+                    number += '<div class="label-roll">' + 
+                    '<div class="label2" id="number' + i + '">' + 
+                        '<h5>' + (i + 1) + '</h5>' +
+                '</div>' + 
+                '</div>'
+                    partner += '<div class="label-roll">' +
+                    '<div class="label2" id="partner' + i + '">' +
+                        '<h5>' + Element.nome + '</h5>' +
+                    '</div>' + 
+                '</div>'
+                    regra += '<div class="label-roll">' +
+                    '<div class="label2" id="regra' + i + '">' +
+                        '<h5>' + Element.regra + '</h5>' + 
+                    '</div>' + 
+                '</div>'
+                    estado += '<div class="label-roll">' + 
+                    '<div class="label2" id="estado' + i + '">'+
+                        '<h5>' + Element.estado + '</h5>' + 
+                    '</div>' + 
+                '</div>'
+                    qtd += '<div class="label-roll">' +
+                    '<div class="label2" id="qtd' + i + '">' +
+                        '<h5>' + Element.qtds + '</h5>' +
+                    '</div>' +
+                '</div>'
+                    divValor += '<div class="label-roll">' + 
+                    '<div class="label2" id="value' + i + '">' +
+                        '<h5>R$ ' + Element.montante_total + '</h5>' +
+                    '</div>' +
+                '</div>'
+                    i++
+                }
+            }
+                
+          }
+    }
+    document.getElementById('col_number').innerHTML = number
+    document.getElementById('partner_col').innerHTML = partner
+    document.getElementById('rule_col').innerHTML = regra
+    document.getElementById('state_col').innerHTML = estado
+    document.getElementById('qtd').innerHTML = qtd
+    document.getElementById('antecipatedValue').innerHTML = divValor
 }
 
 function ranking(){
-    var nomes_usados_qtd = []
-    var nomes_usados_rank = []
     var number = '<div class="label-roll">' + 
     '<div class="label1">' + 
         '<h5>Nº</h5>' + 
@@ -303,30 +751,24 @@ function ranking(){
         '<h5>Valor Antecipado    </h5>' +
     '</div>' +
 '</div>'
-    var qtd_ant = 0
     var i = 0
-    var valor = 0
     var url = "http://127.0.0.1:3031/ranking";
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, false);
     xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
     var retorno = JSON.parse(xhttp.responseText);
+    var semrep = {};
+    //Exemplo: semrep = {"Inteli":{"montante_total": 5000, "regra":"D+7"}, "Hurb": {"montante_total": 2000, "regra":"D+7"}
     for (Element of retorno){
-            var nome_atual = Element.nome
-            if (nomes_usados_qtd.includes(nome_atual)){
-                break
-            }else{
-            for(Element2 of retorno){
-                if(nome_atual == Element2.nome){
-                    qtd_ant++
-                    valor += Element2.montante
-                }
-            }
-            nomes_usados_qtd.push(nome_atual)
-        }
-        if (nomes_usados_rank.includes(nome_atual)){
-            break
+        if(Element.nome in semrep){
+            semrep[Element.nome]["montante_total"] += Element.montante
+            semrep[Element.nome]["qtds"] += 1
         }else{
+            semrep[Element.nome] = {"nome": Element.nome, "montante_total": Element.montante, "regra": Element.regra, "qtds": 1, "estado": Element.estado}
+        }
+    }    
+    semrep = Object.values(semrep).sort(function(a,b){return b["montante_total"]- a["montante_total"]});
+    for(Element of semrep){
         number += '<div class="label-roll">' + 
         '<div class="label2" id="number' + i + '">' + 
             '<h5>' + (i + 1) + '</h5>' +
@@ -349,20 +791,16 @@ function ranking(){
     '</div>'
         qtd += '<div class="label-roll">' +
         '<div class="label2" id="qtd' + i + '">' +
-            '<h5>' + qtd_ant + '</h5>' +
+            '<h5>' + Element.qtds + '</h5>' +
         '</div>' +
     '</div>'
         divValor += '<div class="label-roll">' + 
         '<div class="label2" id="value' + i + '">' +
-            '<h5>R$ ' + valor + '</h5>' +
+            '<h5>R$ ' + Element.montante_total + '</h5>' +
         '</div>' +
     '</div>'
-        i++
-        qtd_ant = 0
-        nomes_usados_rank.push(nome_atual)
-        valor = 0
+    i++
     }
-}
     document.getElementById('col_number').innerHTML = number
     document.getElementById('partner_col').innerHTML = partner
     document.getElementById('rule_col').innerHTML = regra
@@ -370,3 +808,4 @@ function ranking(){
     document.getElementById('qtd').innerHTML = qtd
     document.getElementById('antecipatedValue').innerHTML = divValor
 }
+
