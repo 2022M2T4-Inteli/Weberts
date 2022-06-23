@@ -1,15 +1,15 @@
 function load(){
 
-   //Info hotel
+   // Hotel info
    var text = ''
    var i = 0
    var url = "http://127.0.0.1:3031/hotelReserva";
    var xhttp = new XMLHttpRequest();
    xhttp.open("GET", url, false);
-   xhttp.send();//Pega as informações no banco de dados
+   xhttp.send();//The script's execution stops here until the server returns the requirements 
    var retorno = JSON.parse(xhttp.responseText);
    for(Element in retorno){
-   //Código HTML coloca cada linha da página de antecipações
+   // HTML code that puts every line of the antecipation page
        text += '<div class="reserveContainer" id="reserveContainer"' + i + '>' + 
       ' <input type="checkbox" name="D+15" class="agree" id="agree' + i + '" onclick="javaScript:check()" />' +
        '<div class="reserveInfos">'+
@@ -38,7 +38,7 @@ function load(){
  document.getElementById('Data').innerHTML = 'Sem Data Ainda'
 }
 
-//Soma dos itens selecionados
+//Sums the selected items
 
 function check(){
   var soma = 0
@@ -48,9 +48,9 @@ function check(){
       for(i; i < scrollContainer.length; i++){
       if(document.getElementById("agree" + i).checked){
           retorno = document.getElementById('value' + i).innerHTML
-          soma += parseInt(retorno.substring(3))  //Soma as reservas selecionadas
+          soma += parseInt(retorno.substring(3))  // Sums the selected reserves
       }
-      if(document.getElementById('D+15').checked){  //Faz o desconto de acordo com a regra de negócio
+      if(document.getElementById('D+15').checked){  // Make the discounts according to the business rule
         document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(soma * (94/100))
       }else if(document.getElementById('D+7').checked){
         document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(soma * (91/100))
@@ -62,7 +62,7 @@ function check(){
   };
 }
 
-//Data de recebimento
+// Revenue recival date
 
 function regra(){
   var soma = 0
@@ -80,7 +80,7 @@ function regra(){
       }
     }
   var today = new Date();
-  //Calcula o dia que a antecipação será recebida
+  //Calculates the day the antecipation will be requested
   if(D30.checked){
     document.getElementById('selectedAntecipationText').innerHTML = 'D+30'
     today.setDate(today.getDate() + 30)
@@ -104,13 +104,13 @@ function regra(){
   })
 }
 
-//Abre o popup de confirmação de solicitação
+// Opens the solicitation confirmation popup
   function abrirAntecipacoes(){
     var reset = 0
     var taxa = ''
     var regra = document.getElementById('selectedAntecipationText').innerHTML
     var montante = (document.getElementById('fullValue').innerHTML).substring(3)
-    //De acordo com a regra, mostra a taxa que será cobrada
+    // According to the business rule, it shows the text that will be charged
     if(regra == 'D+15'){
       taxa = '6%'
       reset = (100/94)
@@ -121,7 +121,7 @@ function regra(){
       taxa = '12%'
       reset = (100/88)
     }
-    //Coloca os textos na página
+    //Places the text in the page
     document.getElementById("soma").innerHTML = 'Você está antecipando: R$ ' + parseInt(montante * reset)
     document.getElementById("taxa").innerHTML = 'Taxa: ' + taxa
     document.getElementById("regra").innerHTML = 'Regra de negócio: ' + regra
@@ -131,7 +131,7 @@ function regra(){
     document.getElementById("header").style.filter = "blur(10px) brightness(90%)";
     
 }
-  //Manda o pedido de antecipação para o banco de dados
+  // Sends the antecipation request to the database
 function confirmar(){
   var url = "http://127.0.0.1:3031/mandarAntecipacao";
   var regra = document.getElementById('selectedAntecipationText').innerHTML
@@ -155,7 +155,7 @@ function confirmar(){
 }
 
 
-//Permite criar um user no banco de dados
+// Allows the creation of a user in the database
 function editData(){
   var hoteleiro_nome = document.getElementById('nome').value
   var cpf = document.getElementById('cpf').value
@@ -184,13 +184,13 @@ function editData(){
 }
 
 function historico() {
-  //Info hotel
+  // Hotel Info
   var text = ''
   var i = 0
   var url = "http://127.0.0.1:3031/historicodata";
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", url, false);
-  xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
+  xhttp.send();// The script's execution stops here until the server returns the requirements 
   var retorno = JSON.parse(xhttp.responseText);
   for (Element in retorno) {
     text += '<p class="columElements" id="data' + i + '">' + retorno[i].data_recebimento + '</p> ' +
@@ -202,7 +202,7 @@ function historico() {
 }
 
 
-//Hover do Dashboard
+// Dashboard hover
 function mouseIn(){
   var option0 = document.querySelector("#option0")
   var option1 = document.querySelector("#option1")
@@ -227,7 +227,7 @@ function mouseOut(){
   option3.classList.add('none')
 }
 
-//Script da seleção de cidades e estados
+// City and state selection script
 
 window.onDomReady = function dgDomReady(fn){
 	if(document.addEventListener)	//W3C
@@ -240,7 +240,7 @@ function dgReadyState(fn){ //dom is ready for interaction (IE)
 	if(document.readyState == "interactive") fn();
 }
 
-/* Objeto */
+/* Object */
 var dgCidadesEstados = function(data) {
   var defaultData = {
     estado: false,
@@ -255,7 +255,7 @@ var dgCidadesEstados = function(data) {
     }
   }
   var keys = ['estado', 'cidade'];
-  if (data['change']) { //caso change: true, não se trata de um select a ser povoado
+  if (data['change']) { // If change: true, it isnt a select that needs to be filled
     var nome, length = keys.length;
     for (var a=0; a<length; a++ ) {
       nome = keys[a];
@@ -280,20 +280,20 @@ var dgCidadesEstados = function(data) {
 
   var nome, length = keys.length;
   for (var i=0; i<length; i++) {
-    nome = keys[i]; //estado e cidade
+    nome = keys[i]; // State and city
 	
     if (this[nome].getAttribute('value')) {
       data[nome+'Val'] = this[nome].getAttribute('value');
     }
 	
-    if (data[nome+'Val']) { //preenche estadoVal e cidadeVal se fornecidos na criação do dgCidadesEstados.
+    if (data[nome+'Val']) { // Fills stateVal and cityCal if given in the creation of dgCityStates
 		var options = this[nome].options;
-		if (nome=='estado') this.estado.onchange(); //se tiver preenchido o estado, dá run() pra preencher as cidades
-		for (var j = 0; j<options.length; j++) { //olha cada linha e vê se é a que quer... aí coloca como selected.
+		if (nome=='estado') this.estado.onchange(); // If the state is filled, use run() to fill the cities
+		for (var j = 0; j<options.length; j++) { // Searches every line until it finds the wanted one than places it as selected
 			if (options[j].tagName == 'OPTION') {
 				if (options[j].value == data[nome+'Val']) {
 					options[j].setAttribute('selected',true);
-					if (nome=='estado'){ //esses dois passos são necessários pro IE6!
+					if (nome=='estado'){ // These two steps are necessary for the IE6
 						this.estado.selectedIndex=j;
 						this.estado.onchange();
 					}
@@ -309,27 +309,27 @@ var dgCidadesEstados = function(data) {
 dgCidadesEstados.prototype = {
   estado: document.createElement('select'),
   cidade: document.createElement('select'),
-  set: function(estado, cidade) { //define os elementos DOM a serem preenchidos
+  set: function(estado, cidade) { // Defines the DOM elements that need to be filled
     this.estado=estado;
     this.estado.dgCidadesEstados=this;
     this.cidade=cidade;
     this.estado.onchange=function(){this.dgCidadesEstados.run()};
   },
-  start: function () { //preenche os estados
+  start: function () { // Fills the states
     var estado = this.estado;
     while (estado.childNodes.length) estado.removeChild(estado.firstChild);
     for (var i=0;i<this.estados.length;i++) this.addOption(estado, this.estados[i][0], this.estados[i][1]);
   },
-  run: function () { //preenche as cidades de acordo com o estado escolhido
-	var sel = this.estado.selectedIndex; // estado escolhido
-    var itens = this.cidades[sel]; // pega as cidades correspondentes
+  run: function () { // Fills the cities according to the chosen state
+	var sel = this.estado.selectedIndex; // Chosen state
+    var itens = this.cidades[sel]; // Grabs the corresponding cities
     var itens_total = itens.length;
 	
     var opts = this.cidade;
-    while (opts.childNodes.length) opts.removeChild(opts.firstChild); // limpa a lista atual
+    while (opts.childNodes.length) opts.removeChild(opts.firstChild); // Clears the atual list
 	
     this.addOption(opts, '', 'Selecione uma cidade');
-    for (var i=0;i<itens_total;i++) this.addOption(opts, itens[i], itens[i]); // vai adicionando as cidades correspondentes
+    for (var i=0;i<itens_total;i++) this.addOption(opts, itens[i], itens[i]); // Adds corresponding cities
   },
   addOption: function (elm, val, text) {
     var opt = document.createElement('option');
