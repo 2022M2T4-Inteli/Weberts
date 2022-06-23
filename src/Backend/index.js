@@ -149,6 +149,7 @@ app.get("/hotelReserva", (req, res) => {
   );
 });
 
+//Coloca no banco o pedido de antecipação que foi feito
 app.post("/mandarAntecipacao", (req, res) => {
   const infos = req.body;
   db.get(
@@ -163,6 +164,7 @@ app.post("/mandarAntecipacao", (req, res) => {
   );
 });
 
+//Cria um user no banco de dados
 app.post("/editarDados", (req, res) => {
   const infos = req.body;
   db.get(
@@ -183,26 +185,7 @@ app.post("/editarDados", (req, res) => {
   );
 });
 
-//Coisa do luiz
-
-app.get("/hotel", (req, res) => {
-  db.all(
-    `SELECT * FROM hotel WHERE (estado) IN (${JSON.parse(req.body.estado_hotel)}) AND (${JSON.parse(req.body.cidade_hotel)}) AND (${JSON.parse(req.body.nome_hotel)}) `,
-    (error, data) => {
-      res.json(data)
-    }
-  )
-})
-
-app.get("/antecipacao", (req, res) => {
-  db.all(
-    `SELECT * FROM antecipacao WHERE (estado) IN (${JSON.parse(req.body.data_recebimento_antecipacao)}) AND (${JSON.parse(req.body.regra_antecipacao)}) `,
-    (error, data) => {
-      res.json(data)
-    }
-  )
-})
-
+//Busca os estados diferentes que temos no banco de dados
 app.get("/openStates", (req, res) => {
   db.all(
     `SELECT DISTINCT (estado) FROM hotel `,
@@ -212,6 +195,7 @@ app.get("/openStates", (req, res) => {
   )
 })
 
+//Busca as informações para o ranking de acordo com o estado selecionado para filtrar
 app.post("/stateFilter", (req, res) => {
   db.all(
     `SELECT montante,hotel.nome, antecipacao.regra, hotel.estado FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code and hotel.estado = '${req.body.estado}'`,
@@ -221,6 +205,7 @@ app.post("/stateFilter", (req, res) => {
   )
 })
 
+//Busca os parceiros diferentes que temos no banco de dados
 app.get("/openPartner", (req, res) => {
   db.all(
     `SELECT nome, hotel.id, code, reserva_code, hotel_id FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code `,
@@ -230,6 +215,7 @@ app.get("/openPartner", (req, res) => {
   )
 })
 
+//Busca as informações para o ranking de acordo com o parceiro selecionado para filtrar
 app.post("/partnerFilter", (req, res) => {
   db.all(
     `SELECT montante,hotel.nome, antecipacao.regra, hotel.estado FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code and hotel.nome = '${req.body.partner}'`,
@@ -239,6 +225,7 @@ app.post("/partnerFilter", (req, res) => {
   )
 })
 
+//Busca os tipos de solicitação diferentes que temos no banco de dados
 app.get("/openType", (req, res) => {
   db.all(
     `SELECT DISTINCT (regra) FROM antecipacao`,
@@ -248,6 +235,7 @@ app.get("/openType", (req, res) => {
   )
 })
 
+//Busca as informações para o ranking de acordo com o tipo de solicitação selecionado para filtrar
 app.post("/typeFilter", (req, res) => {
   db.all(
     `SELECT montante,hotel.nome, antecipacao.regra, hotel.estado FROM hotel, antecipacao, reserva where hotel.id = reserva.hotel_id and reserva.code = antecipacao.reserva_code and antecipacao.regra = '${req.body.regra}'`,
@@ -257,26 +245,7 @@ app.post("/typeFilter", (req, res) => {
   )
 })
 
-app.get("/antecipations?states=[]", (req, res) => {
-  var stateFiltered = JSON.parse(req.query.state);
-  console.log(stateFiltered)
-  if (!stateFiltered) { 
-    db.get( 
-      `SELECT SUM(estado) FROM hotel`,
-      (error, data) => {
-        res.json(data)
-      }
-    )
-  } else {
-    db.get(
-      `SELECT SUM(estado) FROM hotel WHERE estado in ${stateFiltered}`,
-      (error, data) => {
-        res.json(data)
-      }
-    )
-  }
-})
-
+//Busca no banco valores para a div de AntecipaçãoxPrazo
 app.get("/antecipations", (req, res) => {
   db.all(
     `SELECT COUNT (*) FROM antecipacao `,
@@ -286,6 +255,7 @@ app.get("/antecipations", (req, res) => {
   )
 })
 
+//Busca no banco o valor para a div de PagamentosxPrazo
 app.get("/montante", (req, res) => {
   db.all(
     `SELECT SUM (montante) FROM antecipacao`,
@@ -296,6 +266,7 @@ app.get("/montante", (req, res) => {
   
 })
 
+//Busca no banco o valor para a div de Rentabilidade Média
 app.get("/rentabilidade", (req, res) => {
   db.all(
     `SELECT SUM(montante)/SUM(valor) FROM antecipacao INNER JOIN reserva on reserva.code = antecipacao.reserva_code`,
@@ -306,27 +277,7 @@ app.get("/rentabilidade", (req, res) => {
 
 })
 
-app.get("/antecipations?states=[]", (req, res) => {
-  var stateFiltered = JSON.parse(req.query.state);
-  console.log(stateFiltered)
-  if (!stateFiltered) { 
-    db.get( 
-      `SELECT SUM(estado) FROM hotel`,
-      (error, data) => {
-        res.json(data)
-      }
-    )
-  } else {
-    db.get(
-      `SELECT SUM(estado) FROM hotel WHERE estado in ${stateFiltered}`,
-      (error, data) => {
-        res.json(data)
-      }
-    )
-  }
-})
-
-//Ranking
+//Dados para o ranking
 
 app.get("/ranking", (req, res) => {
   db.all(
@@ -337,6 +288,7 @@ app.get("/ranking", (req, res) => {
   )
 })
 
+//Dados para o histórico
 app.get("/historicodata", (req, res) => {
   db.all(
     'SELECT regra, data_recebimento, montante FROM antecipacao',

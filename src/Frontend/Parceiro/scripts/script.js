@@ -6,9 +6,10 @@ function load(){
    var url = "http://127.0.0.1:3031/hotelReserva";
    var xhttp = new XMLHttpRequest();
    xhttp.open("GET", url, false);
-   xhttp.send();//A execução do script pára aqui até a requisição retornar do servidor
+   xhttp.send();//Pega as informações no banco de dados
    var retorno = JSON.parse(xhttp.responseText);
    for(Element in retorno){
+   //Código HTML coloca cada linha da página de antecipações
        text += '<div class="reserveContainer" id="reserveContainer"' + i + '>' + 
       ' <input type="checkbox" name="D+15" class="agree" id="agree' + i + '" onclick="javaScript:check()" />' +
        '<div class="reserveInfos">'+
@@ -47,9 +48,9 @@ function check(){
       for(i; i < scrollContainer.length; i++){
       if(document.getElementById("agree" + i).checked){
           retorno = document.getElementById('value' + i).innerHTML
-          soma += parseInt(retorno.substring(3))
+          soma += parseInt(retorno.substring(3))  //Soma as reservas selecionadas
       }
-      if(document.getElementById('D+15').checked){
+      if(document.getElementById('D+15').checked){  //Faz o desconto de acordo com a regra de negócio
         document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(soma * (94/100))
       }else if(document.getElementById('D+7').checked){
         document.getElementById('fullValue').innerHTML = 'R$ ' + Math.round(soma * (91/100))
@@ -79,6 +80,7 @@ function regra(){
       }
     }
   var today = new Date();
+  //Calcula o dia que a antecipação será recebida
   if(D30.checked){
     document.getElementById('selectedAntecipationText').innerHTML = 'D+30'
     today.setDate(today.getDate() + 30)
@@ -102,11 +104,13 @@ function regra(){
   })
 }
 
+//Abre o popup de confirmação de solicitação
   function abrirAntecipacoes(){
     var reset = 0
     var taxa = ''
     var regra = document.getElementById('selectedAntecipationText').innerHTML
     var montante = (document.getElementById('fullValue').innerHTML).substring(3)
+    //De acordo com a regra, mostra a taxa que será cobrada
     if(regra == 'D+15'){
       taxa = '6%'
       reset = (100/94)
@@ -117,6 +121,7 @@ function regra(){
       taxa = '12%'
       reset = (100/88)
     }
+    //Coloca os textos na página
     document.getElementById("soma").innerHTML = 'Você está antecipando: R$ ' + parseInt(montante * reset)
     document.getElementById("taxa").innerHTML = 'Taxa: ' + taxa
     document.getElementById("regra").innerHTML = 'Regra de negócio: ' + regra
@@ -126,7 +131,7 @@ function regra(){
     document.getElementById("header").style.filter = "blur(10px) brightness(90%)";
     
 }
-
+  //Manda o pedido de antecipação para o banco de dados
 function confirmar(){
   var url = "http://127.0.0.1:3031/mandarAntecipacao";
   var regra = document.getElementById('selectedAntecipationText').innerHTML
@@ -149,6 +154,8 @@ function confirmar(){
   xhttp.send("regra=" + regra + "&data_pedido=" + data_pedido + "&data_recebimento=" + data_recebimento + "&montante=" + montante + "&reserva_code=1");
 }
 
+
+//Permite criar um user no banco de dados
 function editData(){
   var hoteleiro_nome = document.getElementById('nome').value
   var cpf = document.getElementById('cpf').value
@@ -174,31 +181,6 @@ function editData(){
   xhttp.open("POST", url, true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhttp.send("hoteleiro_nome=" + hoteleiro_nome + "&hotel_nome=" + hotel_name + "&cpf=" + cpf + "&cnpj=" + cnpj + "&cep=" + cep + "&rua=" + rua + "&numero=" + numero + "&estado=" + estado + "&cidade=" + cidade + "&banco=" + banco + "&agencia=" + agencia + "&conta=" + conta);
-}
-
-//Hover do Dashboard
-function mouseIn(){
-  var option0 = document.querySelector("#option0")
-  var option1 = document.querySelector("#option1")
-  var option2 = document.querySelector("#option2")
-  var option3 = document.querySelector("#option3")
-
-  option0.classList.remove('none')
-  option1.classList.remove('none')
-  option2.classList.remove('none')
-  option3.classList.remove('none')
-}
-
-function mouseOut(){
-  var option0 = document.querySelector("#option0")
-  var option1 = document.querySelector("#option1")
-  var option2 = document.querySelector("#option2")
-  var option3 = document.querySelector("#option3")
-
-  option0.classList.add('none')
-  option1.classList.add('none')
-  option2.classList.add('none')
-  option3.classList.add('none')
 }
 
 //Script da seleção de cidades e estados
