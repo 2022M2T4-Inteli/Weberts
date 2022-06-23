@@ -384,7 +384,46 @@ button:hover:after {
   bottom: 30%;
 }
 
+#confirm{
+  background-color: #3468fc;
+  color: #fff;
+  border:none;
+  padding: 10px 20px 10px 20px !important;
+  border-radius: 10px!important;
+  transition: all 0.5s;
+  cursor: pointer;
+  text-align: center;
+  width: 200px;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+#confirm{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
 
+#confirm:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;  
+  top: 9px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#confirm:hover{
+  padding-right: 25px !important;
+  padding-left:25px !important;
+  transform: scale(1.1);
+  transition: all 0.5s;
+}
+
+#confirm:hover:after {
+  opacity: 1;
+  right: 10px;
+}
 
 
 
