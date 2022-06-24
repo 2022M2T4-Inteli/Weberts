@@ -1,0 +1,40 @@
+#navStyle {
+  background-color: #3e6ffc !important;
+}
+
+.navbar-toggler {
+  background-color: white !important;
+  margin-left: 15px !important;
+}
+
+@media (min-width: 800px) {
+  .offcanvas-lg{
+    display: none;
+  }
+  
+  .list-group-flush {
+    border-radius: 0 !important;
+    justify-content: space-evenly !important;
+    justify-items: center !important;
+    display: flex !important;
+    flex-direction: row !important;
+}
+
+#navStyle {
+    display: none !important;
+    justify-content: flex-end !important;
+    align-content: center !important;
+  }
+
+  .list-group-item {
+    margin: 10px !important;
+    background-color: unset !important;
+    color: white !important;
+    font-weight: bold !important;
+    transition: 200ms !important;
+  }
+
+  .list-group-item:hover {
+    border-bottom: 2px white solid !important;
+  }
+}
