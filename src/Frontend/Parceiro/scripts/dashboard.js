@@ -75,8 +75,8 @@ function attData() {
             if (!usedNames.includes(currentName)){ 
                 usedNames.push(currentName)             
                 $("#partner-options")[0].innerHTML += `<div class="partner-unselected"><input type="checkbox" onclick="changePartner()" id="partner` + i + `"><h3 id="partnerText` + i + `">${row.nome}</h3></div>`;
+                i++
             }
-            i++
     });
             }
     )
