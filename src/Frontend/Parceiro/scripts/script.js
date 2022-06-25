@@ -141,7 +141,7 @@ function confirmar(){
       month: '2-digit',
       day: '2-digit',
     })
-  var dateRequest = document.getElementById('Data').innerHTML
+  var dateRecieve = document.getElementById('Data').innerHTML
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
   if(this.readyState == 4 && this.status == 200){
@@ -151,7 +151,7 @@ function confirmar(){
   };
   xhttp.open("POST", url, true);
   xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send("regra=" + regra + "&data_pedido=" + dateRequest + "&data_recebimento=" + dateRecieve + "&montante=" + ammount + "&reserva_code=1");
+  xhttp.send("regra=" + rule + "&data_pedido=" + dateRequest + "&data_recebimento=" + dateRecieve + "&montante=" + ammount + "&reserva_code=1");
 }
 
 
