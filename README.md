@@ -26,8 +26,8 @@
   
   |--> documentos<br>
   &emsp;| --> outros <br>
-  &emsp;| T4_G2_V3_Web_application_document.pdf<br>
-  &emsp;| T4_G2_V3_Web_application_document.docx<br>
+  &emsp;| T4_G2_V4_Web_application_document.docx<br>
+  &emsp;| T4_G2_V4_Web_application_document.pdf<br>
 |--> imagens<br>
 |--> src<br>
   &emsp;|--> Backend<br>
@@ -62,7 +62,7 @@ Isso instalará todas as dependências definidas no arquivo <b>package.json</b> 
 ```sh
 npm start
 ```
-5. Agora você pode acessar a aplicação através do link http://localhost:1234/
+5. Agora você pode acessar a aplicação através do link http://localhost:3031/
 6. O servidor está online.
  
   ## 🗃 Histórico de lançamentos
