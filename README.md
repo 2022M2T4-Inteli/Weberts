@@ -64,6 +64,7 @@ npm start
 ```
 5. Agora você pode acessar a aplicação através do link http://localhost:3031/
 6. O servidor está online.
+7. Link da aplicação no Heroku: https://herouku-weberts.herokuapp.com/
  
   ## 🗃 Histórico de lançamentos
 * 0.1.4 - 21/06/2022
@@ -99,7 +100,7 @@ npm start
   
  ## 📋 Licença/License
 
-<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Spidus/Teste_Final_1">MODELO GIT INTELI</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.yggbrasil.com.br/vr">Inteli, Bianca Cassemiro Lima, Luiz Francisco Granville Gonçalves, Oliver Gomes da Silva, Pedro Romão Cerdeira Dias, Theo Albero Tosto, Wagner Estevam Barcelos da Silva</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International</a>.</p>
+<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/Spidus/Teste_Final_1">HU Payments</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://www.yggbrasil.com.br/vr">Inteli, Bianca Cassemiro Lima, Luiz Francisco Granville Gonçalves, Oliver Gomes da Silva, Pedro Romão Cerdeira Dias, Theo Albero Tosto, Wagner Estevam Barcelos da Silva</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">Attribution 4.0 International</a>.</p>
 
 
 ## 🎓 Referências
