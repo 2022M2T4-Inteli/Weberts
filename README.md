@@ -26,8 +26,8 @@
   
   |--> documentos<br>
   &emsp;| --> outros <br>
-  &emsp;| T4_G2_V4_Web_application_document.docx<br>
-  &emsp;| T4_G2_V4_Web_application_document.pdf<br>
+  &emsp;| T4_G2_V6_Web_application_document.docx<br>
+  &emsp;| T4_G2_V6_Web_application_document.pdf<br>
 |--> imagens<br>
 |--> src<br>
   &emsp;|--> Backend<br>
